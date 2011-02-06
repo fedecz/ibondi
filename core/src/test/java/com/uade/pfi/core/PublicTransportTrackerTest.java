@@ -64,6 +64,18 @@ public class PublicTransportTrackerTest {
 		assertNotNull(locations);
 		assertEquals(2, locations.size());
 	}
+	
+	@Test
+	public void elNombreDelTransporteNoPuedeSerNulo(){
+		//TODO a completar despues
+		fail();
+	}
+	
+	@Test
+	public void lasCoordenadasDelTransporteNoPuedeSerNulas(){
+		//TODO a completar despues
+		fail();
+	}
 
 
 
