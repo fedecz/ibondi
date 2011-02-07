@@ -45,8 +45,8 @@ public class PublicTransportTrackerTest {
 		
 		assertEquals(1, locations.size());
 		TransportLocation newLocation = locations.get(0);
-		assertEquals(2, newLocation.getLocation().getLatitude());
-		assertEquals(3, newLocation.getLocation().getLongitude());
+		assertEquals(new Integer(2), newLocation.getLocation().getLatitude());
+		assertEquals(new Integer(3), newLocation.getLocation().getLongitude());
 		assertEquals("60", newLocation.getName());
 	}
 	
@@ -63,18 +63,57 @@ public class PublicTransportTrackerTest {
 		
 		assertNotNull(locations);
 		assertEquals(2, locations.size());
+		for (TransportLocation location : locations) {
+			if(location.getName().equals("60")){
+				assertEquals(new Integer(3), location.getLocation().getLatitude());
+				assertEquals(new Integer(4), location.getLocation().getLongitude());
+			}
+			if(location.getName().equals("59")){
+				assertEquals(new Integer(1), location.getLocation().getLatitude());
+				assertEquals(new Integer(2), location.getLocation().getLongitude());
+			}
+		}
 	}
 	
 	@Test
-	public void elNombreDelTransporteNoPuedeSerNulo(){
-		//TODO a completar despues
-		fail();
+	public void elNombreDelTransporteNoPuedeSerNuloOVacio(){
+		TransportLocation location1 = new TransportLocation(2,3,null);
+		TransportLocation location2 = new TransportLocation(2,3,"");
+		
+		try {
+			service.updatePosition(location1);
+			fail();
+		} catch (Exception e) {
+		}
+		try {
+			service.updatePosition(location2);
+			fail();
+		} catch (Exception e) {
+		}
+		
 	}
 	
 	@Test
 	public void lasCoordenadasDelTransporteNoPuedeSerNulas(){
-		//TODO a completar despues
-		fail();
+		TransportLocation location1 = new TransportLocation(2,null,"59");
+		TransportLocation location2 = new TransportLocation(null,3,"60");
+		TransportLocation location3 = new TransportLocation(null,null,"152");
+		
+		try {
+			service.updatePosition(location1);
+			fail();
+		} catch (Exception e) {
+		}
+		try {
+			service.updatePosition(location2);
+			fail();
+		} catch (Exception e) {
+		}
+		try {
+			service.updatePosition(location3);
+			fail();
+		} catch (Exception e) {
+		}
 	}
 
 
