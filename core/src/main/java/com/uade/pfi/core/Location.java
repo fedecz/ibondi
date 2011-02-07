@@ -2,10 +2,10 @@ package com.uade.pfi.core;
 
 public class Location {
 
-	private int latitude;
-	private int longitude;
+	private Integer latitude;
+	private Integer longitude;
 
-	public Location(int latitude, int longitude) {
+	public Location(Integer latitude, Integer longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -13,16 +13,16 @@ public class Location {
 	public Location() {
 	}
 	
-	public void setLatitude(int latitude) {
+	public void setLatitude(Integer latitude) {
 		this.latitude = latitude;
 	}
-	public void setLongitude(int longitude) {
+	public void setLongitude(Integer longitude) {
 		this.longitude = longitude;
 	}
-	public int getLatitude() {
+	public Integer getLatitude() {
 		return latitude;
 	}
-	public int getLongitude() {
+	public Integer getLongitude() {
 		return longitude;
 	}
 	
