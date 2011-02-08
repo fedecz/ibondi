@@ -37,6 +37,14 @@ public class PublicTransportTrackerServiceImpl implements
 			throw new IllegalArgumentException("Latitude or longitude cannot be null");
 	}
 
+	
+	/**
+	 * Hay que implementar "haversine".
+	 * http://www.movable-type.co.uk/scripts/latlong.html
+	 * http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe
+	 * 
+	 * @param aLocation
+	 */
 	private void mergeOrInsertPosition(TransportLocation aLocation) {
 		TransportLocation oldLocation = locations.get(aLocation.getName());
 		if(oldLocation!=null){
