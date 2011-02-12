@@ -57,5 +57,11 @@ public class PublicTransportTrackerServiceImpl implements
 		locations.put(aLocation.getName(), aLocation);
 	}
 
+	public void setLocations(HashMap<String, TransportLocation> locations) {
+		this.locations = locations;
+	}
+	public HashMap<String, TransportLocation> getLocations() {
+		return locations;
+	}
 
 }
