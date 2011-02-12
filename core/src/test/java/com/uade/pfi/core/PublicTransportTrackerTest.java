@@ -3,6 +3,7 @@ package com.uade.pfi.core;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static junit.framework.Assert.*;
 
@@ -28,7 +29,7 @@ public class PublicTransportTrackerTest {
 
 	@Test
 	public void elServicioDebeDejarUpdetearMiPosicionEnElMedioDeTransporte(){
-		TransportLocation location = new TransportLocation(2,3,"60");
+		TransportLocation location = new TransportLocation(new Float(2),new Float(3),"60");
 
 		service.updatePosition(location);
 	}
@@ -39,22 +40,22 @@ public class PublicTransportTrackerTest {
 		assertNotNull(locations);
 		assertEquals(0, locations.size());
 		
-		TransportLocation location = new TransportLocation(2,3,"60");
+		TransportLocation location = new TransportLocation(new Float(2),new Float(3),"60");
 		service.updatePosition(location);
 		locations=service.retrieveLocations();
 		
 		assertEquals(1, locations.size());
 		TransportLocation newLocation = locations.get(0);
-		assertEquals(new Integer(2), newLocation.getLocation().getLatitude());
-		assertEquals(new Integer(3), newLocation.getLocation().getLongitude());
+		assertEquals(new Float(2), newLocation.getLocation().getLatitude());
+		assertEquals(new Float(3), newLocation.getLocation().getLongitude());
 		assertEquals("60", newLocation.getName());
 	}
 	
 	@Test
 	public void elServicioTieneQueGenerarUnPromedioDeLasPosicionesAnteElMismoTransporte(){
-		TransportLocation location1 = new TransportLocation(2,3,"60");
-		TransportLocation location2 = new TransportLocation(4,6,"60");
-		TransportLocation location3 = new TransportLocation(1,2,"59");
+		TransportLocation location1 = new TransportLocation(new Float(2),new Float(3),"60");
+		TransportLocation location2 = new TransportLocation(new Float(4),new Float(6),"60");
+		TransportLocation location3 = new TransportLocation(new Float(1),new Float(2),"59");
 		
 		service.updatePosition(location1);
 		service.updatePosition(location2);
@@ -65,20 +66,20 @@ public class PublicTransportTrackerTest {
 		assertEquals(2, locations.size());
 		for (TransportLocation location : locations) {
 			if(location.getName().equals("60")){
-				assertEquals(new Integer(3), location.getLocation().getLatitude());
-				assertEquals(new Integer(4), location.getLocation().getLongitude());
+				assertEquals(new Float(3), location.getLocation().getLatitude());
+				assertEquals(new Float(4.5), location.getLocation().getLongitude());
 			}
 			if(location.getName().equals("59")){
-				assertEquals(new Integer(1), location.getLocation().getLatitude());
-				assertEquals(new Integer(2), location.getLocation().getLongitude());
+				assertEquals(new Float(1), location.getLocation().getLatitude());
+				assertEquals(new Float(2), location.getLocation().getLongitude());
 			}
 		}
 	}
 	
 	@Test
 	public void elNombreDelTransporteNoPuedeSerNuloOVacio(){
-		TransportLocation location1 = new TransportLocation(2,3,null);
-		TransportLocation location2 = new TransportLocation(2,3,"");
+		TransportLocation location1 = new TransportLocation(new Float(2),new Float(3),null);
+		TransportLocation location2 = new TransportLocation(new Float(2),new Float(3),"");
 		
 		try {
 			service.updatePosition(location1);
@@ -95,8 +96,8 @@ public class PublicTransportTrackerTest {
 	
 	@Test
 	public void lasCoordenadasDelTransporteNoPuedeSerNulas(){
-		TransportLocation location1 = new TransportLocation(2,null,"59");
-		TransportLocation location2 = new TransportLocation(null,3,"60");
+		TransportLocation location1 = new TransportLocation(new Float(2),null,"59");
+		TransportLocation location2 = new TransportLocation(null,new Float(3),"60");
 		TransportLocation location3 = new TransportLocation(null,null,"152");
 		
 		try {

@@ -8,7 +8,7 @@ public class TransportLocation {
 	public TransportLocation() {
 	}
 	
-	public TransportLocation(Integer latitude, Integer longitude, String name) {
+	public TransportLocation(Float latitude, Float longitude, String name) {
 		this.location = new Location(latitude,longitude);
 		this.name = name;
 	}
