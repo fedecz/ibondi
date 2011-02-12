@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="com.uade.pfi.web" />
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="service"
+		class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl">
+		<property name="locations">
+			<map>
+				<entry key="60">
+					<bean class="com.uade.pfi.core.TransportLocation">
+						<property name="name" value="60" />
+						<property name="location">
+							<bean class="com.uade.pfi.core.Location">
+								<property name="latitude" value="-34.49023889" />
+								<property name="longitude" value="-58.50026111" />
+							</bean>
+						</property>
+					</bean>
+				</entry>
+				<entry key="59">
+					<bean class="com.uade.pfi.core.TransportLocation">
+						<property name="name" value="59" />
+						<property name="location">
+							<bean class="com.uade.pfi.core.Location">
+								<property name="latitude" value="-34.48916944" />
+								<property name="longitude" value="-58.50085" />
+							</bean>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<!-- property name="order" value="1"/> -->
+	</bean>
+
+
+</beans>
