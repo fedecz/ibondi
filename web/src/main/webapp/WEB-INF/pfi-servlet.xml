@@ -15,36 +15,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean id="service"
-		class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl">
-		<property name="locations">
-			<map>
-				<entry key="60">
-					<bean class="com.uade.pfi.core.TransportLocation">
-						<property name="name" value="60" />
-						<property name="location">
-							<bean class="com.uade.pfi.core.Location">
-								<property name="latitude" value="-34.49023889" />
-								<property name="longitude" value="-58.50026111" />
-							</bean>
-						</property>
-					</bean>
-				</entry>
-				<entry key="59">
-					<bean class="com.uade.pfi.core.TransportLocation">
-						<property name="name" value="59" />
-						<property name="location">
-							<bean class="com.uade.pfi.core.Location">
-								<property name="latitude" value="-34.48916944" />
-								<property name="longitude" value="-58.50085" />
-							</bean>
-						</property>
-					</bean>
-				</entry>
-			</map>
-		</property>
-	</bean>
-
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<!-- property name="order" value="1"/> -->

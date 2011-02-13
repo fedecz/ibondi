@@ -11,18 +11,18 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<!-- context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/donarWeb-service.xml
-            /WEB-INF/donarWeb-webflow.xml
-            /WEB-INF/donarWeb-security.xml
+			classpath:core-ds.xml
+			classpath:core-dao.xml
+			classpath:core-service.xml
         </param-value>
 	</context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener> -->
+	</listener>
 
 	<servlet-mapping>
 		<servlet-name>pfi</servlet-name>

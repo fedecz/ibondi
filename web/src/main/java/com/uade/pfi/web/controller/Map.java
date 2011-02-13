@@ -26,15 +26,14 @@ public class Map {
 	}
 	
 	@RequestMapping(value="update.htm",method=RequestMethod.GET)
-	public ModelAndView update(){
-		TransportLocation location = new TransportLocation();
-		location.setLocation(new Location());
-		return new ModelAndView("update","loc",location);
+	public String update(){
+		return "update";
 	}
 	
 	@RequestMapping(value="update.htm",method=RequestMethod.POST)
-	public String processUpdate(TransportLocation location){
+	public ModelAndView processUpdate(String name, String latitude, String longitude){
+		TransportLocation location = new TransportLocation(Float.parseFloat(latitude), Float.parseFloat(longitude), name);
 		service.updatePosition(location);
-		return "update";
+		return new ModelAndView("update","msg","Location sent");
 	}
 }
