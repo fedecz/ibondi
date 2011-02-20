@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.uade.pfi.core.Location;
-import com.uade.pfi.core.TransportLocation;
+import com.uade.pfi.core.dto.TransportLocation;
 import com.uade.pfi.core.service.PublicTransportTrackerService;
 
 
