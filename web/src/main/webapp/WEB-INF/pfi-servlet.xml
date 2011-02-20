@@ -8,17 +8,12 @@
 
 	<context:component-scan base-package="com.uade.pfi.web" />
 
+	<mvc:annotation-driven />
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<!-- property name="order" value="1"/> -->
-	</bean>
+	</bean> 
 
 
 </beans>
