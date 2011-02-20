@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.uade.pfi.core.TransportLocation;
+import com.uade.pfi.core.dto.TransportLocation;
 
 public class LocationDaoImpl implements LocationDao {
 	private JdbcTemplate template;

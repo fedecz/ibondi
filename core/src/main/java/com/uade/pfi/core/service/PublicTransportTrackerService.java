@@ -2,7 +2,7 @@ package com.uade.pfi.core.service;
 
 import java.util.List;
 
-import com.uade.pfi.core.TransportLocation;
+import com.uade.pfi.core.dto.TransportLocation;
 
 public interface PublicTransportTrackerService {
 

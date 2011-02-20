@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.uade.pfi.core.dao.LocationDao;
+import com.uade.pfi.core.dto.TransportLocation;
 
 import static junit.framework.Assert.*;
 

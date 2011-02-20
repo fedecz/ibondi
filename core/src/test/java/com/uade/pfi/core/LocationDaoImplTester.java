@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uade.pfi.core.dao.LocationDao;
+import com.uade.pfi.core.dto.TransportLocation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
