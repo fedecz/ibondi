@@ -22,7 +22,9 @@ import android.widget.Toast;
 import com.uade.pfi.core.dto.TransportLocation;
 
 public class TransportMeService extends Service {
-	private String BASE_URL = "http://chiwi.homelinux.com:8080";
+	private String BASE_URL = "http://192.168.1.102:8080";
+	//private String BASE_URL = "http://chiwi.homelinux.com:8080";
+	
 	private LocationManager locationManager;
 	private LocationListener locationListener;
 	private Listener listener = new Listener() {
@@ -74,7 +76,7 @@ public class TransportMeService extends Service {
 		
 		Float latitude = new Float(newLocation.getLatitude());
 		Float longitud = new Float(newLocation.getLongitude());
-		TransportLocation location = new TransportLocation(latitude, longitud, "chiwi");
+		TransportLocation location = new TransportLocation(latitude, longitud, newLocation.toString());
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application","json"));
 

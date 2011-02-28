@@ -10,9 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.uade.pfi.androidApp.R;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,9 +19,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.maps.MapActivity;
+
+import com.uade.pfi.androidapp.R;
+
 
 public class TransportMe extends Activity {
-	private String BASE_URL = "http://chiwi.homelinux.com:8080";
+	private String BASE_URL = "http://192.168.1.102:8080";
+	//private String BASE_URL = "http://chiwi.homelinux.com:8080";
+	Context context = this;
+	
+	
 	
 	
 	@Override
@@ -41,6 +48,17 @@ public class TransportMe extends Activity {
 			@Override
 			public void onClick(View v) {
 				TransportMe.this.stopService(new Intent("TRANSPORT_ME_SERVICE"));
+			}
+		});
+		
+		Button mapButton = (Button) findViewById(R.id.mapButton);
+		mapButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				Intent i = new Intent(getApplicationContext(), ShowMapView.class);
+				startActivity(i);
+				
 			}
 		});
 		
