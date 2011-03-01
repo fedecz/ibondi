@@ -1,5 +1,7 @@
 package com.uade.pfi.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,12 @@ public class MobileInterface {
 	public @ResponseBody Integer count(){
 		System.out.println("get accessed");
 		return service.retrieveLocations().size();
+	}
+	
+	@RequestMapping(value="/location/getList.json")
+	public @ResponseBody List<TransportLocation> list(){
+		System.out.println("get accessed");
+		return service.retrieveLocations();
 	}
 	
 	@RequestMapping("/location/post.json")

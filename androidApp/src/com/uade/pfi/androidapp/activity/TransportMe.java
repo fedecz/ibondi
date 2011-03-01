@@ -19,13 +19,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.maps.MapActivity;
-
 import com.uade.pfi.androidapp.R;
 
 
 public class TransportMe extends Activity {
-	private String BASE_URL = "http://192.168.1.102:8080";
+	private String BASE_URL = "http://186.136.91.211:8080";
 	//private String BASE_URL = "http://chiwi.homelinux.com:8080";
 	Context context = this;
 	
@@ -62,7 +60,7 @@ public class TransportMe extends Activity {
 			}
 		});
 		
-		Button getButton = (Button) findViewById(R.id.getButton);
+/*		Button getButton = (Button) findViewById(R.id.getButton);
 		getButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -80,7 +78,7 @@ public class TransportMe extends Activity {
 			    Integer result = responseEntity.getBody();
 			    Toast.makeText(getApplicationContext(),result+"", Toast.LENGTH_SHORT).show();
 			}
-		});
+		});*/
 	}
 
 }

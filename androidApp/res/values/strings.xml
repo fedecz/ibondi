@@ -7,5 +7,7 @@
     <string name="mapButton">Show Map</string>
     <string name="postButton">Post to Service</string>
     <string name="getButton">Get from Service</string>
-    <string name="quit">CloseApp</string>
+	<string name="quit">Back To Menu</string>
+    
+    
 </resources>
