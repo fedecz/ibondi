@@ -5,5 +5,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="0zFzbsRmiUC-VOovOnso2wT9SSsDZ5YB03snfyg"
+        android:apiKey="0zFzbsRmiUC91tTRXgWjMrm3qL9pwRpuwDBJZ7w"
 />
+
+<!-- 
+chiwi:
+mac debug : 0zFzbsRmiUC9o5xwiOLL9Ibu5kOjsEigu-y1olQ
+ubuntu debug : 0zFzbsRmiUC-VOovOnso2wT9SSsDZ5YB03snfyg
+
+mati
+
+mac : 0EIgBvc29NVawAkCxtZppoNRlNlIuoxiMLbnlHA
+
+ -->
