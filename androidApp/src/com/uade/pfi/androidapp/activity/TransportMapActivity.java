@@ -26,6 +26,7 @@ public class TransportMapActivity extends MapActivity {
 
 	private MapView mapView;
 	private String BASE_URL = null;
+	private String GET_LIST_FROM_SERVER = null;
 	private RestTemplate restTemplate;
 
 
@@ -45,18 +46,27 @@ public class TransportMapActivity extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		BASE_URL = this.getString(R.string.baseUrl);
+		GET_LIST_FROM_SERVER = this.getString(R.string.getListFromServer);
 		setContentView(R.layout.map);
-		MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
+		mapView = (MapView) findViewById(R.id.mapview);
+		mapView.setBuiltInZoomControls(true);	
 
+	}
 
-
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		
 		List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
 		acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setAccept(acceptableMediaTypes);
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-		String url = BASE_URL + "/web/location/getList.json";
+		
+		String url = BASE_URL + GET_LIST_FROM_SERVER;
+		
+		System.out.println(url);
 
 		restTemplate =  new RestTemplate();
 
@@ -80,12 +90,7 @@ public class TransportMapActivity extends MapActivity {
 		mapOverlays.add(itemizedOverlay);
 		// Displays OverlayItems
 
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-
+		
 
 
 	}
