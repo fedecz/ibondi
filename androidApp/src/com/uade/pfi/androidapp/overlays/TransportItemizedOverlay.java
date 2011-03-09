@@ -1,4 +1,4 @@
-package com.uade.pfi.androidapp.utils;
+package com.uade.pfi.androidapp.overlays;
 
 import java.util.ArrayList;
 
@@ -7,13 +7,12 @@ import android.graphics.drawable.Drawable;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
-public class DrawItemizedOverlay extends ItemizedOverlay {
+public class TransportItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 
-	public DrawItemizedOverlay(Drawable defaultMarker) {
+	public TransportItemizedOverlay(Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -23,7 +22,6 @@ public class DrawItemizedOverlay extends ItemizedOverlay {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return mOverlays.size();
 	}
 	

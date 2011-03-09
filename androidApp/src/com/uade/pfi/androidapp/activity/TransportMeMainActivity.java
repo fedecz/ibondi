@@ -1,34 +1,16 @@
 package com.uade.pfi.androidapp.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.uade.pfi.androidapp.R;
 
 
-public class TransportMe extends Activity {
-	private String BASE_URL = "http://186.136.91.211:8080";
-	//private String BASE_URL = "http://chiwi.homelinux.com:8080";
-	Context context = this;
-	
-	
-	
+public class TransportMeMainActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +20,14 @@ public class TransportMe extends Activity {
 		startButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TransportMe.this.startService(new Intent("TRANSPORT_ME_SERVICE"));
+				TransportMeMainActivity.this.startService(new Intent("TRANSPORT_ME_SERVICE"));
 			}
 		});
 		Button stopButton = (Button) findViewById(R.id.stopButton);
 		stopButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TransportMe.this.stopService(new Intent("TRANSPORT_ME_SERVICE"));
+				TransportMeMainActivity.this.stopService(new Intent("TRANSPORT_ME_SERVICE"));
 			}
 		});
 		
@@ -53,10 +35,7 @@ public class TransportMe extends Activity {
 		mapButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				Intent i = new Intent(getApplicationContext(), ShowMapView.class);
-				startActivity(i);
-				
+				TransportMeMainActivity.this.startActivity(new Intent(getBaseContext(),TransportMapActivity.class));
 			}
 		});
 		

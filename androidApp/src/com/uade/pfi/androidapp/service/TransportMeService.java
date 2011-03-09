@@ -22,8 +22,11 @@ import android.widget.Toast;
 import com.uade.pfi.core.dto.TransportLocation;
 
 public class TransportMeService extends Service {
-	private String BASE_URL = "http://192.168.1.102:8080";
-	//private String BASE_URL = "http://chiwi.homelinux.com:8080";
+	private String BASE_URL = "http://chiwi.homelinux.com:8080";
+	
+	private RestTemplate restTemplate;
+	private HttpHeaders requestHeaders;
+	
 	
 	private LocationManager locationManager;
 	private LocationListener locationListener;
@@ -44,6 +47,12 @@ public class TransportMeService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		createRestTemplateAndHeader();
+		setupGPSProvider();
+		Toast.makeText(getApplicationContext(), "Service Started", Toast.LENGTH_SHORT).show();
+	}
+
+	private void setupGPSProvider() {
 		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
 		// Define a listener that responds to location updates
@@ -63,7 +72,6 @@ public class TransportMeService extends Service {
 		// Register the listener with the Location Manager to receive location updates
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 30, locationListener);
 		locationManager.addGpsStatusListener(listener);
-		Toast.makeText(getApplicationContext(), "Service Started", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -74,16 +82,20 @@ public class TransportMeService extends Service {
 
 	private void makeUseOfNewLocation(Location newLocation) {
 		
-		Float latitude = new Float(newLocation.getLatitude());
-		Float longitud = new Float(newLocation.getLongitude());
-		TransportLocation location = new TransportLocation(latitude, longitud, newLocation.toString());
-		HttpHeaders requestHeaders = new HttpHeaders();
-		requestHeaders.setContentType(new MediaType("application","json"));
-
+		Float latitude = (float) (newLocation.getLatitude());
+		Float longitud = (float) (newLocation.getLongitude());
+		TransportLocation location = new TransportLocation(latitude, longitud, newLocation.getProvider());
+		
 		HttpEntity<TransportLocation> requestEntity = new HttpEntity<TransportLocation>(location, requestHeaders);
-		RestTemplate rest = new RestTemplate();
-		ResponseEntity<Boolean> exchange = rest.exchange(BASE_URL + "/web/location/post.json", HttpMethod.POST, requestEntity, Boolean.class);
+		
+		ResponseEntity<Boolean> exchange = restTemplate.exchange(BASE_URL + "/web/location/post.json", HttpMethod.POST, requestEntity, Boolean.class);
 		Toast.makeText(getApplicationContext(), "Location sent: " + exchange.getBody(), Toast.LENGTH_SHORT).show();
+	}
+
+	private void createRestTemplateAndHeader() {
+		restTemplate = new RestTemplate();
+		requestHeaders = new HttpHeaders();
+		requestHeaders.setContentType(new MediaType("application","json"));
 	}	
 
 
