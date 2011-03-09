@@ -1,7 +1,5 @@
 package com.uade.pfi.web.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +21,9 @@ public class MobileInterface {
 	}
 	
 	@RequestMapping(value="/location/getList.json")
-	public @ResponseBody List<TransportLocation> list(){
+	public @ResponseBody TransportLocation[] list(){
 		System.out.println("get accessed");
-		return service.retrieveLocations();
+		return service.retrieveLocations().toArray(new TransportLocation[0]);
 	}
 	
 	@RequestMapping("/location/post.json")
