@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.uade.pfi.androidapp">
-	
+
 	<uses-sdk android:minSdkVersion="7" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-	
 
-	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:launchMode="standard" android:name="com.uade.pfi.androidapp.activity.TransportMe"
-			android:icon="@drawable/icon" android:label="TransportMe">
+
+	<application android:icon="@drawable/iconbus" android:label="@string/app_name">
+		<!-- USES DECLARATION -->
+		<uses-library android:name="com.google.android.maps" android:required="true"/>
+		
+		
+		<!-- MAIN ACTIVITY -->
+		<activity android:launchMode="standard"
+			android:name="com.uade.pfi.androidapp.activity.TransportMeMainActivity"
+			android:icon="@drawable/iconbus" android:label="TransportMe">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		
-		<activity android:name="com.uade.pfi.androidapp.activity.ShowMapView" android:label="@string/app_name"/>
-	<uses-library android:name="com.google.android.maps" />	 
+
+
+
+		<!-- MAP ACTIVITY -->
+		<activity android:name="com.uade.pfi.androidapp.activity.TransportMapActivity" 
+				  android:label="@string/app_name">
+		</activity>
+
+
+			
+		<!-- GPS SERVICE -->			
 		<service android:name="com.uade.pfi.androidapp.service.TransportMeService"
 			android:label="TransportMeService" android:enabled="true"
-			android:icon="@drawable/icon">
+			android:icon="@drawable/iconbus">
 			<intent-filter>
 				<action android:name="TRANSPORT_ME_SERVICE"></action>
 			</intent-filter>
 		</service>
-		
-
 
 	</application>
 </manifest>
