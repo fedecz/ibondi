@@ -1,12 +1,5 @@
 package com.uade.pfi.androidapp.service;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -19,13 +12,12 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import com.uade.pfi.core.dto.TransportLocation;
+import com.uade.pfi.androidapp.server.ServerFacade;
+import com.uade.pfi.core.dto.TransportLocationDTO;
 
 public class TransportMeService extends Service {
-	private String BASE_URL = "http://chiwi.homelinux.com:8080";
-	
-	private RestTemplate restTemplate;
-	private HttpHeaders requestHeaders;
+	private ServerFacade server;
+	private Long sessionId;
 	
 	
 	private LocationManager locationManager;
@@ -44,12 +36,20 @@ public class TransportMeService extends Service {
 		}
 	};
 
+
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		String transportName = intent.getExtras().getString("transportName");
+		sessionId = server.checkIn(transportName);
+		setupGPSProvider();
+		Toast.makeText(getApplicationContext(), "Service Started", Toast.LENGTH_SHORT).show();
+		return START_STICKY;
+	};
+	
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		createRestTemplateAndHeader();
-		setupGPSProvider();
-		Toast.makeText(getApplicationContext(), "Service Started", Toast.LENGTH_SHORT).show();
+		server = ServerFacade.getInstace(getBaseContext());
 	}
 
 	private void setupGPSProvider() {
@@ -81,22 +81,14 @@ public class TransportMeService extends Service {
 
 
 	private void makeUseOfNewLocation(Location newLocation) {
-		
 		Float latitude = (float) (newLocation.getLatitude());
 		Float longitud = (float) (newLocation.getLongitude());
-		TransportLocation location = new TransportLocation(latitude, longitud, newLocation.getProvider());
-		
-		HttpEntity<TransportLocation> requestEntity = new HttpEntity<TransportLocation>(location, requestHeaders);
-		
-		ResponseEntity<Boolean> exchange = restTemplate.exchange(BASE_URL + "/web/location/post.json", HttpMethod.POST, requestEntity, Boolean.class);
-		Toast.makeText(getApplicationContext(), "Location sent: " + exchange.getBody(), Toast.LENGTH_SHORT).show();
+		TransportLocationDTO location = new TransportLocationDTO();
+		location.setSession(sessionId);
+		location.setLatitude(latitude);
+		location.setLongitude(longitud);
+		server.postLocation(location);
 	}
-
-	private void createRestTemplateAndHeader() {
-		restTemplate = new RestTemplate();
-		requestHeaders = new HttpHeaders();
-		requestHeaders.setContentType(new MediaType("application","json"));
-	}	
 
 
 	@Override

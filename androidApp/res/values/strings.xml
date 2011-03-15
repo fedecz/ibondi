@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TransportMe</string>
-    <string name="startButton">Start</string>
-    <string name="stopButton">Stop</string>
+    <string name="checkInButton">Check In</string>
+    <string name="checkOutButton">Check Out</string>
     <string name="mapButton">Show Map</string>
     <string name="postButton">Post to Service</string>
     <string name="getButton">Get from Service</string>
 	<string name="quit">Back To Menu</string>
+	<string name="okButton">OK</string>
 	<string name="baseUrl">http://192.168.1.106:8080</string>
-	<string name="getListFromServer">/web/location/getList.json</string>
-    
+	<string name="checkIn">/web/checkIn.json</string>
+	<string name="getAllLocationsFromServer">/web/getAllLocations.json</string>
+    <string name="postLocationToServer">/web/postLocation.json</string>
     
 </resources>

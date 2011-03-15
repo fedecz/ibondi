@@ -16,18 +16,18 @@ public class TransportMeMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		Button startButton = (Button) findViewById(R.id.startButton);
-		startButton.setOnClickListener(new OnClickListener() {
+		Button checkInButton = (Button) findViewById(R.id.checkInButton);
+		checkInButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TransportMeMainActivity.this.startService(new Intent("TRANSPORT_ME_SERVICE"));
+				TransportMeMainActivity.this.startActivity(new Intent(getBaseContext(),CheckInActivity.class));
 			}
 		});
-		Button stopButton = (Button) findViewById(R.id.stopButton);
-		stopButton.setOnClickListener(new OnClickListener() {
+		Button checkOutButton = (Button) findViewById(R.id.checkOutButton);
+		checkOutButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TransportMeMainActivity.this.stopService(new Intent("TRANSPORT_ME_SERVICE"));
+				TransportMeMainActivity.this.stopService(new Intent("com.uade.pfi.transportMe.TRANSPORT_ME_SERVICE"));
 			}
 		});
 		
@@ -39,25 +39,6 @@ public class TransportMeMainActivity extends Activity {
 			}
 		});
 		
-/*		Button getButton = (Button) findViewById(R.id.getButton);
-		getButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
-				acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
-
-				HttpHeaders requestHeaders = new HttpHeaders();
-				requestHeaders.setAccept(acceptableMediaTypes);
-
-				HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-			    String url = BASE_URL + "/web/location/get.json";
-			    RestTemplate restTemplate =  new RestTemplate();
-			    ResponseEntity<Integer> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Integer.class);
-			    Integer result = responseEntity.getBody();
-			    Toast.makeText(getApplicationContext(),result+"", Toast.LENGTH_SHORT).show();
-			}
-		});*/
 	}
 
 }

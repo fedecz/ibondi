@@ -4,8 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-    <Button android:text="@string/startButton" android:id="@+id/startButton" android:layout_width="fill_parent" android:layout_height="wrap_content" ></Button>
-    <Button android:text="@string/stopButton" android:id="@+id/stopButton" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+    <Button android:text="@string/checkInButton" android:id="@+id/checkInButton" android:layout_width="fill_parent" android:layout_height="wrap_content" ></Button>
+    <Button android:text="@string/checkOutButton" android:id="@+id/checkOutButton" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
     <Button android:text="@string/mapButton" android:id="@+id/mapButton" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
     
 
