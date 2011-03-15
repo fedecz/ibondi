@@ -15,7 +15,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:core-ds.xml
-			classpath:core-dao.xml
+			classpath:core-dao-hibernate.xml
 			classpath:core-service.xml
         </param-value>
 	</context-param>

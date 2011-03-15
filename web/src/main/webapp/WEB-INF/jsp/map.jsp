@@ -27,7 +27,7 @@ body {
 
 var beaches = [
      <c:forEach var="location" items="${locations}">
-          ['${location.name}',${location.location.latitude},${location.location.longitude},${i+1}],
+          ['${location.name}',${location.latitude},${location.longitude},${i+1}],
       </c:forEach>
 ];
 var map;
@@ -45,14 +45,14 @@ var map;
 		   centerLat=latSum / beaches.length;
 	   if (longSum!=0)
 		   centerLong=longSum / beaches.length;
-	 
+
+	   		 
   var myOptions = {
-    zoom: 16,
-    center: new google.maps.LatLng(centerLat, centerLong),
+    zoom: ${mapZoom},
+    center: new google.maps.LatLng(${centerLat},${centerLong}),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
- map = new google.maps.Map(document.getElementById("map_canvas"),
-                                myOptions);
+ map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
   setMarkers(map, beaches);
 
  }
