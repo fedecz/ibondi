@@ -1,37 +1,61 @@
 package com.uade.pfi.core.service;
 
+import java.util.Date;
 import java.util.List;
 
-import com.uade.pfi.core.dao.LocationDao;
-import com.uade.pfi.core.dto.TransportLocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.uade.pfi.core.beans.Location;
+import com.uade.pfi.core.beans.TransportSession;
+import com.uade.pfi.core.dao.SessionDao;
+import com.uade.pfi.core.exception.InvalidSessionException;
+import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class PublicTransportTrackerServiceImpl implements
 		PublicTransportTrackerService {
+	private Logger logger = LoggerFactory.getLogger(PublicTransportTrackerServiceImpl.class);
 	
-	private LocationDao dao;
+	private SessionDao dao;
 	
-	public List<TransportLocation> retrieveLocations() {
-		return dao.retrieveLocations();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.uade.pfi.core.service.PublicTransportTrackerService#retrieveLocations()
+	 */
+	@Transactional
+	public List<TransportSession> retrieveAllSessions() {
+		logger.debug("retriveAllSessions()");
+		List<TransportSession> sessions = dao.retrieveActiveSessions();
+		logger.debug("sessions: " + TransportMeStringCreator.toString(sessions));
+		return sessions;
 	}
 
-	public void updatePosition(TransportLocation location) {
-		validateTransportLocation(location);
-//		this.mergeOrInsertPosition(location);
-		dao.storeLocation(location);
-	}
-
-	private void validateTransportLocation(TransportLocation location) {
-		if(location==null)
-			throw new IllegalArgumentException("TransportLocation cannot be null");
-		if(location.getName()==null || location.getName().trim().length()==0)
-			throw new IllegalArgumentException("TransportLocation cannot be empty");
+	@Transactional
+	public void updatePosition(Location location, Long sessionId) {
+		logger.debug("updatePosition(), session id: "+ sessionId);
+		logger.debug("location: "+ TransportMeStringCreator.toString(location).toString());
 		validateLocation(location);
+//		this.mergeOrInsertPosition(location);
+		TransportSession session = dao.get(sessionId);
+		if(session==null)
+			throw new InvalidSessionException("Invalid session: " + sessionId);
+		logger.debug("got session: " + session);
+		location.setTrackedOn(new Date());
+		dao.save(location);
+		boolean add = session.getLocations().add(location);
+		session.setLastKnownLocation(location);
+		logger.debug("added location to session: " + add);
+		session.setLastUpdated(new Date());
+		dao.save(session);
+		logger.debug("Saved session: " + TransportMeStringCreator.toString(session));
 	}
 
-	private void validateLocation(TransportLocation location) {
-		if(location.getLocation()==null)
+	private void validateLocation(Location location) {
+		if(location==null)
 			throw new IllegalArgumentException("Location cannot be null");
-		if(location.getLocation().getLatitude()==null || location.getLocation().getLongitude()==null)
+		if(location.getLatitude()==null || location.getLongitude()==null)
 			throw new IllegalArgumentException("Latitude or longitude cannot be null");
 	}
 
@@ -55,11 +79,28 @@ public class PublicTransportTrackerServiceImpl implements
 //		locations.put(aLocation.getName(), aLocation);
 //	}
 	
-	public void setDao(LocationDao dao) {
+	public void setDao(SessionDao dao) {
 		this.dao = dao;
 	}
-	public LocationDao getDao() {
+	public SessionDao getDao() {
 		return dao;
+	}
+
+	public List<TransportSession> retrieveSessions(Location myLocation) {
+		//TODO esta implementacion devuelve los transportLocations alrededor de myLocation.
+		return null;
+	}
+
+	@Transactional
+	public Long checkIn(String transportName) {
+		logger.debug("cheking in transportName: " + transportName);
+		if(transportName== null || transportName.trim().equals(""))
+			throw new IllegalArgumentException("Transport Name Should not be Null.");
+		TransportSession session = new TransportSession();
+		session.setName(transportName);
+		Long sessionId = dao.insert(session);
+		logger.debug("Inserted session: " + TransportMeStringCreator.toString(session));
+		return sessionId;
 	}
 
 
