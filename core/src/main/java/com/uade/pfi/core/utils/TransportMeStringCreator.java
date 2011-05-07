@@ -49,7 +49,6 @@ public class TransportMeStringCreator {
 
 	public static String toString(Location location) {
 		ToStringCreator c = new ToStringCreator(location);
-		c.append("Id",location.getId());
 		c.append("Latitude", location.getLatitude());
 		c.append("Longitude",location.getLongitude());
 		c.append("Tracked On",location.getTrackedOn());

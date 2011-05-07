@@ -8,15 +8,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.document.mongodb.index.IndexDirection;
+import org.springframework.data.document.mongodb.index.Indexed;
+import org.springframework.data.document.mongodb.mapping.Document;
 
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
@@ -24,22 +19,14 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
  * @author chiwi
  *
  */
-@Entity(name="session")
-@Table(name="session")
+@Document
 public class TransportSession {
 	@Id
-	@GeneratedValue
-	private Long 			id;
+	private String 			id;
 	private String 			name;
-	
-	@OneToOne
 	private Location 		lastKnownLocation;
-	
-	@OneToMany
-	@OrderBy("trackedOn DESC")
 	private List<Location> 	locations = new ArrayList<Location>();
-	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Indexed(direction=IndexDirection.DESCENDING)
 	private Date			lastUpdated;
 
 	public TransportSession() {
@@ -56,11 +43,11 @@ public class TransportSession {
 		return TransportMeStringCreator.toString(this);
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

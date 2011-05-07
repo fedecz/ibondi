@@ -18,26 +18,41 @@ import com.uade.pfi.core.dao.SessionDao;
  */
 public class SessionsDaoMock implements SessionDao{
 
-	private Map<Long,TransportSession> sessions = new HashMap<Long, TransportSession>();
+	private Map<String,TransportSession> sessions = new HashMap<String, TransportSession>();
 
 	public List<TransportSession> retrieveActiveSessions() {
 		return Arrays.asList(sessions.values().toArray(new TransportSession[0]));
 	}
 
-	public Long insert(TransportSession session) {
-		sessions.put(new Long(session.hashCode()),session);
-		return new Long(session.hashCode());
+	public String insert(TransportSession session) {
+		sessions.put(""+session.hashCode(),session);
+		return ""+session.hashCode();
 	}
 
-	public TransportSession get(Long sessionId) {
+	public TransportSession get(String sessionId) {
 		return sessions.get(sessionId);
 	}
 
 	public void save(TransportSession session) {
-		sessions.put(new Long(session.hashCode()),session);		
+		sessions.put(""+session.hashCode(),session);		
 	}
 
 	public void save(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setLatestLocationTo(String sessionId, Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addLocationToList(String sessionId, Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateTime(String sessionId) {
 		// TODO Auto-generated method stub
 		
 	}

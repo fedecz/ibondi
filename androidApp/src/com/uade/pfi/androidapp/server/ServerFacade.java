@@ -49,9 +49,9 @@ public class ServerFacade implements MobileInterface {
 	 * @see com.uade.pfi.core.facade.MobileInterface#checkIn(java.lang.String)
 	 */
 	@Override
-	public Long checkIn(String transportName) {
+	public String checkIn(String transportName) {
 		HttpEntity<String> requestEntity = new HttpEntity<String>(transportName, requestHeaders);
-		ResponseEntity<Long> exchange = restTemplate.exchange(BASE_URL + context.getString(R.string.checkIn), HttpMethod.POST, requestEntity, Long.class);
+		ResponseEntity<String> exchange = restTemplate.exchange(BASE_URL + context.getString(R.string.checkIn), HttpMethod.POST, requestEntity, String.class);
 		return exchange.getBody();
 	}
 

@@ -5,13 +5,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="0zFzbsRmiUC91tTRXgWjMrm3qL9pwRpuwDBJZ7w"
+        android:apiKey="0zFzbsRmiUC9DpN86GAIfshMzTHhnMgzfgiqBww"
 />
 
 <!-- 
 chiwi:
 mac debug : 0zFzbsRmiUC9o5xwiOLL9Ibu5kOjsEigu-y1olQ
 ubuntu debug : 0zFzbsRmiUC-VOovOnso2wT9SSsDZ5YB03snfyg
+${home}/Java/chiwi.keystore: 0zFzbsRmiUC9DpN86GAIfshMzTHhnMgzfgiqBww
 
 mati
 

@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,13 +19,13 @@ import com.uade.pfi.core.service.PublicTransportTrackerService;
 
 @Controller
 public class WebInterfaceImpl {
-	private Logger logger = LoggerFactory.getLogger(WebInterfaceImpl.class);
+	private Log logger = LogFactory.getLog(WebInterfaceImpl.class);
 	
-	@Resource
+	@Autowired
 	private PublicTransportTrackerService service;
 
+
 	@RequestMapping("index.htm")
-	@Transactional
 	public ModelAndView index(){
 		logger.debug("using service: " + service);
 		List<TransportSession> sessions = service.retrieveAllSessions();
@@ -55,16 +53,5 @@ public class WebInterfaceImpl {
 		
 		return new ModelAndView("map",parameters);
 	}
-	
-//	@RequestMapping(value="update.htm",method=RequestMethod.GET)
-//	public String update(){
-//		return "update";
-//	}
-//	
-//	@RequestMapping(value="update.htm",method=RequestMethod.POST)
-//	public ModelAndView processUpdate(String name, Float latitude, Float longitude){
-//		
-//		service.updatePosition(new Location(latitude,longitude),name);
-//		return new ModelAndView("update","msg","Location sent");
-//	}
+
 }

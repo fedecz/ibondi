@@ -11,10 +11,8 @@ public interface PublicTransportTrackerService {
 
 	List<TransportSession> retrieveSessions(Location myLocation);
 
-	void updatePosition(Location location, Long sessionId);
+	void updatePosition(Location location, String sessionId);
 
-	Long checkIn(String transportName);
+	String checkIn(String transportName);
 
-	
-	
 }

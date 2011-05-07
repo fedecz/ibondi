@@ -24,18 +24,20 @@ public class PublicTransportTrackerTest {
 	public void elServicioDebeDevolverListasPosicionesDeTODOSLosTransportes(){
 		PublicTransportTrackerServiceImpl service = new PublicTransportTrackerServiceImpl();
 		service.setDao(new SessionDao() {
-			public Long insert(TransportSession session) {return null;}
+			public String insert(TransportSession session) {return null;}
 			public List<TransportSession> retrieveActiveSessions() {
 				TransportSession loc = new TransportSession();
 				ArrayList<TransportSession> list = new ArrayList<TransportSession>();
 				list.add(loc);
 				return list;
 			}
-			public TransportSession get(Long sessionId) {
+			public void save(TransportSession session) {}
+			public TransportSession get(String sessionId) {
 				return null;
 			}
-			public void save(TransportSession session) {}
-			public void save(Location location) {}
+			public void setLatestLocationTo(String sessionId, Location location) {}
+			public void addLocationToList(String sessionId, Location location) {}
+			public void updateTime(String sessionId) {}
 		});
 		List<TransportSession> sessions=service.retrieveAllSessions();
 
@@ -46,7 +48,7 @@ public class PublicTransportTrackerTest {
 	@Test
 	public void elServicioDebeDejarUpdetearMiPosicionEnElMedioDeTransporte(){
 		PublicTransportTrackerService service = createService();
-		Long sessionId = service.checkIn("60");
+		String sessionId = service.checkIn("60");
 		Location location = new Location(2,3);
 
 		service.updatePosition(location,sessionId);
@@ -60,7 +62,7 @@ public class PublicTransportTrackerTest {
 		assertNotNull(sessions);
 		assertEquals(0, sessions.size());
 
-		Long sessionid1 = service.checkIn("60");
+		String sessionid1 = service.checkIn("60");
 		service.updatePosition(new Location(2,3),sessionid1);
 		sessions=service.retrieveAllSessions();
 
@@ -81,7 +83,7 @@ public class PublicTransportTrackerTest {
 	public void lasCoordenadasNoPuedenEstarIncompletas(){
 		PublicTransportTrackerService service = createService();
 
-		service.updatePosition(new Location(),0l);
+		service.updatePosition(new Location(),"x");
 
 		fail();
 	}
@@ -91,23 +93,25 @@ public class PublicTransportTrackerTest {
 	public void serviceShouldAllowCheckIn(){
 		PublicTransportTrackerServiceImpl service = createService();
 		service.setDao(new SessionDao() {
-			public Long insert(TransportSession session) {
-				return 0l;
+			public String insert(TransportSession session) {
+				return "x";
 			}
 			public List<TransportSession> retrieveActiveSessions() {
 				return null;
 			}
-			public TransportSession get(Long sessionId) {
+			public void save(TransportSession session) {}
+			public TransportSession get(String sessionId) {
 				return null;
 			}
-			public void save(TransportSession session) {}
-			public void save(Location location) {}
+			public void setLatestLocationTo(String sessionId, Location location) {}
+			public void addLocationToList(String sessionId, Location location) {}
+			public void updateTime(String sessionId) {}
 		});
 		
-		Long sessionId = service.checkIn("152");
+		String sessionId = service.checkIn("152");
 
 		assertNotNull(sessionId);
-		assertEquals(new Long(0), sessionId);
+		assertEquals("x", sessionId);
 	}
 
 

@@ -17,7 +17,7 @@ import com.uade.pfi.core.dto.TransportLocationDTO;
 
 public class TransportMeService extends Service {
 	private ServerFacade server;
-	private Long sessionId;
+	private String sessionId;
 	
 	
 	private LocationManager locationManager;
@@ -83,7 +83,7 @@ public class TransportMeService extends Service {
 	private void makeUseOfNewLocation(Location newLocation) {
 		Float latitude = (float) (newLocation.getLatitude());
 		Float longitud = (float) (newLocation.getLongitude());
-		TransportLocationDTO location = new TransportLocationDTO();
+		final TransportLocationDTO location = new TransportLocationDTO();
 		location.setSession(sessionId);
 		location.setLatitude(latitude);
 		location.setLongitude(longitud);

@@ -3,10 +3,9 @@ package com.uade.pfi.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +23,9 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
 @Controller
 public class MobileInterfaceImpl implements MobileInterface {
 	
-	private Logger logger = LoggerFactory.getLogger(MobileInterfaceImpl.class);
+	private Log logger = LogFactory.getLog(MobileInterfaceImpl.class);
 	
-	@Resource
+	@Autowired
 	private PublicTransportTrackerService service;
 
 	
@@ -47,25 +46,24 @@ public class MobileInterfaceImpl implements MobileInterface {
 	@RequestMapping(value="/getLocations.json")
 	@Transactional
 	public TransportLocationDTO[] getLocations(@RequestBody LocationDTO myLocation) {
-		throw new RuntimeException("To be IMplemented");
+		throw new RuntimeException("To be Implemented");
 	}
 	
 	@RequestMapping("/postLocation.json")
 	@Transactional
 	public @ResponseBody Boolean postLocation(@RequestBody TransportLocationDTO location){
-		logger.debug("[postLocation()] using service: " + service);
-		logger.debug("received TransportLocationDTO: " + TransportMeStringCreator.toString(location));
+		logger.debug("[postLocation()] received TransportLocationDTO: " + TransportMeStringCreator.toString(location));
 		service.updatePosition(new Location(location.getLatitude(),location.getLongitude()),location.getSession());
+		logger.debug("position updated to session: " + location.getSession());
 		return true;
 	}
 
 
 	@RequestMapping(value="/checkIn.json")
 	@Transactional
-	public @ResponseBody Long checkIn(@RequestBody String transportName) {
-		logger.debug("[checkIn()] using service: " + service);
-		logger.debug("received transportName: " + transportName);
-		Long id = service.checkIn(transportName);
+	public @ResponseBody String checkIn(@RequestBody String transportName) {
+		logger.debug("[checkIn()] received transportName: " + transportName);
+		String id = service.checkIn(transportName);
 		logger.debug("returning sessionId: " + id);
 		return id;
 	}

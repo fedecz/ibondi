@@ -6,25 +6,20 @@ package com.uade.pfi.core.dao.criteria;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.data.document.mongodb.query.Criteria;
 
-import com.uade.pfi.core.beans.TransportSession;
 
 /**
  * @author chiwi
  *
  */
 public class DefaultActiveSessionCriteriaStrategy implements
-		ActiveSessionCriteriaStrategy {
+		ActiveSessionCriteriaStrategy<Criteria> {
 
-	/* (non-Javadoc)
-	 * @see com.uade.pfi.core.dao.criteria.ActiveSessionCriteriaStrategy#getCriteria()
-	 */
-	public DetachedCriteria getCriteria() {
-		Calendar calendar = new GregorianCalendar();
+	public Criteria getCriteria() {
+		Calendar calendar = GregorianCalendar.getInstance();
 		calendar.add(Calendar.MINUTE, -10);
-		return DetachedCriteria.forClass(TransportSession.class).add(Restrictions.gt("lastUpdated", calendar.getTime()));
+		return Criteria.where("lastUpdated").gt(calendar.getTime());
 	}
 
 }

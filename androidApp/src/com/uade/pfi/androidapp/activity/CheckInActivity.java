@@ -19,7 +19,6 @@ import com.uade.pfi.androidapp.R;
  */
 public class CheckInActivity extends Activity{
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,11 +27,12 @@ public class CheckInActivity extends Activity{
 		okButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				EditText transportName = (EditText) findViewById(R.id.transportName);
+				EditText transportNameTextbox = (EditText) findViewById(R.id.transportName);
+				final String transportName = transportNameTextbox.getText().toString();
 				Intent intent = new Intent("com.uade.pfi.transportMe.TRANSPORT_ME_SERVICE");
-				intent.putExtra("transportName", transportName.getText().toString());
+				intent.putExtra("transportName", transportName);
 				CheckInActivity.this.startService(intent);
-				CheckInActivity.this.finish();
+				CheckInActivity.this.finish();		
 			}
 		});
 

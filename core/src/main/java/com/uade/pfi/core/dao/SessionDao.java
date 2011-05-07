@@ -9,12 +9,16 @@ public interface SessionDao {
 
 	List<TransportSession> retrieveActiveSessions();
 
-	TransportSession get(Long sessionId);
+	TransportSession get(String sessionId);
 	
-	Long insert(TransportSession session);
+	String insert(TransportSession session);
 	
 	void save(TransportSession session);
 	
-	void save(Location location);
+	void setLatestLocationTo(String sessionId, Location location);
+
+	void addLocationToList(String sessionId, Location location);
+
+	void updateTime(String sessionId);
 
 }

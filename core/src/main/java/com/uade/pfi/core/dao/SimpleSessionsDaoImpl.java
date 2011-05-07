@@ -18,7 +18,7 @@ import com.uade.pfi.core.beans.TransportSession;
  */
 public class SimpleSessionsDaoImpl implements SessionDao {
 
-	private Map<Long, TransportSession> sessions = new Hashtable<Long, TransportSession>();
+	private Map<String, TransportSession> sessions = new Hashtable<String, TransportSession>();
 	
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.dao.SessionsDao#retrieveActiveSessions()
@@ -30,16 +30,16 @@ public class SimpleSessionsDaoImpl implements SessionDao {
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.dao.SessionsDao#get(java.lang.Long)
 	 */
-	public TransportSession get(Long sessionId) {
+	public TransportSession get(String sessionId) {
 		return sessions.get(sessionId);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.dao.SessionsDao#save(com.uade.pfi.core.beans.TransportSession)
 	 */
-	public Long insert(TransportSession session) {
+	public String insert(TransportSession session) {
 		if(session.getId()==null)
-			session.setId(new Date().getTime());
+			session.setId(new Date().getTime()+"");
 		sessions.put(session.getId(), session);
 		return session.getId();
 	}
@@ -49,6 +49,21 @@ public class SimpleSessionsDaoImpl implements SessionDao {
 	}
 
 	public void save(Location location) {
+		
+	}
+
+	public void setLatestLocationTo(String sessionId, Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addLocationToList(String sessionId, Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateTime(String sessionId) {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -5,7 +5,7 @@ import com.uade.pfi.core.dto.TransportLocationDTO;
 
 public interface MobileInterface {
 
-	public abstract Long checkIn(String transportName);
+	public abstract String checkIn(String transportName);
 	
 	public abstract TransportLocationDTO[] getAllLocations();
 	

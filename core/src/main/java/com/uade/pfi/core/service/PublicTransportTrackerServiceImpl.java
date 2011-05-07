@@ -3,8 +3,8 @@ package com.uade.pfi.core.service;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uade.pfi.core.beans.Location;
@@ -15,7 +15,7 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class PublicTransportTrackerServiceImpl implements
 		PublicTransportTrackerService {
-	private Logger logger = LoggerFactory.getLogger(PublicTransportTrackerServiceImpl.class);
+	private Log logger = LogFactory.getLog(PublicTransportTrackerServiceImpl.class);
 	
 	private SessionDao dao;
 	
@@ -33,20 +33,21 @@ public class PublicTransportTrackerServiceImpl implements
 	}
 
 	@Transactional
-	public void updatePosition(Location location, Long sessionId) {
+	public void updatePosition(Location location, String sessionId) {
 		logger.debug("updatePosition(), session id: "+ sessionId);
 		logger.debug("location: "+ TransportMeStringCreator.toString(location).toString());
 		validateLocation(location);
 //		this.mergeOrInsertPosition(location);
+		location.setTrackedOn(new Date());
+//		dao.setLatestLocationTo(sessionId,location);
+//		dao.addLocationToList(sessionId, location);
+//		dao.updateTime(sessionId);
 		TransportSession session = dao.get(sessionId);
 		if(session==null)
 			throw new InvalidSessionException("Invalid session: " + sessionId);
 		logger.debug("got session: " + session);
-		location.setTrackedOn(new Date());
-		dao.save(location);
-		boolean add = session.getLocations().add(location);
+		session.getLocations().add(location);
 		session.setLastKnownLocation(location);
-		logger.debug("added location to session: " + add);
 		session.setLastUpdated(new Date());
 		dao.save(session);
 		logger.debug("Saved session: " + TransportMeStringCreator.toString(session));
@@ -92,15 +93,15 @@ public class PublicTransportTrackerServiceImpl implements
 	}
 
 	@Transactional
-	public Long checkIn(String transportName) {
+	public String checkIn(String transportName) {
 		logger.debug("cheking in transportName: " + transportName);
 		if(transportName== null || transportName.trim().equals(""))
 			throw new IllegalArgumentException("Transport Name Should not be Null.");
 		TransportSession session = new TransportSession();
 		session.setName(transportName);
-		Long sessionId = dao.insert(session);
+		String id = dao.insert(session);
 		logger.debug("Inserted session: " + TransportMeStringCreator.toString(session));
-		return sessionId;
+		return id;
 	}
 
 

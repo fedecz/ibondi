@@ -2,21 +2,9 @@ package com.uade.pfi.core.beans;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
-
-@Entity
-@Table(name="location")
-public class Location implements Comparable<Location>{
-	@Id
-	@GeneratedValue
-	private Long 	id;
-	
+public class Location {
 	private Float 	latitude;
 	private Float 	longitude;
 	private Date	trackedOn;
@@ -24,18 +12,6 @@ public class Location implements Comparable<Location>{
 	public Location(Float latitude, Float longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
-	}
-	
-	public int compareTo(Location l) {
-		if(l.getTrackedOn() == null)
-			return -1;
-		if(this.getTrackedOn() == null)
-			return 1;
-		if(this.getTrackedOn() == null && l.getTrackedOn() == null)
-			return 0;
-		if((this.getTrackedOn().getTime() - l.getTrackedOn().getTime()) >= 0)
-			return -1;
-		return 1;
 	}
 	
 	public String toString(){
@@ -70,16 +46,5 @@ public class Location implements Comparable<Location>{
 	public void setTrackedOn(Date trackedOn) {
 		this.trackedOn = trackedOn;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	
-	
 	
 }

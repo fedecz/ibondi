@@ -14,8 +14,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:core-ds.xml
-			classpath:core-dao-hibernate.xml
+			classpath:core-ds-cloudfoundry.xml
+			classpath:core-dao-mongo.xml
 			classpath:core-service.xml
         </param-value>
 	</context-param>
@@ -27,6 +27,11 @@
 	<servlet-mapping>
 		<servlet-name>pfi</servlet-name>
 		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>pfi</servlet-name>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
