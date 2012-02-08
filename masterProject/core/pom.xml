@@ -24,7 +24,7 @@
 		<!-- MAIN DEPENDENCIES -->
 		<dependency>
 			<groupId>edu.uade.pfi</groupId>
-			<artifactId>core-dto</artifactId>
+			<artifactId>api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- SPRING DEPENDENCIES -->

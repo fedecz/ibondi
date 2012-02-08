@@ -7,7 +7,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>core</module>
-  	<module>core-dto</module>
+  	<module>api</module>
   	<module>web</module>
   </modules>
 </project>
