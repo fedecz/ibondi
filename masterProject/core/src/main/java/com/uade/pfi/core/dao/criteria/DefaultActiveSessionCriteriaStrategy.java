@@ -6,7 +6,8 @@ package com.uade.pfi.core.dao.criteria;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.springframework.data.document.mongodb.query.Criteria;
+import org.springframework.data.mongodb.core.query.Criteria;
+
 
 
 /**

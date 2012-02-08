@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <artifactId>uadepfi2012</artifactId>
-    <groupId>edu.uade.pfi</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  
+	<parent>
+		<artifactId>uadepfi2012</artifactId>
+		<groupId>edu.uade.pfi</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
 	<groupId>edu.uade.pfi</groupId>
 	<artifactId>core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -16,7 +16,7 @@
 	<name>Core</name>
 
 	<properties>
-		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.0.0.M2</version>
+			<version>1.0.0.RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -73,19 +73,15 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2</version>
-			<scope>test</scope>
-		</dependency> -->
-		
+		<!-- dependency> <groupId>cglib</groupId> <artifactId>cglib-nodep</artifactId> 
+			<version>2.2</version> <scope>test</scope> </dependency> -->
+
 		<!-- CLOUDFOUNDRT Deps -->
-		<dependency>
-			<groupId>org.cloudfoundry</groupId>
-			<artifactId>cloudfoundry-runtime</artifactId>
-			<version>0.6.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.cloudfoundry</groupId> -->
+<!-- 			<artifactId>cloudfoundry-runtime</artifactId> -->
+<!-- 			<version>0.6.0</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 	<repositories>
 		<repository>

@@ -12,16 +12,16 @@
 
  	<!-- mongo:mapping-converter base-package="com.uade.pfi.core.beans" id="converter"/> --> 
  	
- 	<bean id="mappingContext" class="org.springframework.data.document.mongodb.mapping.MongoMappingContext"/>
+ 	<bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext"/>
 
- 	<bean id="converter" class="org.springframework.data.document.mongodb.convert.MappingMongoConverter">
+ 	<bean id="converter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
  		<constructor-arg ref="mappingContext"/>
  		<property name="mongo" ref="mongo"/>
  	</bean>
 	
 	<!-- Offers convenience methods and automatic mapping between MongoDB JSON 
 		documents and your domain classes. -->
-	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />
 		<constructor-arg name="databaseName" value="#{serviceProperties['pfiMongoDB.db']}" />
 		<constructor-arg name="defaultCollectionName" value="sessions"/>

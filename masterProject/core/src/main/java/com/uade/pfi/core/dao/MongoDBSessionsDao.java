@@ -1,6 +1,6 @@
 package com.uade.pfi.core.dao;
 
-import static org.springframework.data.document.mongodb.query.Criteria.whereId;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,10 +9,10 @@ import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Criteria;
-import org.springframework.data.document.mongodb.query.Query;
-import org.springframework.data.document.mongodb.query.Update;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.mongodb.WriteResult;
 import com.uade.pfi.core.beans.Location;
@@ -29,7 +29,7 @@ public class MongoDBSessionsDao implements SessionDao {
 	
 	public List<TransportSession> retrieveActiveSessions() {
 		logger.debug("retrieveing all sessions");
-		List<TransportSession> list = template.find("sessions",new Query(activeSessionCriteria.getCriteria()), TransportSession.class);
+		List<TransportSession> list = template.find(new Query(activeSessionCriteria.getCriteria()), TransportSession.class);
 		if(list==null)
 			list=new ArrayList<TransportSession>();
 		logger.debug("returning sessions:" + list);
@@ -39,7 +39,7 @@ public class MongoDBSessionsDao implements SessionDao {
 
 	public TransportSession get(String sessionId) {
 		logger.debug("getting session id:" + sessionId);
-		TransportSession session = template.findOne("sessions",new Query(whereId().is(sessionId)), TransportSession.class);
+		TransportSession session = template.findOne(new Query(where("id").is(sessionId)), TransportSession.class);
 		if(session == null){
 			logger.debug("session is null");
 			return null;
@@ -51,14 +51,14 @@ public class MongoDBSessionsDao implements SessionDao {
 	public String insert(TransportSession session) {
 		logger.debug("inserting session: " + session.toString());
 		session.setId(UUID.randomUUID().toString());
-		template.save("sessions",session);
+		template.save(session,"sessions");
 		logger.debug("returning id: " + session.getId());
 		return session.getId();
 	}
 
 	public void save(TransportSession session) {
 		logger.debug("saving session");
-		template.save("sessions",session);
+		template.save(session);
 		logger.debug("saving session: done");
 	}
 
@@ -72,19 +72,19 @@ public class MongoDBSessionsDao implements SessionDao {
 
 	public void setLatestLocationTo(String sessionId, Location location) {
 		logger.debug("before setting lastKNownLocation.");
-		WriteResult result = template.updateFirst("sessions",new Query(whereId().is(sessionId)), new Update().set("lastKnownLocation", location));
+		WriteResult result = template.updateFirst(new Query(where("id").is(sessionId)), new Update().set("lastKnownLocation", location),"sessions");
 		logger.info(result.toString());
 	}
 
 	public void addLocationToList(String sessionId, Location location) {
 		logger.debug("before adding location to list");
-		WriteResult result = template.updateFirst("sessions",new Query(whereId().is(sessionId)), new Update().addToSet("locations", location));
+		WriteResult result = template.updateFirst(new Query(where("id").is(sessionId)), new Update().addToSet("locations", location),"sessions");
 		logger.info(result.toString());
 	}
 
 	public void updateTime(String sessionId) {
 		logger.debug("before updataing Sessions time");
-		WriteResult result = template.updateFirst("sessions",new Query(whereId().is(sessionId)), new Update().set("lastUpdated", new Date()));
+		WriteResult result = template.updateFirst(new Query(where("id").is(sessionId)), new Update().set("lastUpdated", new Date()),"sessions");
 		logger.info(result.toString());
 	}
 

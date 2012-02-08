@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.document.mongodb.index.IndexDirection;
-import org.springframework.data.document.mongodb.index.Indexed;
-import org.springframework.data.document.mongodb.mapping.Document;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
@@ -19,7 +19,7 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
  * @author chiwi
  *
  */
-@Document
+@Document(collection="sessions")
 public class TransportSession {
 	@Id
 	private String 			id;
