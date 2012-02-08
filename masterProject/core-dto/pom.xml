@@ -10,7 +10,8 @@
   
 	<groupId>edu.uade.pfi</groupId>
 	<artifactId>core-dto</artifactId>
-	<version>0.2</version>
+	<name>Core DTO Objects</name>
+	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
 	</build>

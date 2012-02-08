@@ -2,9 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.uade.pfi</groupId>
   <artifactId>uadepfi2012</artifactId>
+  <name>Master Project</name>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
   	<module>core</module>
+  	<module>core-dto</module>
+  	<module>web</module>
   </modules>
 </project>

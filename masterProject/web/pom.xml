@@ -11,7 +11,7 @@
 	<groupId>edu.uade.pfi</groupId>
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
-	<version>0.2</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>TransportMe Web Application</name>
 	<properties>
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
@@ -24,9 +24,9 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.uade.pfi</groupId>
+			<groupId>edu.uade.pfi</groupId>
 			<artifactId>core</artifactId>
-			<version>0.2</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>taglibs</groupId>
