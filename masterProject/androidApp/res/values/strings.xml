@@ -8,7 +8,7 @@
     <string name="getButton">Get from Service</string>
 	<string name="quit">Back To Menu</string>
 	<string name="okButton">OK</string>
-	<string name="baseUrl">http://pfiweb.cloudfoundry.com</string>
+	<string name="baseUrl">http://10.155.8.10:8080/web</string>
 	<string name="checkIn">/checkIn.json</string>
 	<string name="getAllLocationsFromServer">/getAllLocations.json</string>
     <string name="postLocationToServer">/postLocation.json</string>
