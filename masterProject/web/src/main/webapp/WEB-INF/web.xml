@@ -14,9 +14,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:core-ds-mongo.xml
-			classpath:core-dao-mongo.xml
-			classpath:core-service.xml
+			classpath:core-context.xml
         </param-value>
 	</context-param>
 

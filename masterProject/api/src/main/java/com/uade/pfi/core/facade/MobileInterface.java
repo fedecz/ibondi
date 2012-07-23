@@ -5,12 +5,12 @@ import com.uade.pfi.core.dto.TransportLocationDTO;
 
 public interface MobileInterface {
 
-	public abstract String checkIn(String transportName);
+	public String checkIn(String transportName);
 	
-	public abstract TransportLocationDTO[] getAllLocations();
+	public TransportLocationDTO[] getAllLocations();
 	
-	public abstract TransportLocationDTO[] getLocations(LocationDTO myLocation);
+	public TransportLocationDTO[] getLocations(LocationDTO myLocation);
 	
-	public abstract Boolean postLocation(TransportLocationDTO location);
+	public Boolean postLocation(TransportLocationDTO location);
 
 }
