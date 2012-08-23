@@ -11,7 +11,7 @@ package com.uade.pfi.core.dto;
  * @author chiwi
  */
 public class TransportLocationDTO {
-	private String	session;
+	private String	sessionId;
 	private String 	name;
 	private Float	latitude;
 	private Float	longitude;
@@ -28,6 +28,11 @@ public class TransportLocationDTO {
 		this.name = name;
 		this.latitude = latitud;
 		this.longitude = longitud;
+	}
+	
+	public TransportLocationDTO(String sessionId, String name, Float latitud, Float longitud){
+		this(name, latitud,longitud);
+		this.sessionId = sessionId;
 	}
 	
 	public String getName() {
@@ -49,12 +54,12 @@ public class TransportLocationDTO {
 		this.longitude = longitude;
 	}
 
-	public String getSession() {
-		return session;
+	public String getSessionId() {
+		return sessionId;
 	}
 
-	public void setSession(String session) {
-		this.session = session;
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	
 	

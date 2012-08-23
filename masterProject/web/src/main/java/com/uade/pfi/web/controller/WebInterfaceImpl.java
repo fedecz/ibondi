@@ -1,6 +1,5 @@
 package com.uade.pfi.web.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 import com.uade.pfi.core.service.PublicTransportTrackerService;
 
 
@@ -23,17 +23,14 @@ public class WebInterfaceImpl {
 	
 	@Autowired
 	private PublicTransportTrackerService service;
+	private TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
 
 
 	@RequestMapping("index.htm")
 	public ModelAndView index(){
 		logger.debug("using service: " + service);
 		List<TransportSession> sessions = service.retrieveAllSessions();
-		List<TransportLocationDTO> locations = new ArrayList<TransportLocationDTO>();
-		for (TransportSession session : sessions) {
-			TransportLocationDTO dto = new TransportLocationDTO(session.getName(), session.getLastKnownLocation().getLatitude(), session.getLastKnownLocation().getLongitude());
-			locations.add(dto);
-		}
+		List<TransportLocationDTO> locations = converter.convert(sessions);
 		logger.debug("index() accessed. Returned items: " + locations.size());
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("locations", locations);

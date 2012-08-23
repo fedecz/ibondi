@@ -20,7 +20,7 @@ public class TransportMeStringCreator {
 
 	public static String toString(TransportLocationDTO location) {
 		ToStringCreator c = new ToStringCreator(location);
-		c.append("Session",location.getSession());
+		c.append("Session",location.getSessionId());
 		c.append("Name", location.getName());
 		c.append("Latitude",location.getLatitude());
 		c.append("Longitude",location.getLongitude());

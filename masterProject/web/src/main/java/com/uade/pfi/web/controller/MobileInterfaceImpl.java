@@ -1,6 +1,5 @@
 package com.uade.pfi.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -16,6 +15,7 @@ import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dto.LocationDTO;
 import com.uade.pfi.core.dto.TransportLocationDTO;
 import com.uade.pfi.core.facade.MobileInterface;
+import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 import com.uade.pfi.core.service.PublicTransportTrackerService;
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
@@ -26,17 +26,14 @@ public class MobileInterfaceImpl implements MobileInterface {
 	
 	@Autowired
 	private PublicTransportTrackerService service;
+	private TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
 
 	
 	@RequestMapping(value="/getAllLocations.json")
 	public @ResponseBody TransportLocationDTO[] getAllLocations(){
 		logger.debug("[getAllLocations()] using service: " + service);
 		List<TransportSession> sessions = service.retrieveAllSessions();
-		List<TransportLocationDTO> locations = new ArrayList<TransportLocationDTO>();
-		for (TransportSession session : sessions) {
-			TransportLocationDTO dto = new TransportLocationDTO(session.getName(), session.getLastKnownLocation().getLatitude(), session.getLastKnownLocation().getLongitude());
-			locations.add(dto);
-		}
+		List<TransportLocationDTO> locations = converter.convert(sessions);
 		logger.debug("getAllLocations() finished. Returned items: " + locations.size());
 		return locations.toArray(new TransportLocationDTO[0]);
 	}
@@ -49,8 +46,8 @@ public class MobileInterfaceImpl implements MobileInterface {
 	@RequestMapping("/postLocation.json")
 	public @ResponseBody Boolean postLocation(@RequestBody TransportLocationDTO location){
 		logger.debug("[postLocation()] received TransportLocationDTO: " + TransportMeStringCreator.toString(location));
-		service.updatePosition(new Location(location.getLatitude(),location.getLongitude()),location.getSession());
-		logger.debug("position updated to session: " + location.getSession());
+		service.updatePosition(new Location(location.getLatitude(),location.getLongitude()),location.getSessionId());
+		logger.debug("position updated to session: " + location.getSessionId());
 		return true;
 	}
 
