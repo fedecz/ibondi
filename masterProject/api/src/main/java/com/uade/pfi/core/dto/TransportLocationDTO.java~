@@ -5,7 +5,7 @@ package com.uade.pfi.core.dto;
 
 /**
  * 
- * Esta clase es usada <strong>solamente</strong> como medio de transporte
+ * Esta clase es usada <strong>solamente</strong> para ser usada como medio de transporte
  * entre la web y el dispositivo movil.
  *
  * @author chiwi

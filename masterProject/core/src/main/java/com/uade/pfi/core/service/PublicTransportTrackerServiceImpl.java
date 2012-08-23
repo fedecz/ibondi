@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
@@ -24,7 +23,6 @@ public class PublicTransportTrackerServiceImpl implements
 	 * (non-Javadoc)
 	 * @see com.uade.pfi.core.service.PublicTransportTrackerService#retrieveLocations()
 	 */
-	@Transactional
 	public List<TransportSession> retrieveAllSessions() {
 		logger.debug("retriveAllSessions()");
 		List<TransportSession> sessions = dao.retrieveActiveSessions();
@@ -32,7 +30,6 @@ public class PublicTransportTrackerServiceImpl implements
 		return sessions;
 	}
 
-	@Transactional
 	public void updatePosition(Location location, String sessionId) {
 		logger.debug("updatePosition(), session id: "+ sessionId);
 		logger.debug("location: "+ TransportMeStringCreator.toString(location).toString());
@@ -92,7 +89,6 @@ public class PublicTransportTrackerServiceImpl implements
 		return null;
 	}
 
-	@Transactional
 	public String checkIn(String transportName) {
 		logger.debug("cheking in transportName: " + transportName);
 		if(transportName== null || transportName.trim().equals(""))
