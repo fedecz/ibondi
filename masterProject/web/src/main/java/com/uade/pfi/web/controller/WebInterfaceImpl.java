@@ -38,11 +38,11 @@ public class WebInterfaceImpl {
 		Integer mapZoom = 2;
 		Float centerLat = (float) 0;
 		Float centerLong = (float) 0;
-		if(locations.size()>0){
-			mapZoom = 15;
-			centerLat =  locations.get(0).getLatitude();
-			centerLong = locations.get(0).getLongitude();
-		}
+//		if(locations.size()>0){
+//			mapZoom = 15;
+//			centerLat =  locations.get(0).getLatitude();
+//			centerLong = locations.get(0).getLongitude();
+//		}
 		
 		parameters.put("mapZoom", mapZoom);
 		parameters.put("centerLat", centerLat);

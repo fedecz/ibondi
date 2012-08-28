@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dto.LocationDTO;
+import com.uade.pfi.core.dto.SessionCheckInDTO;
 import com.uade.pfi.core.dto.TransportLocationDTO;
 import com.uade.pfi.core.facade.MobileInterface;
 import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
@@ -53,9 +54,9 @@ public class MobileInterfaceImpl implements MobileInterface {
 
 
 	@RequestMapping(value="/checkIn.json")
-	public @ResponseBody String checkIn(@RequestBody String transportName) {
-		logger.debug("[checkIn()] received transportName: " + transportName);
-		String id = service.checkIn(transportName);
+	public @ResponseBody String checkIn(@RequestBody SessionCheckInDTO sessionCheckin) {
+		logger.debug("[checkIn()] received transportName: " + sessionCheckin.getName());
+		String id = service.checkIn(sessionCheckin.getName());
 		logger.debug("returning sessionId: " + id);
 		return id;
 	}
