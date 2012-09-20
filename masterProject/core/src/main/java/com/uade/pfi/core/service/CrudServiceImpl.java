@@ -1,7 +1,6 @@
 package com.uade.pfi.core.service;
 
-import java.util.List;
-
+import com.uade.pfi.core.dao.CrudDao;
 import com.uade.pfi.core.dto.TransportDTO;
 
 /**
@@ -9,30 +8,32 @@ import com.uade.pfi.core.dto.TransportDTO;
  *
  */
 public class CrudServiceImpl implements CrudService {
-
+	
+	private CrudDao crudDao;
+	
 	public void addTransport(TransportDTO aNewTransport) {
-		// TODO Auto-generated method stub
+		
+		crudDao.insertTransport(aNewTransport);
 
 	}
 
 	public void updateTransport(TransportDTO aNewTransport) {
-		// TODO Auto-generated method stub
+		
+		crudDao.updateTransport(aNewTransport);
 
 	}
 
 	public void removeTransport(TransportDTO transportToBeRemoved) {
-		// TODO Auto-generated method stub
+
+		crudDao.removeTransport(transportToBeRemoved);
 
 	}
 
 	public TransportDTO getTransport(TransportDTO transportExample) {
-		// TODO Auto-generated method stub
-		return null;
+		TransportDTO transportDTO = crudDao.getByExample(transportExample);
+		
+		return transportDTO;
 	}
 
-	public List<TransportDTO> getTransportList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -25,7 +25,7 @@ public class MongoDBSessionsDao implements SessionDao {
 	private Log logger = LogFactory.getLog(MongoDBSessionsDao.class);
 	
 	private MongoTemplate template;
-	private ActiveSessionCriteriaStrategy<Criteria> activeSessionCriteria = new DefaultActiveSessionCriteriaStrategy();
+	private static final ActiveSessionCriteriaStrategy<Criteria> activeSessionCriteria = new DefaultActiveSessionCriteriaStrategy();
 	
 	public List<TransportSession> retrieveActiveSessions() {
 		logger.debug("retrieveing all sessions");

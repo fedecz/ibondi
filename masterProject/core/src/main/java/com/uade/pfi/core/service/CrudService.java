@@ -1,7 +1,5 @@
 package com.uade.pfi.core.service;
 
-import java.util.List;
-
 import com.uade.pfi.core.dto.TransportDTO;
 
 public interface CrudService {
@@ -13,7 +11,5 @@ public interface CrudService {
 	void removeTransport(TransportDTO transportToBeRemoved);
 	
 	TransportDTO getTransport(TransportDTO transportExample);
-	
-	List<TransportDTO> getTransportList();
 	
 }
