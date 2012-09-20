@@ -1,0 +1,12 @@
+curl -v -H "Content-Type: application/json" -X POST -d '{"screencast":{"subject":"tools"}}' \
+
+Checkin
+"{"name": "paquete"}"
+
+Postlocation
+"{ "latitude" : "35.123",
+  "longitude" : "2.256",
+  "sessionId" : "b17130e8-0ccf-4689-a2e2-47af28bbceb1"
+}"
+
+

@@ -1,14 +1,24 @@
 package com.uade.pfi.core.dto;
 
+/** 
+ * Represents the user session check in with the associated transport
+ *
+ */
 public class SessionCheckInDTO {
-	
-	private String name;
-	
-	public String getName() {
-		return name;
+	private String transportName;
+	private LocationDTO initialLocation;
+
+	public SessionCheckInDTO(String transportName, LocationDTO initialLocation) {
+		this.transportName = transportName;
+		this.initialLocation = initialLocation;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public String getTransportName() {
+		return transportName;
+	}
+	
+	public LocationDTO getInitialLocation() {
+		return initialLocation;
 	}
 
 }
