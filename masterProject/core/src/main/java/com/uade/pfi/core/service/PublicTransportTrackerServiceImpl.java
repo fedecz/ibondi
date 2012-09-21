@@ -16,7 +16,7 @@ public class PublicTransportTrackerServiceImpl implements
 		PublicTransportTrackerService {
 	private Log logger = LogFactory.getLog(PublicTransportTrackerServiceImpl.class);
 	
-	private SessionDao dao;
+	private SessionDao sessionsDao;
 	
 	
 	/*
@@ -25,7 +25,7 @@ public class PublicTransportTrackerServiceImpl implements
 	 */
 	public List<TransportSession> retrieveAllSessions() {
 		logger.debug("retriveAllSessions()");
-		List<TransportSession> sessions = dao.retrieveActiveSessions();
+		List<TransportSession> sessions = sessionsDao.retrieveActiveSessions();
 		logger.debug("sessions: " + TransportMeStringCreator.toString(sessions));
 		return sessions;
 	}
@@ -39,14 +39,14 @@ public class PublicTransportTrackerServiceImpl implements
 //		dao.setLatestLocationTo(sessionId,location);
 //		dao.addLocationToList(sessionId, location);
 //		dao.updateTime(sessionId);
-		TransportSession session = dao.get(sessionId);
+		TransportSession session = sessionsDao.get(sessionId);
 		if(session==null)
 			throw new InvalidSessionException("Invalid session: " + sessionId);
 		logger.debug("got session: " + session);
 		session.getLocations().add(location);
 		session.setLastKnownLocation(location);
 		session.setLastUpdated(new Date());
-		dao.save(session);
+		sessionsDao.save(session);
 		logger.debug("Saved session: " + TransportMeStringCreator.toString(session));
 	}
 
@@ -77,11 +77,11 @@ public class PublicTransportTrackerServiceImpl implements
 //		locations.put(aLocation.getName(), aLocation);
 //	}
 	
-	public void setDao(SessionDao dao) {
-		this.dao = dao;
+	public void setSessionsDao(SessionDao dao) {
+		this.sessionsDao = dao;
 	}
-	public SessionDao getDao() {
-		return dao;
+	public SessionDao getSessionsDao() {
+		return sessionsDao;
 	}
 
 	public List<TransportSession> retrieveSessions(Location myLocation) {
@@ -89,13 +89,13 @@ public class PublicTransportTrackerServiceImpl implements
 		return null;
 	}
 
-	public String checkIn(String transportName) {
-		logger.debug("cheking in transportName: " + transportName);
-		if(transportName== null || transportName.trim().equals(""))
-			throw new IllegalArgumentException("Transport Name Should not be Null.");
+	public String checkIn(String transportId) {
+		logger.debug("cheking in transportName: " + transportId);
+		if(transportId== null || transportId.trim().equals(""))
+			throw new IllegalArgumentException("Transport Id Should not be Null.");
 		TransportSession session = new TransportSession();
-		session.setName(transportName);
-		String id = dao.insert(session);
+		session.setTransportId(transportId);
+		String id = sessionsDao.insert(session);
 		logger.debug("Inserted session: " + TransportMeStringCreator.toString(session));
 		return id;
 	}

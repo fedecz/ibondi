@@ -1,15 +1,14 @@
 package com.uade.pfi.core.service;
 
-import com.uade.pfi.core.beans.Transport;
 
-public interface CrudService {
+public interface CrudService<T> {
 	
-	void addTransport(Transport aNewTransport);
+	void add(T t);
 	
-	void updateTransport(Transport aNewTransport);
+	void update(T t);
 	
-	void removeTransport(Transport transportToBeRemoved);
+	void remove(T t);
 	
-	Transport getTransport(Transport transportExample);
+	T get(T t);
 	
 }

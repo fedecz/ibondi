@@ -34,7 +34,7 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 	public void elConverterDebePopularElName(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
 		TransportSession value = new TransportSession();
-		value.setName("name");
+		value.setTransportId("name");
 		TransportLocationDTO locationDTO = converter.convert(value);
 		assertEquals("name", locationDTO.getName());
 	}
@@ -53,9 +53,9 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 	public void elConverterDebeConvertirUnaLista(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
 		TransportSession value1 = new TransportSession();
-		value1.setName("uno");
+		value1.setTransportId("uno");
 		TransportSession value2 = new TransportSession();
-		value2.setName("dos");
+		value2.setTransportId("dos");
 		List<TransportSession> sessions = Arrays.asList(value1, value2);
 		List<TransportLocationDTO> list = converter.convert(sessions);
 		assertEquals("uno", list.get(0).getName());

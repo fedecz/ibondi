@@ -55,8 +55,8 @@ public class MobileInterfaceImpl implements MobileInterface {
 
 	@RequestMapping(value="/checkIn.json")
 	public @ResponseBody String checkIn(@RequestBody SessionCheckInDTO sessionCheckin) {
-		logger.debug("[checkIn()] received transportName: " + sessionCheckin.getTransportName());
-		String id = service.checkIn(sessionCheckin.getTransportName());
+		logger.debug("[checkIn()] received transportName: " + sessionCheckin.getTransportId());
+		String id = service.checkIn(sessionCheckin.getTransportId());
 		logger.debug("returning sessionId: " + id);
 		return id;
 	}

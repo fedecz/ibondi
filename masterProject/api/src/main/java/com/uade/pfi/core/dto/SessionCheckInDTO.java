@@ -5,16 +5,16 @@ package com.uade.pfi.core.dto;
  *
  */
 public class SessionCheckInDTO {
-	private String transportName;
+	private String transportId;
 	private LocationDTO initialLocation;
 
-	public SessionCheckInDTO(String transportName, LocationDTO initialLocation) {
-		this.transportName = transportName;
+	public SessionCheckInDTO(String transportId, LocationDTO initialLocation) {
+		this.transportId = transportId;
 		this.initialLocation = initialLocation;
 	}
 
-	public String getTransportName() {
-		return transportName;
+	public String getTransportId() {
+		return transportId;
 	}
 	
 	public LocationDTO getInitialLocation() {

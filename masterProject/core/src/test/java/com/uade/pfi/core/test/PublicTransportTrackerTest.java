@@ -23,7 +23,7 @@ public class PublicTransportTrackerTest {
 	@Test
 	public void elServicioDebeDevolverListasPosicionesDeTODOSLosTransportes(){
 		PublicTransportTrackerServiceImpl service = new PublicTransportTrackerServiceImpl();
-		service.setDao(new SessionDao() {
+		service.setSessionsDao(new SessionDao() {
 			public String insert(TransportSession session) {return null;}
 			public List<TransportSession> retrieveActiveSessions() {
 				TransportSession loc = new TransportSession();
@@ -70,7 +70,7 @@ public class PublicTransportTrackerTest {
 		TransportSession newSession = sessions.get(sessions.size()-1);
 		//		assertEquals(new Float(2), newSession.getLocation().getLatitude());
 		//		assertEquals(new Float(3), newSession.getLocation().getLongitude());
-		assertEquals("60", newSession.getName());
+		assertEquals("60", newSession.getTransportId());
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class PublicTransportTrackerTest {
 	@Test
 	public void serviceShouldAllowCheckIn(){
 		PublicTransportTrackerServiceImpl service = createService();
-		service.setDao(new SessionDao() {
+		service.setSessionsDao(new SessionDao() {
 			public String insert(TransportSession session) {
 				return "x";
 			}
@@ -136,7 +136,7 @@ public class PublicTransportTrackerTest {
 	
 	private PublicTransportTrackerServiceImpl createService() {
 		PublicTransportTrackerServiceImpl service = new PublicTransportTrackerServiceImpl();
-		service.setDao(new SessionsDaoMock());
+		service.setSessionsDao(new SessionsDaoMock());
 		return service;
 	}
 

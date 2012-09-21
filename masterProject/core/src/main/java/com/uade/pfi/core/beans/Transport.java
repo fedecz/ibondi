@@ -1,23 +1,25 @@
 package com.uade.pfi.core.beans;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.uade.pfi.core.enums.TransportTypeEnum;
 
 @Document(collection="transports")
+@CompoundIndexes(
+		@CompoundIndex(name="transport_index",unique=true,def="{'name': 1, 'branch': -1, 'heading': -1}")
+)
 public class Transport {
 	@Id
 	private String id;
 	
-	@Indexed
 	private String name;
 	
-	@Indexed
 	private String branch;
 	
-	@Indexed
 	private String heading;
 	
 	private TransportTypeEnum transportType;
@@ -29,6 +31,13 @@ public class Transport {
 		this.branch = branch;
 		this.heading = heading;
 		this.transportType = transportType;
+	}
+	
+	@PersistenceConstructor
+	public Transport(String id, String name, String branch, String heading,
+			TransportTypeEnum transportType) {
+		this(name, branch, heading, transportType);
+		this.id = id;
 	}
 	
 	public String getName() {

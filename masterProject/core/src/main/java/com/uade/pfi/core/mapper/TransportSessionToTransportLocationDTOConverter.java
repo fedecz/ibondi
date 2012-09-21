@@ -11,7 +11,7 @@ public class TransportSessionToTransportLocationDTOConverter implements Converte
 	public TransportLocationDTO convert(TransportSession value) {
 		TransportLocationDTO dto = new TransportLocationDTO();
 		dto.setSessionId(value.getId());
-		dto.setName(value.getName());
+		dto.setName(value.getTransportId());
 		if(value.getLastKnownLocation()!=null){
 			dto.setLatitude(value.getLastKnownLocation().getLatitude());
 			dto.setLongitude(value.getLastKnownLocation().getLongitude());

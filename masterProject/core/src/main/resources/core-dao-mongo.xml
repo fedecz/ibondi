@@ -6,14 +6,10 @@
     		http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd">
 
 
-	<bean id="locationsDao" class="com.uade.pfi.core.dao.MongoDBSessionsDao">
+	<bean id="sessionsDao" class="com.uade.pfi.core.dao.MongoDBSessionsDao">
 		<property name="template" ref="mongoTemplate" />
 	</bean>
 	
-	<bean id="crudDao" class="com.uade.pfi.core.dao.MongoDBCrudDao">
-		<property name="transportRepository" ref="transportRepository"/>	    
-	</bean>
-
  	<mongo:mapping-converter base-package="com.uade.pfi.core.beans" id="converter"/> 
  	
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
@@ -22,6 +18,6 @@
 		<property name="writeResultChecking" value="EXCEPTION"/>
 	</bean>
 	
-	<bean id="transportRepository" class="com.uade.pfi.core.dao.repositories.TransportRespository" />
+	<mongo:repositories base-package="com.uade.pfi.core.dao.repositories" />
 
 </beans>

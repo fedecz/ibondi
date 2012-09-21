@@ -23,7 +23,7 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
 public class TransportSession {
 	@Id
 	private String 			id;
-	private String 			name;
+	private String 			transportId; //por ahora solo el id. Despues vemos si usamos DBRefs.
 	private Location 		lastKnownLocation;
 	private List<Location> 	locations = new ArrayList<Location>();
 	@Indexed(direction=IndexDirection.DESCENDING)
@@ -32,11 +32,11 @@ public class TransportSession {
 	public TransportSession() {
 	}
 	
-	public String getName() {
-		return name;
+	public String getTransportId() {
+		return transportId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTransportId(String name) {
+		this.transportId = name;
 	}
 
 	public String toString(){

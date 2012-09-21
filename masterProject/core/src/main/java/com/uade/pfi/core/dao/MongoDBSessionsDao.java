@@ -20,7 +20,8 @@ import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dao.criteria.ActiveSessionCriteriaStrategy;
 import com.uade.pfi.core.dao.criteria.DefaultActiveSessionCriteriaStrategy;
 
-
+//FIXME: implementar esta clase como repository. Los custom Methods hacerlos con esto:
+//http://static.springsource.org/spring-data/data-mongo/docs/current/reference/html/#repositories.single-repository-behaviour
 public class MongoDBSessionsDao implements SessionDao {
 	private Log logger = LogFactory.getLog(MongoDBSessionsDao.class);
 	
@@ -50,6 +51,7 @@ public class MongoDBSessionsDao implements SessionDao {
 
 	public String insert(TransportSession session) {
 		logger.debug("inserting session: " + session.toString());
+		//FIXME: sacar el UUID y usar el ObjectId nativo de Mongo... http://www.mongodb.org/display/DOCS/Object+IDs
 		session.setId(UUID.randomUUID().toString());
 		template.save(session,"sessions");
 		logger.debug("returning id: " + session.getId());

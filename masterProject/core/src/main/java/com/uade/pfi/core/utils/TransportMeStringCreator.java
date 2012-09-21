@@ -31,7 +31,7 @@ public class TransportMeStringCreator {
 	public static String toString(TransportSession session) {
 		ToStringCreator c = new ToStringCreator(session);
 		c.append("Id",session.getId());
-		c.append("Name", session.getName());
+		c.append("TransportID", session.getTransportId());
 		c.append("LastKnownLocation", session.getLastKnownLocation()!=null?TransportMeStringCreator.toString(session.getLastKnownLocation()):null);
 		c.append("LastUpdated",session.getLastUpdated());
 		c.append("Locations",TransportMeStringCreator.toString(session.getLocations()));

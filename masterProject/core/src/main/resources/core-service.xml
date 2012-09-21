@@ -8,11 +8,7 @@
 		">
 
 	<bean id="locationService" class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl">
-		<property name="dao" ref="locationsDao"/>
+		<property name="sessionsDao" ref="sessionsDao"/>
 	</bean>
 	
-	<bean id="crudService" class="com.uade.pfi.core.service.CrudServiceImpl">
-	    <property name="crudDao" ref="crudDao" />
-	</bean>
-
 </beans>
