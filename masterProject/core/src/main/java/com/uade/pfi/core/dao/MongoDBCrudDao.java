@@ -1,34 +1,33 @@
 package com.uade.pfi.core.dao;
 
-import org.springframework.data.mongodb.core.MongoTemplate;
-
-import com.uade.pfi.core.dto.TransportDTO;
+import com.uade.pfi.core.beans.Transport;
+import com.uade.pfi.core.dao.repositories.TransportRespository;
 
 public class MongoDBCrudDao implements CrudDao {
 
-	private MongoTemplate template;
+	private TransportRespository transportRepository;
 	
 	
-	public void insertTransport(TransportDTO aNewTransport) {
-		// TODO Auto-generated method stub
+	public Transport insertTransport(Transport transportEntity) {
+		return transportRepository.save(transportEntity);
 		
 	}
 
-	public void updateTransport(TransportDTO aNewTransport) {
-		// TODO Auto-generated method stub
-		
+	public void updateTransport(Transport transportEntity) {
+		transportRepository.save(transportEntity);
 	}
 
-	public void removeTransport(TransportDTO transportToBeRemoved) {
-		// TODO Auto-generated method stub
-		
+	public void removeTransport(Transport transportEntity) {
+		transportRepository.delete(transportEntity);
 	}
 
-	public TransportDTO getByExample(TransportDTO transportExample) {
-		// TODO Auto-generated method stub
-		return null;
+	public Transport getByExample(Transport transportEntity) {
+		return transportRepository.findOne(transportEntity.getId());
 	}
 	
+	public void setTransportRepository(TransportRespository transportRepository) {
+		this.transportRepository = transportRepository;
+	}
 	
 	
 }

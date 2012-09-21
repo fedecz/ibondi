@@ -1,5 +1,6 @@
 package com.uade.pfi.core.beans;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +8,7 @@ import com.uade.pfi.core.enums.TransportTypeEnum;
 
 @Document(collection="transports")
 public class Transport {
-	
+	@Id
 	private String id;
 	
 	@Indexed

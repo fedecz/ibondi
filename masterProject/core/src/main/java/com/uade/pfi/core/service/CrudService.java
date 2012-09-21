@@ -1,15 +1,15 @@
 package com.uade.pfi.core.service;
 
-import com.uade.pfi.core.dto.TransportDTO;
+import com.uade.pfi.core.beans.Transport;
 
 public interface CrudService {
 	
-	void addTransport(TransportDTO aNewTransport);
+	void addTransport(Transport aNewTransport);
 	
-	void updateTransport(TransportDTO aNewTransport);
+	void updateTransport(Transport aNewTransport);
 	
-	void removeTransport(TransportDTO transportToBeRemoved);
+	void removeTransport(Transport transportToBeRemoved);
 	
-	TransportDTO getTransport(TransportDTO transportExample);
+	Transport getTransport(Transport transportExample);
 	
 }

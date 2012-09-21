@@ -9,6 +9,10 @@
 	<bean id="locationsDao" class="com.uade.pfi.core.dao.MongoDBSessionsDao">
 		<property name="template" ref="mongoTemplate" />
 	</bean>
+	
+	<bean id="crudDao" class="com.uade.pfi.core.dao.MongoDBCrudDao">
+		<property name="transportRepository" ref="transportRepository"/>	    
+	</bean>
 
  	<mongo:mapping-converter base-package="com.uade.pfi.core.beans" id="converter"/> 
  	
@@ -18,5 +22,6 @@
 		<property name="writeResultChecking" value="EXCEPTION"/>
 	</bean>
 	
+	<bean id="transportRepository" class="com.uade.pfi.core.dao.repositories.TransportRespository" />
 
 </beans>

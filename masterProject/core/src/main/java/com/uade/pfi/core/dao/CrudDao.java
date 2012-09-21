@@ -1,15 +1,15 @@
 package com.uade.pfi.core.dao;
 
-import com.uade.pfi.core.dto.TransportDTO;
+import com.uade.pfi.core.beans.Transport;
 
 public interface CrudDao {
 
-	void insertTransport(TransportDTO aNewTransport);
+	Transport insertTransport(Transport aNewTransport);
 
-	void updateTransport(TransportDTO aNewTransport);
+	void updateTransport(Transport aNewTransport);
 
-	void removeTransport(TransportDTO transportToBeRemoved);
+	void removeTransport(Transport transportToBeRemoved);
 
-	TransportDTO getByExample(TransportDTO transportExample);
+	Transport getByExample(Transport transportExample);
 
 }
