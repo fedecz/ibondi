@@ -15,7 +15,6 @@ import com.uade.pfi.core.enums.TransportTypeEnum;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value="classpath:core-context.xml")
-@Ignore //TODO ver como hacer para que no corra este test en un simple "mvn clean install"
 public class TransportRepositoryTest {
 
 	@Autowired
