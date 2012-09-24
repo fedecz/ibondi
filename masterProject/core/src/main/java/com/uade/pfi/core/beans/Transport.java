@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.uade.pfi.core.enums.HeadingEnum;
 import com.uade.pfi.core.enums.TransportTypeEnum;
 
 @Document(collection="transports")
@@ -20,11 +21,11 @@ public class Transport {
 	
 	private String branch;
 	
-	private String heading;
+	private HeadingEnum heading;
 	
 	private TransportTypeEnum transportType;
 	
-	public Transport(String name, String branch, String heading,
+	public Transport(String name, String branch, HeadingEnum heading,
 			TransportTypeEnum transportType) {
 		super();
 		this.name = name;
@@ -34,7 +35,7 @@ public class Transport {
 	}
 	
 	@PersistenceConstructor
-	public Transport(String id, String name, String branch, String heading,
+	public Transport(String id, String name, String branch, HeadingEnum heading,
 			TransportTypeEnum transportType) {
 		this(name, branch, heading, transportType);
 		this.id = id;
@@ -48,7 +49,7 @@ public class Transport {
 		return branch;
 	}
 	
-	public String getHeading() {
+	public HeadingEnum getHeading() {
 		return heading;
 	}
 	

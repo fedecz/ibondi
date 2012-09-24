@@ -2,7 +2,6 @@ package com.uade.pfi.core.test.integration.dao;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.uade.pfi.core.beans.Transport;
 import com.uade.pfi.core.dao.repositories.TransportRespository;
+import com.uade.pfi.core.enums.HeadingEnum;
 import com.uade.pfi.core.enums.TransportTypeEnum;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,7 +27,7 @@ public class TransportRepositoryTest {
 
 	@Test
 	public void verifyThatRepositoryIsInsertedCorrectly() {
-		Transport insertedTransport = repository.save(new Transport("152", "SEMIRAPIDO", "IDA", TransportTypeEnum.BUS));
+		Transport insertedTransport = repository.save(new Transport("152", "SEMIRAPIDO", HeadingEnum.IDA, TransportTypeEnum.BUS));
 
 		Assert.assertNotNull(insertedTransport);
 		Assert.assertNotNull(insertedTransport.getId());
@@ -38,7 +38,7 @@ public class TransportRepositoryTest {
 	
 	@Test
 	public void verifyThatATransportIsSavedCorrectly(){
-		Transport sesenta = repository.save(new Transport("60", "escobar", "escobar", TransportTypeEnum.BUS));
+		Transport sesenta = repository.save(new Transport("60", "escobar", HeadingEnum.IDA, TransportTypeEnum.BUS));
 		Transport nuevoSesenta = new Transport(sesenta.getId(),sesenta.getName(), "TIGRE" , sesenta.getHeading(), sesenta.getTransportType());
 		
 		repository.save(nuevoSesenta);

@@ -11,4 +11,6 @@
 		<property name="sessionsDao" ref="sessionsDao"/>
 	</bean>
 	
+	<bean id="transportCrudService" class="com.uade.pfi.core.service.TransportCrudService" />
+	
 </beans>
