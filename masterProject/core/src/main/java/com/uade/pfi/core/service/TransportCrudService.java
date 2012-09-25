@@ -1,5 +1,7 @@
 package com.uade.pfi.core.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uade.pfi.core.beans.Transport;
@@ -36,5 +38,9 @@ public class TransportCrudService implements CrudService<Transport> {
 	
 	public TransportRespository getRepo() {
 		return repo;
+	}
+
+	public List<Transport> getAllTransports() {
+		return repo.findAll();
 	}
 }

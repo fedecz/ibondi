@@ -7,6 +7,8 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
 		">
 
+    <context:annotation-config />
+    
 	<bean id="locationService" class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl">
 		<property name="sessionsDao" ref="sessionsDao"/>
 	</bean>
