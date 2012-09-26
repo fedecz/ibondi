@@ -9,6 +9,7 @@
   	<module>core</module>
   	<module>api</module>
   	<module>web</module>
+	<module>scripts</module>
   </modules>
 
 </project>
