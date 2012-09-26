@@ -8,10 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-	<groupId>edu.uade.pfi</groupId>
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>TransportMe Web Application</name>
 	<properties>
 		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>

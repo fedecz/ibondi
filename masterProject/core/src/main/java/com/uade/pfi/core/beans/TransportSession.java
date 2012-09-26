@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,14 +26,38 @@ public class TransportSession {
 	@Id
 	private String 			id;
 	private String 			transportId; //por ahora solo el id. Despues vemos si usamos DBRefs.
+	@GeoSpatialIndexed
 	private Location 		lastKnownLocation;
 	private List<Location> 	locations = new ArrayList<Location>();
 	@Indexed(direction=IndexDirection.DESCENDING)
 	private Date			lastUpdated;
 
+	@Deprecated
 	public TransportSession() {
 	}
 	
+	public TransportSession(String transportId,
+			Location lastKnownLocation, List<Location> locations,
+			Date lastUpdated) {
+		super();
+		this.transportId = transportId;
+		this.lastKnownLocation = lastKnownLocation;
+		this.locations = locations;
+		this.lastUpdated = lastUpdated;
+	}
+	
+	@PersistenceConstructor
+	public TransportSession(String id, String transportId,
+			Location lastKnownLocation, List<Location> locations,
+			Date lastUpdated) {
+		super();
+		this.id = id;
+		this.transportId = transportId;
+		this.lastKnownLocation = lastKnownLocation;
+		this.locations = locations;
+		this.lastUpdated = lastUpdated;
+	}
+
 	public String getTransportId() {
 		return transportId;
 	}

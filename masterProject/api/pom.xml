@@ -8,10 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-	<groupId>edu.uade.pfi</groupId>
 	<artifactId>api</artifactId>
 	<name>API</name>
-	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
 	</build>

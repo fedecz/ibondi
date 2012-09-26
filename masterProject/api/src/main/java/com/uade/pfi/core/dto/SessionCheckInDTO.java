@@ -8,17 +8,21 @@ public class SessionCheckInDTO {
 	private String transportId;
 	private LocationDTO initialLocation;
 
-	public SessionCheckInDTO(String transportId, LocationDTO initialLocation) {
-		this.transportId = transportId;
-		this.initialLocation = initialLocation;
+	public SessionCheckInDTO() {
 	}
 
 	public String getTransportId() {
 		return transportId;
 	}
-	
+
 	public LocationDTO getInitialLocation() {
 		return initialLocation;
+	}
+	public void setInitialLocation(LocationDTO initialLocation) {
+		this.initialLocation = initialLocation;
+	}
+	public void setTransportId(String transportId) {
+		this.transportId = transportId;
 	}
 
 }
