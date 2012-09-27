@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uade.pfi.core.beans.Transport;
 import com.uade.pfi.core.service.TransportCrudService;
@@ -25,27 +26,24 @@ public class TransportCrudController {
 	@Autowired
 	private TransportCrudService service;
 
-	@ModelAttribute
-	public Transport newRequest(@RequestParam(required=false) Integer id) {
+	@ModelAttribute public Transport getTransport(@RequestParam(required=false) Integer id) {
 		return (id != null ? service.getTransportBy(Integer.toString(id)) : new Transport());
 	}
 
-	@RequestMapping("/transport/CrudRequestForm.htm")
-	public String showEmptyForm() {
-		return "transportCrudRequestForm";
+	@RequestMapping("/transport/transportCrudRequestForm.htm")
+	public ModelAndView showEmptyForm() {
+		return new ModelAndView("/WEB-INF/jsp/transportCrudRequestForm.jsp");
 	}
-
-	@RequestMapping(value="/transport/form", method=RequestMethod.GET)
-	public void form() {}
 
 	@RequestMapping(value="/transport/form.htm", method=RequestMethod.POST)
-	public Transport form(Transport transport, Model model) {
+	public String form(Transport transport, Model model) {
 		Transport result = service.add(transport);
 		model.addAttribute("statusMessageKey", "Success");
-		return result;
+		model.addAttribute("createdTransport", result);
+		return "/WEB-INF/jsp/showNewTransport.jsp";
 	}
 
-	@RequestMapping(value="/transport/search.htm", method=RequestMethod.GET)
+	@RequestMapping(value="/transport/search.htm")
 	public @ModelAttribute("transport") Collection<Transport> search() {
 		return service.getAllTransports();
 	}
