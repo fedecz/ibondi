@@ -41,6 +41,9 @@ public class Transport {
 		this.id = id;
 	}
 	
+	public Transport() {
+	}
+
 	public String getName() {
 		return name;
 	}

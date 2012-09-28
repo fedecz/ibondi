@@ -43,4 +43,8 @@ public class TransportCrudService implements CrudService<Transport> {
 	public List<Transport> getAllTransports() {
 		return repo.findAll();
 	}
+
+	public Transport getTransportBy(String id) {
+		return repo.findOne(id);
+	}
 }
