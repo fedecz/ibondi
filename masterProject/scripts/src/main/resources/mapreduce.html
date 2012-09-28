@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var m = function(){
+	console.log('emit: transportId=' + this.transportId + ', x:' + this.lastKnownLocation.latitude + ", y:" + this.lastKnownLocation.longitude);
+	emit(this.transportId,{items:[{x: this.lastKnownLocation.latitude, y: this.lastKnownLocation.longitude}]});
+}
+
+var r = function(key, values){
+	var puntos = [];
+	for(var i =0;i<values.length;i++){
+		var items = values[i].items;
+		puntos = items.concat(puntos);
+	}
+	var solitarios = [];
+	var clusters = [];
+	var visitados = {};
+	var eps = 1;
+	var minPts = 2;
+		
+	var buscarVecinos = function(p, eps, puntos){
+		var vecinosP = [];
+		for(var i = 0; i < puntos.length; i++){
+			var posibleVecino = puntos[i];
+			var dist = Math.sqrt(Math.pow((posibleVecino.x - p.x),2) + Math.pow((posibleVecino.y - p.y),2));
+			if(dist > eps){
+				vecinosP.push(posibleVecino);
+			}
+		}	
+	}
+	var hash = function(p){
+		return "x:" +p.x + ",y:" + p.y;
+	}
+	
+	for(var i = 0; i < puntos.length; i++){
+		var p = puntos[i];
+		visitados[hash(p)] = true;
+		
+		var vecinosP = buscarVecinos(p,eps, puntos);
+		
+		if(vecinosP.length < minPts){
+			solitarios.push(p);
+		}else{
+			var cluster = [];
+			cluster.push(p);
+			p.cluster = clusters.length; //esto no va
+			for (var j = 0; j < vecinosP.length ; j++){
+				var pp = vecinosP[j];
+				if(visitados[hash(p)] == undefined){
+					visitados[hash(p)] = true;
+					var vecinosPP = buscarVecinos(pp, eps, puntos);
+					if(vecinosPP.length >= minPts){
+						vecinosP = vecinosP.concat(vecinosPP);
+					}
+				}
+				if(pp.cluster == undefined){
+					cluster.push(pp);
+					pp.cluster = clusters.length;//esto no va 
+				}
+			}
+			clusters.push(cluster);
+		}
+	}
+	for (var i = 0; i < solitarios.length; i++){
+		var p = solitarios[i];
+		var newCluster = [];
+		newCluster.push(p);
+		p.cluster = clusters.length;//esto no va
+		clusters.push(newCluster);
+	}
+	var result = {items:[]};
+	for (var i = 0 ; i < clusters.length ; i++){
+		var cluster = clusters[i];
+		var sumx = 0;
+		var sumy = 0;
+		for (var j = 0; j < cluster.length; j++){
+			var p = cluster[j];
+			sumx += p.x;
+			sumy += p.y;
+		}
+		var avgx = sumx / cluster.length;
+		var avgy = sumy / cluster.length;
+		result.items.push({x:avgx, y:avgy});
+	}
+	
+	return result;
+}
+
+
+// var r = function(key, values){
+// 	var dbScanf =  
+// 		function (D, eps, MinPts) {
+// 		    this.D = D;           
+// 		    this.dist = 
+// 				function  (p1,p2){
+// 					return  Math.sqrt(Math.pow((p2.x - p1.x),2) + Math.pow((p2.y - p1.y),2));
+// 				};
+// 			this.eps = eps;       
+// 		    this.MinPts = MinPts; 
+// 		    this.assigned = {};    
+// 		    this.cluster = [];    
+// 			this.run = 
+// 				function () {
+// 				    this.assigned = new Array(this.D.length);
+// 				    this.cluster = new Array();
+// 				    for (var P in this.D) {
+// 						if (this.assigned[P] === undefined) {  
+// 				            var N = this.getNeighbors(P);
+// 			                var C = this.cluster.length;  
+// 			                this.cluster[C] = [];         
+// 			                this.expandCluster(P, N, C);
+// 						}
+// 					}
+// 				}; 
+// 		this.getNeighbors = 
+// 			function (P) {
+// 			    var neighbors = [];
+// 			    for (var i in this.D) {
+// 			        if (i == P) continue;
+// 			        if (this.dist(P, i) <= this.eps)
+// 		            	neighbors.push(i);
+// 				}
+// 			    return neighbors;
+// 			};  
+// 		this.expandCluster = 
+// 			function (P, N, C) {
+// 			    this.cluster[C].push(P);  
+// 			    this.assigned[P] = C;     
+// 			    for (var PP in N) {  
+// 			        if (this.assigned[PP] === undefined) {  
+// 			            var NP = this.getNeighbors(PP);    
+// 			            if (NP.length + 1 >= this.MinPts) {
+// 				        	N = N.concat(NP.filter(function(p) { return p != P && N.indexOf(p) == -1 } ));
+// 			            }
+// 				    }
+// 			        if (!(this.assigned[PP] > -1)) {  
+// 			            this.cluster[C].push(PP);  
+// 			            this.assigned[PP] = C;     
+// 				    }
+// 			    }
+// 			};
+// 	}
+// 	var expandedValues = [];
+// 	for(var i =0;i<values.length;i++){
+// 		var items = values[i].items;
+// 		expandedValues = items.concat(expandedValues);
+// 	}
+	
+	
+// 	var dbScan = new dbScanf(expandedValues,1,1);
+// 	dbScan.run();
+// 	var cluster = dbScan.cluster;
+// 	console.log("cluster size: " + dbScan.cluster.length)
+// 	var result = {items:[]};
+// 	for(var i = 0; i < cluster.length; i++){
+// 		console.log("cluster " + i + " ==> " + cluster[i]);
+// 		var item = cluster[i][0];
+// 		//result.items.push(item);
+// 	}
+// 	for(var i = 0; i< dbScan.assigned.length; i++){
+// 		console.log("assigned " + i + " ==> " + dbScan.assigned[i]);
+// 	}
+// 	console.log("result: " + result);
+// 	return result;
+// }
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -100,7 +100,8 @@ function dbscanExpandCluster(P, N, C) {
 
 
 m = function(){
-	emit(this.transportId,{items:[{x: this.latitude, y: this.longitude}]});
+	console.log('emit: transportId=' + this.transportId + ', x:' + this.lastKnownLocation.latitude + ", y:" + this.lastKnownLocation.longitude);
+	emit(this.transportId,{items:[{x: this.lastKnownLocation.latitude, y: this.lastKnownLocation.longitude}]});
 }
 
 r = function(key, values){
@@ -109,7 +110,7 @@ r = function(key, values){
 		    this.D = D;           
 		    this.dist = 
 				function  (p1,p2){
-					return Math.sqrt(Math.pow((p2.x - p1.x),2) + Math.pow((p2.y - p1.y),2));
+					return  Math.sqrt(Math.pow((p2.x - p1.x),2) + Math.pow((p2.y - p1.y),2));
 				};
 			this.eps = eps;       
 		    this.MinPts = MinPts; 
@@ -121,7 +122,7 @@ r = function(key, values){
 				    if (MinPts) this.MinPts = MinPts;
 				    this.assigned = new Array(this.D.length);
 				    this.cluster = new Array();
-				    for (var P in this.D) {
+				    for (var P in this.D.items) {
 						if (this.assigned[P] === undefined) {  
 				            var N = this.getNeighbors(P);
 			                var C = this.cluster.length;  
@@ -133,7 +134,7 @@ r = function(key, values){
 		this.getNeighbors = 
 			function (P) {
 			    var neighbors = [];
-			    for (var i in this.D) {
+			    for (var i in this.D.items) {
 			        if (i == P) continue;
 			        if (this.dist(P, i) <= this.eps)
 		            	neighbors.push(i);
@@ -158,19 +159,17 @@ r = function(key, values){
 			    }
 			};
 	}
-	
-	
 	var dbScan = new dbScanf(values,1,1);
 	dbScan.run();
 	var cluster = dbScan.cluster;
-
+	console.log("cluster size: " + dbScan.cluster.length)
 	var result = {items:[]};
-
 	for(var i = 0; i < cluster.length; i++){
+		console.log("cluster " + i + " ==> " + cluster[i]);
 		var item = cluster[i][0];
 		result.items.push(item);
 	}
-
+	console.log("result: " + result);
 	return result;
 
 }
