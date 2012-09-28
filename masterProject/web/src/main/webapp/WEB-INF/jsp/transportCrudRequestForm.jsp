@@ -10,7 +10,7 @@
 <p>${msg}</p>
 </c:if>
 
-<form action="/transport/form.htm" method="post" >
+<form action="/transport/addTransport.htm" method="post" >
   <table width="95%" bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
     <tr>
       <td align="right" width="20%">Linea:</td>

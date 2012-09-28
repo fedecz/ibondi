@@ -10,7 +10,7 @@
 <p>${msg}</p>
 </c:if>
 
-<c:forEach var="transport" items="${transports}">
+<c:forEach var="transport" items="${transportList}">
     	<tr>
     		<td align="right" bgcolor="#ffffff">${transport.id}	</td>
         	<td align="right" bgcolor="#ffffff">${transport.name}	</td>
