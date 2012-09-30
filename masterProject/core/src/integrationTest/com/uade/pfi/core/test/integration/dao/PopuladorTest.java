@@ -5,6 +5,7 @@ package com.uade.pfi.core.test.integration.dao;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,13 +62,14 @@ public class PopuladorTest {
 		TransportSession B1 = new TransportSession("2",new Location(10f,5f),null,new Date());
 		TransportSession B2 = new TransportSession("2",new Location(80f,150f),null,new Date());
 		TransportSession B3 = new TransportSession("2",new Location(150f,150f),null,new Date());
-		TransportSession B4 = new TransportSession("2",new Location(180f,5f),null,new Date());
+		TransportSession B4 = new TransportSession("2",new Location(179f,5f),null,new Date());
 		
-		TransportSession C1 = new TransportSession("3",new Location(10f,180f),null,new Date());
+		TransportSession C1 = new TransportSession("3",new Location(10f,179f),null,new Date());
 		TransportSession C2 = new TransportSession("3",new Location(90f,5f),null,new Date());
 		TransportSession C3 = new TransportSession("3",new Location(150f,50f),null,new Date());
 		
-		sessionRepo.save(Arrays.asList(A1, A2,A3, A4, A5,A6,B1, B2, B3, B4, C1, C2, C3));
+		List<TransportSession> a = Arrays.asList(A1, A2,A3, A4, A5,A6,B1, B2, B3, B4, C1, C2, C3);
+		sessionRepo.save(a);
 	}
 	
 	
