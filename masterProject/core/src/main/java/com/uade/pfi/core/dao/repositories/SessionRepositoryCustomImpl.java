@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.geo.Circle;
 import org.springframework.data.mongodb.core.geo.Point;
+import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
+import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -68,11 +70,13 @@ public class SessionRepositoryCustomImpl implements
 		Calendar calendar = GregorianCalendar.getInstance();
 		calendar.add(Calendar.MINUTE, -10);
 		logger.debug("retrieveing all sessions");
-		List<TransportSession> activeSessions = template.find(new Query(where("lastUpdated")
+		Query query = new Query(where("lastUpdated")
 				.gt(calendar.getTime())
 				.andOperator(new Criteria("lastKnownLocation")
-					.withinSphere(new Circle(new Point(myLocation.getLatitude(),myLocation.getLongitude()), 100))))
+					.withinSphere(new Circle(new Point(myLocation.getLatitude(),myLocation.getLongitude()), 100))));
+		List<TransportSession> activeSessions = template.find(query
 			, TransportSession.class);
+		MapReduceResults<TransportSession> mapReduceResults = template.mapReduce(query, "sessions", "classpath:map.js", "classpath:reduce.js",TransportSession.class);
 		if(activeSessions==null)
 			activeSessions=new ArrayList<TransportSession>();
 		logger.debug("returning sessions:" + activeSessions);
