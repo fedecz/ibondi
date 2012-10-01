@@ -11,6 +11,6 @@ import com.uade.pfi.core.beans.TransportSession;
  * @author chiwi
  *
  */
-public interface SessionRepository extends MongoRepository<TransportSession, String>{
+public interface SessionRepository extends MongoRepository<TransportSession, String>, CustomSessionRepository{
 
 }

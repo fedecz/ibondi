@@ -17,15 +17,14 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 	@Test
 	public void elConverterDebeConvertirADTOYNoDebeSerNulo(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
-		TransportLocationDTO locationDTO = converter.convert(new TransportSession());
+		TransportLocationDTO locationDTO = converter.convert(new TransportSession(null));
 		assertNotNull(locationDTO);
 	}
 	
 	@Test
 	public void elConverterDebePopularElIdDeSession(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
-		TransportSession value = new TransportSession();
-		value.setId("123");
+		TransportSession value = new TransportSession("123",null, null, null, null);
 		TransportLocationDTO locationDTO = converter.convert(value);
 		assertEquals("123", locationDTO.getSessionId());
 	}
@@ -33,8 +32,7 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 	@Test
 	public void elConverterDebePopularElName(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
-		TransportSession value = new TransportSession();
-		value.setTransportId("name");
+		TransportSession value = new TransportSession("name");
 		TransportLocationDTO locationDTO = converter.convert(value);
 		assertEquals("name", locationDTO.getName());
 	}
@@ -42,8 +40,7 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 	@Test
 	public void elConverterDebePopularElLastKnownLocation(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
-		TransportSession value = new TransportSession();
-		value.setLastKnownLocation(new Location(123,456));
+		TransportSession value = new TransportSession(null,new Location(123,456),null, null);
 		TransportLocationDTO locationDTO = converter.convert(value);
 		assertTrue(locationDTO.getLatitude().equals(Float.valueOf(123)));
 		assertTrue(locationDTO.getLongitude().equals(Float.valueOf(456)));
@@ -52,10 +49,8 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 	@Test
 	public void elConverterDebeConvertirUnaLista(){
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
-		TransportSession value1 = new TransportSession();
-		value1.setTransportId("uno");
-		TransportSession value2 = new TransportSession();
-		value2.setTransportId("dos");
+		TransportSession value1 = new TransportSession("uno");
+		TransportSession value2 = new TransportSession("dos");
 		List<TransportSession> sessions = Arrays.asList(value1, value2);
 		List<TransportLocationDTO> list = converter.convert(sessions);
 		assertEquals("uno", list.get(0).getName());

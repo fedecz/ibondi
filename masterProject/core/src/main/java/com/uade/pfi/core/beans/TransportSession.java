@@ -46,6 +46,10 @@ public class TransportSession {
 		this.lastUpdated = lastUpdated;
 	}
 	
+	public TransportSession(String transportId){
+		this(transportId,null,null,null);
+	}
+	
 	@PersistenceConstructor
 	public TransportSession(String id, String transportId,
 			Location lastKnownLocation, List<Location> locations,
@@ -61,9 +65,6 @@ public class TransportSession {
 	public String getTransportId() {
 		return transportId;
 	}
-	public void setTransportId(String name) {
-		this.transportId = name;
-	}
 
 	public String toString(){
 		return TransportMeStringCreator.toString(this);
@@ -73,32 +74,17 @@ public class TransportSession {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public Collection<Location> getLocations() {
 		return locations;
 	}
 
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
 
 	public Date getLastUpdated() {
 		return lastUpdated;
 	}
 
-	public void setLastUpdated(Date lastUpdated) {
-		this.lastUpdated = lastUpdated;
-	}
-	
-	public void setLastKnownLocation(Location lastKnownLocation) {
-		this.lastKnownLocation = lastKnownLocation;
-	}
 	public Location getLastKnownLocation() {
 		return lastKnownLocation;
 	}
-	
-
 }

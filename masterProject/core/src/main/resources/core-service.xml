@@ -9,9 +9,7 @@
 
     <context:annotation-config />
     
-	<bean id="locationService" class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl">
-		<property name="sessionsDao" ref="sessionsDao"/>
-	</bean>
+	<bean id="locationService" class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl"/>
 	
 	<bean id="transportCrudService" class="com.uade.pfi.core.service.TransportCrudService" />
 	

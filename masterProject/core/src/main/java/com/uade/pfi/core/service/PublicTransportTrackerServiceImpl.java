@@ -5,18 +5,19 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dao.SessionDao;
-import com.uade.pfi.core.exception.InvalidSessionException;
+import com.uade.pfi.core.dao.repositories.SessionRepository;
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class PublicTransportTrackerServiceImpl implements
 		PublicTransportTrackerService {
 	private Log logger = LogFactory.getLog(PublicTransportTrackerServiceImpl.class);
 	
-	private SessionDao sessionsDao;
+	@Autowired
+	private SessionRepository sessionsRepo;
 	
 	
 	/*
@@ -25,7 +26,7 @@ public class PublicTransportTrackerServiceImpl implements
 	 */
 	public List<TransportSession> retrieveAllSessions() {
 		logger.debug("retriveAllSessions()");
-		List<TransportSession> sessions = sessionsDao.retrieveActiveSessions();
+		List<TransportSession> sessions = sessionsRepo.findActiveSessions();
 		logger.debug("sessions: " + TransportMeStringCreator.toString(sessions));
 		return sessions;
 	}
@@ -34,20 +35,9 @@ public class PublicTransportTrackerServiceImpl implements
 		logger.debug("updatePosition(), session id: "+ sessionId);
 		logger.debug("location: "+ TransportMeStringCreator.toString(location).toString());
 		validateLocation(location);
-//		this.mergeOrInsertPosition(location);
 		location.setTrackedOn(new Date());
-//		dao.setLatestLocationTo(sessionId,location);
-//		dao.addLocationToList(sessionId, location);
-//		dao.updateTime(sessionId);
-		TransportSession session = sessionsDao.get(sessionId);
-		if(session==null)
-			throw new InvalidSessionException("Invalid session: " + sessionId);
-		logger.debug("got session: " + session);
-		session.getLocations().add(location);
-		session.setLastKnownLocation(location);
-		session.setLastUpdated(new Date());
-		sessionsDao.save(session);
-		logger.debug("Saved session: " + TransportMeStringCreator.toString(session));
+		sessionsRepo.trackLocation(sessionId, location);
+		logger.debug("Location " + TransportMeStringCreator.toString(location) + " tracked to session: " + sessionId);
 	}
 
 	private void validateLocation(Location location) {
@@ -77,27 +67,22 @@ public class PublicTransportTrackerServiceImpl implements
 //		locations.put(aLocation.getName(), aLocation);
 //	}
 	
-	public void setSessionsDao(SessionDao dao) {
-		this.sessionsDao = dao;
+	public void setSessionsRepository(SessionRepository repo) {
+		this.sessionsRepo = repo;
 	}
-	public SessionDao getSessionsDao() {
-		return sessionsDao;
-	}
+	
 
 	public List<TransportSession> retrieveSessions(Location myLocation) {
-		//TODO esta implementacion devuelve los transportLocations alrededor de myLocation.
-		return null;
+		return sessionsRepo.findActiveSessions(myLocation);
 	}
 
 	public String checkIn(String transportId) {
 		logger.debug("cheking in transportName: " + transportId);
 		if(transportId== null || transportId.trim().equals(""))
 			throw new IllegalArgumentException("Transport Id Should not be Null.");
-		TransportSession session = new TransportSession();
-		session.setTransportId(transportId);
-		String id = sessionsDao.insert(session);
-		logger.debug("Inserted session: " + TransportMeStringCreator.toString(session));
-		return id;
+		TransportSession session = new TransportSession(transportId);
+		TransportSession savedSession = sessionsRepo.save(session);
+		return savedSession.getId();
 	}
 
 

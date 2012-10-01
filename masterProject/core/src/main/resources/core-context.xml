@@ -10,14 +10,14 @@
 		http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
 
-	<!-- Spring Service -->
-	<import resource="core-service.xml" />
-
 	<!-- Datasource mongo -->
 	<import resource="core-ds-mongo.xml" />
 
 	<!-- DAO MongoDB -->
 	<import resource="core-dao-mongo.xml" />
+	
+	<!-- Spring Service -->
+	<import resource="core-service.xml" />
 	
 	<context:property-placeholder location="classpath:pfiuade.properties"/>
 	

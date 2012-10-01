@@ -11,7 +11,7 @@ import com.uade.pfi.core.enums.TransportTypeEnum;
 
 @Document(collection="transports")
 @CompoundIndexes(
-		@CompoundIndex(name="transport_index",unique=true,def="{'name': 1, 'branch': -1, 'heading': -1}")
+		@CompoundIndex(name="transport_index",unique=true,def="{'name': 1, 'branch': 1, 'heading': 1}")
 )
 public class Transport {
 	@Id

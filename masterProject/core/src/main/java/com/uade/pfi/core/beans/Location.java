@@ -2,10 +2,14 @@ package com.uade.pfi.core.beans;
 
 import java.util.Date;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class Location {
+	@Field("lat")
 	private Float 	latitude;
+	@Field("long")
 	private Float 	longitude;
 	private Date	trackedOn;
 
