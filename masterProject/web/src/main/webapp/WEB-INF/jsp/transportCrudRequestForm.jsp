@@ -3,14 +3,9 @@
 <html>
 <head>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
 </head>
 <body>
-<c:if test="${!empty msg}">
-<p>${msg}</p>
-</c:if>
-
-<form action="/transport/addTransport.htm" method="post" >
+<form action="addTransport.htm" method="post" >
   <table width="95%" bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
     <tr>
       <td align="right" width="20%">Linea:</td>
@@ -34,7 +29,7 @@
       <td align="right" width="20%"S>Transport type (BUS, TREN):</td>
         <td width="20%">
           <input name="transportType"/>
-        </td>S
+        </td>
     </tr>
   </table>
   <br>

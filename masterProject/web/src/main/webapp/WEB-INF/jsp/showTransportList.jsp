@@ -1,16 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
-</head>
 <body>
-<c:if test="${!empty msg}">
-<p>${msg}</p>
-</c:if>
+Show all transport list:<br />
 
-<c:forEach var="transport" items="${transportList}">
+<table><tr><th>Id</th><th>Name</th><th>branch</th><th>Heading</th><th>Type</th></tr>
+<c:forEach items="${transportList}" var="transport">
     	<tr>
     		<td align="right" bgcolor="#ffffff">${transport.id}	</td>
         	<td align="right" bgcolor="#ffffff">${transport.name}	</td>
@@ -19,6 +14,7 @@
         	<td align="right" bgcolor="#ffffff">${transport.transportType}	</td>
         </tr>
 </c:forEach>
+</table>
 
 </body>
 </html>

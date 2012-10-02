@@ -63,4 +63,24 @@ public class Transport {
 	public String getId() {
 		return id;
 	}
+	
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+	
+	public void setHeading(HeadingEnum heading) {
+		this.heading = heading;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setTransportType(TransportTypeEnum transportType) {
+		this.transportType = transportType;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 }

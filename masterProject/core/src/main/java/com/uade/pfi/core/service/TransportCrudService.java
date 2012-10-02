@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uade.pfi.core.beans.Transport;
-import com.uade.pfi.core.dao.repositories.TransportRespository;
+import com.uade.pfi.core.dao.repositories.TransportRepository;
 
 /**
  * CRUD Service for Transport 
@@ -14,7 +14,7 @@ import com.uade.pfi.core.dao.repositories.TransportRespository;
 public class TransportCrudService implements CrudService<Transport> {
 	
 	@Autowired
-	private TransportRespository repo;
+	private TransportRepository repo;
 
 	public Transport add(Transport transport) {
 		return repo.save(transport);
@@ -32,11 +32,11 @@ public class TransportCrudService implements CrudService<Transport> {
 		return repo.findOne(transport.getId());
 	}
 	
-	public void setRepo(TransportRespository repo) {
+	public void setRepo(TransportRepository repo) {
 		this.repo = repo;
 	}
 	
-	public TransportRespository getRepo() {
+	public TransportRepository getRepo() {
 		return repo;
 	}
 
@@ -46,5 +46,9 @@ public class TransportCrudService implements CrudService<Transport> {
 
 	public Transport getTransportBy(String id) {
 		return repo.findOne(id);
+	}
+
+	public List<Transport> getTransportsByName(String name) {
+		return repo.findByName(name);
 	}
 }
