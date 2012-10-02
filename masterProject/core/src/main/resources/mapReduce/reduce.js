@@ -63,16 +63,16 @@ function(key, values){
 			clusters.push(cluster);
 		}
 	}
-	print("clusters: " + tojson(clusters));
+//	print("clusters: " + tojson(clusters));
+	print("Solitarios: " + tojson(solitarios));
 	for (var i = 0; i < solitarios.length; i++){
-		print("Solitarios: " + tojson(solitarios));
 		var p = solitarios[i];
 		var newCluster = [];
 		newCluster.push(p);
 		asignados[hash(p)] = clusters.length;
 		clusters.push(newCluster);
 	}
-	print("clusters ahora: " + tojson(clusters));
+//	print("clusters ahora: " + tojson(clusters));
 	var result = {items:[]};
 	for (var i = 0 ; i < clusters.length ; i++){
 		var cluster = clusters[i];
@@ -87,5 +87,6 @@ function(key, values){
 		var avgy = sumy / cluster.length;
 		result.items.push({x:avgx, y:avgy});
 	}
+	print("result: " + tojson(result));
 	return result;
 }

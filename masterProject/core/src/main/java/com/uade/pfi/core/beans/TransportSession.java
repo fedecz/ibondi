@@ -32,9 +32,6 @@ public class TransportSession {
 	@Indexed(direction=IndexDirection.DESCENDING)
 	private Date			lastUpdated;
 
-	@Deprecated
-	public TransportSession() {
-	}
 	
 	public TransportSession(String transportId,
 			Location lastKnownLocation, List<Location> locations,

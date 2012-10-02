@@ -39,6 +39,9 @@ public class TransportMeStringCreator {
 	}
 	
 	public static String toString(Collection<Location> locations) {
+		if(locations== null){
+			return "[ null ]";
+		}
 		ToStringCreator c = new ToStringCreator(locations);
 		for (Location location : locations) {
 			c.append(TransportMeStringCreator.toString(location));

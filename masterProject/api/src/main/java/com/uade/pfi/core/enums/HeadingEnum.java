@@ -1,19 +1,19 @@
 package com.uade.pfi.core.enums;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public enum HeadingEnum {
-	IDA, VUELTA;
+	IDA("IDA"), VUELTA("VUELTA");
 
-	private static final Map<String, HeadingEnum> headingMap = new HashMap<String, HeadingEnum>();
+	private String description;
 	
-	static {
-		headingMap.put("IDA", IDA);
-		headingMap.put("VUELTA", VUELTA);
+	private HeadingEnum(String description) {
+		this.description = description;
 	}
 	
-	public static HeadingEnum getHeadingFrom(String headingAsString) {
-		return headingMap.get(headingAsString);
+	public String getDescription() {
+		return description;
 	}
+
+	
+
 }
