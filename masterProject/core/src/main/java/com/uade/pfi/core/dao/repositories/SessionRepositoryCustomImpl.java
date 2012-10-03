@@ -75,18 +75,18 @@ public class SessionRepositoryCustomImpl implements
 	
 	
 	private List<TransportSession> executeMapReduceAndReturnResults(Query query) {
-		MapReduceResults<TransportSession> mapReduceResults = template.mapReduce(
+		MapReduceResults<MROutput> mapReduceResults = template.mapReduce(
 				query, 
 				"sessions", 
 				"classpath:/mapReduce/map.js", 
 				"classpath:/mapReduce/reduce.js",
 				options().finalizeFunction("classpath:/mapReduce/finalize.js").outputTypeInline(), 
-				TransportSession.class);
+				MROutput.class);
 		List<TransportSession> result = new ArrayList<TransportSession>(mapReduceResults.getCounts().getOutputCount());
-		Iterator<TransportSession> iterator = mapReduceResults.iterator();
+		Iterator<MROutput> iterator = mapReduceResults.iterator();
 		while(iterator.hasNext()){
-			TransportSession s = iterator.next();
-			result.add(s);
+			MROutput output = iterator.next();
+			result.addAll(output.getItems());
 		}
 		return result;
 	}
@@ -96,6 +96,18 @@ public class SessionRepositoryCustomImpl implements
 		calendar.add(Calendar.MINUTE, -10);
 		return where("lastUpdated")
 				.gt(calendar.getTime());
+	}
+	
+	class MROutput{
+		List<TransportSession> items;
+		
+		public MROutput(List<TransportSession> items) {
+			this.items = items;
+		}
+		
+		public List<TransportSession> getItems() {
+			return items;
+		}
 	}
 
 }
