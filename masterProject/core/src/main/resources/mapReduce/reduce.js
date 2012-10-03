@@ -7,7 +7,7 @@ function(key, values){
 	var solitarios = [];
 	var clusters = [];
 	var visitados = {};
-	var eps = 1;
+	var eps = 0.00045045; //en grados, equivalente a unos 50 metros. (1 grado = 111km)
 	var minPts = 1;
 	var asignados = {};
 		
