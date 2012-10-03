@@ -1,4 +1,4 @@
-package com.uade.pfi.core.dao.repositories;
+package com.uade.pfi.core.repositories;
 
 import java.util.List;
 

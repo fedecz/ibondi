@@ -15,6 +15,7 @@ import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dto.LocationDTO;
 import com.uade.pfi.core.dto.SessionCheckInDTO;
 import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.dto.TransportLocationUpdateDto;
 import com.uade.pfi.core.facade.MobileInterface;
 import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 import com.uade.pfi.core.service.PublicTransportTrackerService;
@@ -45,7 +46,7 @@ public class MobileInterfaceImpl implements MobileInterface {
 	}
 	
 	@RequestMapping("/postLocation.json")
-	public @ResponseBody Boolean postLocation(@RequestBody TransportLocationDTO location){
+	public @ResponseBody Boolean postLocation(@RequestBody TransportLocationUpdateDto location){
 		logger.debug("[postLocation()] received TransportLocationDTO: " + TransportMeStringCreator.toString(location));
 		service.updatePosition(new Location(location.getLatitude(),location.getLongitude()),location.getSessionId());
 		logger.debug("position updated to session: " + location.getSessionId());

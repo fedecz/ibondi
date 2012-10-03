@@ -27,7 +27,7 @@ body {
 
 var beaches = [
      <c:forEach var="location" items="${locations}">
-          ['${location.name}',${location.latitude},${location.longitude},${i+1}],
+          ['${location.transportId}',${location.latitude},${location.longitude},${i+1}],
       </c:forEach>
 ];
 var map;

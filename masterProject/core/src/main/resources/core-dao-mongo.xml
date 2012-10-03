@@ -11,7 +11,7 @@
 		<property name="writeResultChecking" value="EXCEPTION"/>
 	</bean>
 		
-	<mongo:repositories base-package="com.uade.pfi.core.dao.repositories" 
+	<mongo:repositories base-package="com.uade.pfi.core.repositories" 
 		repository-impl-postfix="CustomImpl"/>
 
 

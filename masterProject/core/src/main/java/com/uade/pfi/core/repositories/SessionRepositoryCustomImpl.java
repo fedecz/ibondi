@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.uade.pfi.core.dao.repositories;
+package com.uade.pfi.core.repositories;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.geo.Circle;
 import org.springframework.data.mongodb.core.geo.Point;
-import static org.springframework.data.mongodb.core.mapreduce.MapReduceOptions.options;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -27,6 +26,9 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
+import com.uade.pfi.core.mapper.Converter;
+import com.uade.pfi.core.repositories.mapreduce.DefaultMapReduceSessionConverter;
+import com.uade.pfi.core.repositories.mapreduce.MapReduceSessionOutput;
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 /**
@@ -39,6 +41,8 @@ public class SessionRepositoryCustomImpl implements
 	
 	@Autowired
 	private MongoOperations template;
+	
+	private Converter<MapReduceSessionOutput, List<TransportSession>> mapReduceConverter = new DefaultMapReduceSessionConverter();
 	
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.dao.repositories.SessionRepositoryCustomRepository#trackLocation(java.lang.String, com.uade.pfi.core.beans.Location)
@@ -75,18 +79,17 @@ public class SessionRepositoryCustomImpl implements
 	
 	
 	private List<TransportSession> executeMapReduceAndReturnResults(Query query) {
-		MapReduceResults<MROutput> mapReduceResults = template.mapReduce(
+		MapReduceResults<MapReduceSessionOutput> mapReduceResults = template.mapReduce(
 				query, 
 				"sessions", 
 				"classpath:/mapReduce/map.js", 
 				"classpath:/mapReduce/reduce.js",
-				options().finalizeFunction("classpath:/mapReduce/finalize.js").outputTypeInline(), 
-				MROutput.class);
+				MapReduceSessionOutput.class);
 		List<TransportSession> result = new ArrayList<TransportSession>(mapReduceResults.getCounts().getOutputCount());
-		Iterator<MROutput> iterator = mapReduceResults.iterator();
+		Iterator<MapReduceSessionOutput> iterator = mapReduceResults.iterator();
 		while(iterator.hasNext()){
-			MROutput output = iterator.next();
-			result.addAll(output.getItems());
+			MapReduceSessionOutput output = iterator.next();
+			result.addAll(mapReduceConverter.convert(output));
 		}
 		return result;
 	}
@@ -98,16 +101,5 @@ public class SessionRepositoryCustomImpl implements
 				.gt(calendar.getTime());
 	}
 	
-	class MROutput{
-		List<TransportSession> items;
-		
-		public MROutput(List<TransportSession> items) {
-			this.items = items;
-		}
-		
-		public List<TransportSession> getItems() {
-			return items;
-		}
-	}
 
 }

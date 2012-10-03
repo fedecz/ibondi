@@ -11,6 +11,7 @@ import org.springframework.core.style.ToStringCreator;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.dto.TransportLocationUpdateDto;
 
 /**
  * @author chiwi
@@ -20,8 +21,7 @@ public class TransportMeStringCreator {
 
 	public static String toString(TransportLocationDTO location) {
 		ToStringCreator c = new ToStringCreator(location);
-		c.append("Session",location.getSessionId());
-		c.append("Name", location.getName());
+		c.append("TransportId",location.getTransportId());
 		c.append("Latitude",location.getLatitude());
 		c.append("Longitude",location.getLongitude());
 		return c.toString();
@@ -64,6 +64,15 @@ public class TransportMeStringCreator {
 		for (TransportSession session : sessions) {
 			c.append(TransportMeStringCreator.toString(session));
 		}
+		return c.toString();
+	}
+
+
+	public static String toString(TransportLocationUpdateDto location) {
+		ToStringCreator c = new ToStringCreator(location);
+		c.append("SessionId", location.getSessionId());
+		c.append("Latitude", location.getLatitude());
+		c.append("Longitude",location.getLongitude());
 		return c.toString();
 	}
 

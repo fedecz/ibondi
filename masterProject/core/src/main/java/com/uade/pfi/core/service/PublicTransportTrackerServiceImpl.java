@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dao.repositories.SessionRepository;
+import com.uade.pfi.core.repositories.SessionRepository;
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class PublicTransportTrackerServiceImpl implements
@@ -47,25 +47,6 @@ public class PublicTransportTrackerServiceImpl implements
 			throw new IllegalArgumentException("Latitude or longitude cannot be null");
 	}
 
-	
-	/**
-	 * Hay que implementar "haversine".
-	 * http://www.movable-type.co.uk/scripts/latlong.html
-	 * http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe
-	 * 
-	 * @param aLocation
-	 */
-//	private void mergeOrInsertPosition(TransportLocation aLocation) {
-//		TransportLocation oldLocation = locations.get(aLocation.getName());
-//		if(oldLocation!=null){
-//			Location newLocation = new Location();
-//			newLocation.setLatitude((oldLocation.getLocation().getLatitude() + aLocation.getLocation().getLatitude()) / 2);
-//			newLocation.setLongitude((oldLocation.getLocation().getLongitude() + aLocation.getLocation().getLongitude()) / 2);
-//			oldLocation.setLocation(newLocation);
-//			return;	
-//		}
-//		locations.put(aLocation.getName(), aLocation);
-//	}
 	
 	public void setSessionsRepository(SessionRepository repo) {
 		this.sessionsRepo = repo;

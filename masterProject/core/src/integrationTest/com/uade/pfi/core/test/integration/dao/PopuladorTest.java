@@ -17,10 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.Transport;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dao.repositories.SessionRepository;
-import com.uade.pfi.core.dao.repositories.TransportRepository;
 import com.uade.pfi.core.enums.HeadingEnum;
 import com.uade.pfi.core.enums.TransportTypeEnum;
+import com.uade.pfi.core.repositories.SessionRepository;
+import com.uade.pfi.core.repositories.TransportRepository;
 
 /**
  * @author chiwi
