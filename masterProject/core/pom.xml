@@ -16,7 +16,7 @@
 	<properties>
 		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
        	<spring.data.mongoDb>1.0.4.RELEASE</spring.data.mongoDb>
-       	<cloudfoundry>0.8.0</cloudfoundry>
+       	<cloudfoundry>0.8.1</cloudfoundry>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
