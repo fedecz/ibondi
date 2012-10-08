@@ -45,7 +45,7 @@ public class TransportCrudController {
 	public ModelAndView showTransportFor(@PathVariable String id) {
 		Transport t = new Transport();
 		t.setId(id);
-		return new ModelAndView("transports/showSingle","transport",service.get(t));
+		return new ModelAndView("transports/showTransport","transport",service.get(t));
 	}
 	
 	@RequestMapping(value="delete/{id}.html", method=RequestMethod.GET)
