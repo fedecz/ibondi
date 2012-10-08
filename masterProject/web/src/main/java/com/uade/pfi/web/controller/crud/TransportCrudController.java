@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +25,16 @@ public class TransportCrudController {
 	@Autowired
 	private TransportCrudService service;
 
-	@RequestMapping("transportCrudRequestForm.html")
-	public ModelAndView showEmptyForm() {
-		return new ModelAndView("transportCrudRequestForm");
-	}
 
-	@RequestMapping(value="addTransport.html", method=RequestMethod.POST)
-	public ModelAndView addContact(@ModelAttribute("transport") Transport transport) {
+	@RequestMapping(value="add.html", method=RequestMethod.POST)
+	public ModelAndView addContact(@ModelAttribute("transport") Transport transport, BindingResult binding) {
 		service.add(transport);
-		return showTransportList();
+		return showForm();
+	}
+	
+	@RequestMapping(value="add.html", method=RequestMethod.GET)
+	public ModelAndView showForm() {
+		return new ModelAndView("transports/add","transport", new Transport());
 	}
 	
 	@RequestMapping(value="show.html")
@@ -42,7 +44,7 @@ public class TransportCrudController {
 	}
 	
 	@RequestMapping(value="show/{id}.html", method=RequestMethod.GET)
-	public ModelAndView showTransportFor(@PathVariable String id) {
+	public ModelAndView showTransport(@PathVariable String id) {
 		Transport t = new Transport();
 		t.setId(id);
 		return new ModelAndView("transports/showTransport","transport",service.get(t));
