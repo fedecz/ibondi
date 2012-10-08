@@ -5,7 +5,9 @@
 <head>
 </head>
 <body>
+<c:url var="backURL" value='/transports/show.html'/>
 <c:url var="actionUrl" value="/transports/add.html"/>
+
 <form:form method="post" action="${actionUrl}" commandName="transport">
   <table width="95%" bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
     <tr>
@@ -35,6 +37,6 @@
   </table>
   <input type="submit" value="Add Transport"/>
 </form:form>
-<a href="<c:url value="/transports/show.html"/>">Back to the list...</a>
+<a href="${backURL}">Back to the list...</a>
 </body>
 </html>
