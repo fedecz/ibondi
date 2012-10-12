@@ -1,0 +1,31 @@
+TODO
+- ver tema de BigDecimal en Location
+- que mapReduce no devuelva List<TransportSession> sino un objeto mas chico que represente el id del transport, el location, y por ahi un timestamp. No hace falta la lista de locations previos
+- ver que implantacion existe de ResourceLoader para no levantar los JS de maprereduce todo el tiempo.
+- investigar si hay alguna otra forma con androide de generar la app
+
+
+Corto Plazo - Deadline diciembre
+1. Fines octubre Vista
+   - armar el workflow de la vista
+   - armar el codigo de la vista
+   - verificar en un telefono o simulador
+   - arreglar cloud foundry para levantar el server
+   - phone gap test
+   . ver tema propiedad intelectual
+
+2. Pruebas de campo Noviembre
+  - instalar la app en android
+  - montar el server en cloud foundry
+  - si no and a phone gap Vista Plan B
+
+4. Salir a la cancha presentacion
+  - cloud foundry andando
+  - telefonos de muestra
+  - simulador de android
+
+3. Largo Plazo Post Diciembre
+  - Look & Feel Chulo
+  - hacer la pagina
+  - Ponerlo productivo pa los amigos BETA
+
