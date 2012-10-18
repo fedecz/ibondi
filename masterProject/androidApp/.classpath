@@ -2,11 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="lib/spring-android-rest-template-1.0.0.M2.jar" sourcepath="/home/chiwi/.m2/repository/org/springframework/android/spring-android-rest-template/1.0.0.M2/spring-android-rest-template-1.0.0.M2-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-core-asl-1.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/core-dto-0.2-20110425-0002.jar"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="libs/jackson-core-asl-1.9.10.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-mapper-asl-1.9.10.jar"/>
+	<classpathentry kind="lib" path="libs/spring-android-core-1.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/spring-android-rest-template-1.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/api-0.0.1-SNAPSHOT-20121018-1752.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

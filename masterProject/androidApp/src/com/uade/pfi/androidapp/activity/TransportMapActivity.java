@@ -10,10 +10,11 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
-import com.uade.pfi.androidapp.R;
 import com.uade.pfi.androidapp.overlays.TransportItemizedOverlay;
 import com.uade.pfi.androidapp.server.ServerFacade;
 import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.dto.TransportLocationListDTO;
+import com.uadepfi.android.R;
 
 public class TransportMapActivity extends MapActivity {
 
@@ -29,7 +30,7 @@ public class TransportMapActivity extends MapActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map);
+		setContentView(R.layout.activity_show_map);
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);	
 	}
@@ -38,20 +39,19 @@ public class TransportMapActivity extends MapActivity {
 	protected void onStart() {
 		super.onStart();
 		server=ServerFacade.getInstace(this.getBaseContext());
-		TransportLocationDTO[] locations = getLocations();
+		TransportLocationListDTO locations = getLocations();
 		addLocationsToMap(locations);
 	}
 
 
-	private void addLocationsToMap(TransportLocationDTO[] locations) {
+	private void addLocationsToMap(TransportLocationListDTO locations) {
 		// Displays OverlayItems
 		mapOverlays = mapView.getOverlays();
 		if(drawable==null)
 			drawable = this.getResources().getDrawable(R.drawable.iconbus);
 		TransportItemizedOverlay itemizedOverlay = new TransportItemizedOverlay(drawable,getBaseContext());
 
-		for (int i = 0; i < locations.length; i++) {
-			TransportLocationDTO location = locations[i];
+		for (TransportLocationDTO location : locations.getTransports()) {
 			GeoPoint point = generateGeoPoint(location);
 			OverlayItem overlayitem = generateOverlayItem(location, point);
 			itemizedOverlay.addOverlay(overlayitem);
@@ -61,7 +61,7 @@ public class TransportMapActivity extends MapActivity {
 
 
 	private OverlayItem generateOverlayItem(TransportLocationDTO location, GeoPoint point) {
-		OverlayItem overlayitem = new OverlayItem(point, location.getName(), location.getName());
+		OverlayItem overlayitem = new OverlayItem(point, "transport",location.getTransportId());
 		return overlayitem;
 	}
 
@@ -71,7 +71,7 @@ public class TransportMapActivity extends MapActivity {
 		return point;
 	}
 	
-	private TransportLocationDTO[] getLocations(){
+	private TransportLocationListDTO getLocations(){
 		return server.getAllLocations();
 	}
 

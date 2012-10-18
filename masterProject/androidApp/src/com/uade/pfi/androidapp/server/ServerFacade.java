@@ -3,19 +3,24 @@
  */
 package com.uade.pfi.androidapp.server;
 
-import org.springframework.http.HttpEntity;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import android.content.Context;
 
-import com.uade.pfi.androidapp.R;
 import com.uade.pfi.core.dto.LocationDTO;
-import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.dto.SessionCheckInDTO;
+import com.uade.pfi.core.dto.TransportLocationListDTO;
+import com.uade.pfi.core.dto.TransportLocationUpdateDto;
 import com.uade.pfi.core.facade.MobileInterface;
+import com.uadepfi.android.R;
 
 /**
  * @author chiwi
@@ -32,8 +37,13 @@ public class ServerFacade implements MobileInterface {
 
 	private ServerFacade(Context context){
 		this.context = context;
-		BASE_URL = context.getString(R.string.baseUrl);
+		BASE_URL = context.getString(R.string.baseURL);
 		restTemplate = new RestTemplate();
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+//		messageConverters.add(new FormHttpMessageConverter());
+		messageConverters.add(new StringHttpMessageConverter());
+		messageConverters.add(new MappingJacksonHttpMessageConverter());
+		restTemplate.setMessageConverters(messageConverters);
 		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application","json"));
 	}
@@ -49,27 +59,25 @@ public class ServerFacade implements MobileInterface {
 	 * @see com.uade.pfi.core.facade.MobileInterface#checkIn(java.lang.String)
 	 */
 	@Override
-	public String checkIn(String transportName) {
-		HttpEntity<String> requestEntity = new HttpEntity<String>(transportName, requestHeaders);
-		ResponseEntity<String> exchange = restTemplate.exchange(BASE_URL + context.getString(R.string.checkIn), HttpMethod.POST, requestEntity, String.class);
-		return exchange.getBody();
+	public String checkIn(SessionCheckInDTO checkIn) {
+		String sessionId = restTemplate.postForObject(BASE_URL+context.getString(R.string.checkInURL), checkIn, String.class);
+		return sessionId;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.facade.MobileInterface#getAllLocations()
 	 */
 	@Override
-	public TransportLocationDTO[] getAllLocations() {
-		HttpEntity<TransportLocationDTO[]> requestEntity = new HttpEntity<TransportLocationDTO[]>(requestHeaders);
-		ResponseEntity<TransportLocationDTO[]> exchange = restTemplate.exchange(BASE_URL + context.getString(R.string.getAllLocationsFromServer), HttpMethod.POST, requestEntity, TransportLocationDTO[].class);
-		return exchange.getBody();
+	public TransportLocationListDTO getAllLocations() {
+		TransportLocationListDTO result = restTemplate.getForObject(BASE_URL+context.getString(R.string.getAllLocationsFromServerURL), TransportLocationListDTO.class);
+		return result;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.facade.MobileInterface#getLocations(com.uade.pfi.core.dto.LocationDTO)
 	 */
 	@Override
-	public TransportLocationDTO[] getLocations(LocationDTO arg0) {
+	public TransportLocationListDTO getLocations(LocationDTO arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -78,10 +86,9 @@ public class ServerFacade implements MobileInterface {
 	 * @see com.uade.pfi.core.facade.MobileInterface#postLocation(com.uade.pfi.core.dto.TransportLocationDTO)
 	 */
 	@Override
-	public Boolean postLocation(TransportLocationDTO location) {
-		HttpEntity<TransportLocationDTO> requestEntity = new HttpEntity<TransportLocationDTO>(location, requestHeaders);
-		ResponseEntity<Boolean> exchange = restTemplate.exchange(BASE_URL + context.getString(R.string.postLocationToServer), HttpMethod.POST, requestEntity, Boolean.class);
-		return exchange.getBody();
+	public Boolean postLocation(TransportLocationUpdateDto updateLocation) {
+		return restTemplate.postForObject(BASE_URL+context.getString(R.string.postLocationToServerURL), updateLocation, Boolean.class);
 	}
+
 
 }
