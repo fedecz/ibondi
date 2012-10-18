@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TransportMe</string>
+    <!-- APP  -->
+    <string name="app_name">UADE-PFI</string>
+    
+    <!-- MAIN Activity -->
     <string name="checkInButton">Check In</string>
     <string name="checkOutButton">Check Out</string>
-    <string name="mapButton">Show Map</string>
-    <string name="postButton">Post to Service</string>
-    <string name="getButton">Get from Service</string>
-	<string name="quit">Back To Menu</string>
-	<string name="okButton">OK</string>
-	<string name="baseUrl">http://10.155.8.10:8080/web</string>
-	<string name="checkIn">/checkIn.json</string>
-	<string name="getAllLocationsFromServer">/getAllLocations.json</string>
-    <string name="postLocationToServer">/postLocation.json</string>
+    <string name="mapButton">Show Map</string>	
+	
+	<!-- CHECKIN Activity -->
+	<string name="checkInOKButton">Check In!</string>
+    <string name="checkInTransportIdLbl">Transport Id:</string>
+	
+	<!-- SERVER Facade -->
+	<string name="baseURL">http://10.155.8.10:8080/web</string>
+	<string name="checkInURL">/checkIn.json</string>
+	<string name="getAllLocationsFromServerURL">/getAllLocations.json</string>
+    <string name="postLocationToServerURL">/postLocation.json</string>
     
 </resources>

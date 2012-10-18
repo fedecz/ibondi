@@ -24,18 +24,9 @@
 
 	<servlet-mapping>
 		<servlet-name>pfi</servlet-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>pfi</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>pfi</servlet-name>
-		<url-pattern>*.json</url-pattern>
-	</servlet-mapping>
 
 
 	<welcome-file-list>

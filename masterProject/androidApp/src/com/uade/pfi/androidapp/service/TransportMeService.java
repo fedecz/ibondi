@@ -13,7 +13,8 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.uade.pfi.androidapp.server.ServerFacade;
-import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.dto.SessionCheckInDTO;
+import com.uade.pfi.core.dto.TransportLocationUpdateDto;
 
 public class TransportMeService extends Service {
 	private ServerFacade server;
@@ -38,8 +39,10 @@ public class TransportMeService extends Service {
 
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		String transportName = intent.getExtras().getString("transportName");
-		sessionId = server.checkIn(transportName);
+		String transportId = intent.getExtras().getString("transportId");
+		SessionCheckInDTO dto = new SessionCheckInDTO();
+		dto.setTransportId(transportId);
+		sessionId = server.checkIn(dto);
 		setupGPSProvider();
 		Toast.makeText(getApplicationContext(), "Service Started", Toast.LENGTH_SHORT).show();
 		return START_STICKY;
@@ -49,7 +52,7 @@ public class TransportMeService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		server = ServerFacade.getInstace(getBaseContext());
+		server = ServerFacade.getInstace(this.getBaseContext());
 	}
 
 	private void setupGPSProvider() {
@@ -81,13 +84,14 @@ public class TransportMeService extends Service {
 
 
 	private void makeUseOfNewLocation(Location newLocation) {
+		//FIXME ...este cast de double a Float....que onda???
 		Float latitude = (float) (newLocation.getLatitude());
-		Float longitud = (float) (newLocation.getLongitude());
-		final TransportLocationDTO location = new TransportLocationDTO();
-		location.setSession(sessionId);
-		location.setLatitude(latitude);
-		location.setLongitude(longitud);
-		server.postLocation(location);
+		Float longitude = (float) (newLocation.getLongitude());
+		TransportLocationUpdateDto dto = new TransportLocationUpdateDto();
+		dto.setSessionId(sessionId);
+		dto.setLatitude(latitude);
+		dto.setLongitude(longitude);
+		server.postLocation(dto);
 	}
 
 

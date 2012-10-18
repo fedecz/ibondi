@@ -5,17 +5,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="0zFzbsRmiUC9DpN86GAIfshMzTHhnMgzfgiqBww"
+        android:apiKey="0zFzbsRmiUC_-edvDxBRqYdy3SSwqC9cA1lHFIw"
 />
 
 <!-- 
+Para generar el apiKey, ver aca:
+https://developers.google.com/maps/documentation/android/mapkey
+y usar la de eclipse debug.
+
 chiwi:
 mac debug : 0zFzbsRmiUC9o5xwiOLL9Ibu5kOjsEigu-y1olQ
-ubuntu debug : 0zFzbsRmiUC-VOovOnso2wT9SSsDZ5YB03snfyg
-${home}/Java/chiwi.keystore: 0zFzbsRmiUC9DpN86GAIfshMzTHhnMgzfgiqBww
-
-mati
-
-mac : 0EIgBvc29NVawAkCxtZppoNRlNlIuoxiMLbnlHA
+ubuntu dridco debug: 0zFzbsRmiUC_-edvDxBRqYdy3SSwqC9cA1lHFIw
 
  -->

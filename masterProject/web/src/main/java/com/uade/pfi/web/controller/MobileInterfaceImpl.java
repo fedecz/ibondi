@@ -15,6 +15,7 @@ import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.dto.LocationDTO;
 import com.uade.pfi.core.dto.SessionCheckInDTO;
 import com.uade.pfi.core.dto.TransportLocationDTO;
+import com.uade.pfi.core.dto.TransportLocationListDTO;
 import com.uade.pfi.core.dto.TransportLocationUpdateDto;
 import com.uade.pfi.core.facade.MobileInterface;
 import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
@@ -32,16 +33,18 @@ public class MobileInterfaceImpl implements MobileInterface {
 
 	
 	@RequestMapping(value="/getAllLocations.json")
-	public @ResponseBody TransportLocationDTO[] getAllLocations(){
+	public @ResponseBody TransportLocationListDTO getAllLocations(){
 		logger.debug("[getAllLocations()] using service: " + service);
 		List<TransportSession> sessions = service.retrieveAllSessions();
 		List<TransportLocationDTO> locations = converter.convert(sessions);
 		logger.debug("getAllLocations() finished. Returned items: " + locations.size());
-		return locations.toArray(new TransportLocationDTO[0]);
+		TransportLocationListDTO list = new TransportLocationListDTO();
+		list.setTransports(locations.toArray(new TransportLocationDTO[0]));
+		return list;
 	}
 	
 	@RequestMapping(value="/getLocations.json")
-	public TransportLocationDTO[] getLocations(@RequestBody LocationDTO myLocation) {
+	public TransportLocationListDTO getLocations(@RequestBody LocationDTO myLocation) {
 		throw new RuntimeException("To be Implemented");
 	}
 	

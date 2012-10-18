@@ -13,11 +13,16 @@ public class TransportLocationUpdateDto {
 	private float latitude;
 	private float longitude;
 
-	public TransportLocationUpdateDto(String sessionId, float latitude, float longitude) {
-		super();
-		this.sessionId = sessionId;
+	public TransportLocationUpdateDto() {
+	}
+	public void setLatitude(float latitude) {
 		this.latitude = latitude;
+	}
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	public float getLatitude() {
 		return latitude;
