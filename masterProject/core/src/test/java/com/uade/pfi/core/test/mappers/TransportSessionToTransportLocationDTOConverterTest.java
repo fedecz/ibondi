@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dto.TransportLocationDTO;
 import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 
 public class TransportSessionToTransportLocationDTOConverterTest {

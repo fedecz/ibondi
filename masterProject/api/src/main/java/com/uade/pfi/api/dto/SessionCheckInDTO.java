@@ -1,4 +1,4 @@
-package com.uade.pfi.core.dto;
+package com.uade.pfi.api.dto;
 
 /** 
  * Represents the user session check in with the associated transport

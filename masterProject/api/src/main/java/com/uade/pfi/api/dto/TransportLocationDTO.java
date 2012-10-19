@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.uade.pfi.core.dto;
+package com.uade.pfi.api.dto;
 
 /**
  * 

@@ -1,9 +1,9 @@
-package com.uade.pfi.core.facade;
+package com.uade.pfi.api.facade;
 
-import com.uade.pfi.core.dto.LocationDTO;
-import com.uade.pfi.core.dto.SessionCheckInDTO;
-import com.uade.pfi.core.dto.TransportLocationListDTO;
-import com.uade.pfi.core.dto.TransportLocationUpdateDto;
+import com.uade.pfi.api.dto.LocationDTO;
+import com.uade.pfi.api.dto.SessionCheckInDTO;
+import com.uade.pfi.api.dto.TransportLocationListDTO;
+import com.uade.pfi.api.dto.TransportLocationUpdateDto;
 
 public interface MobileInterface {
 

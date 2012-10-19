@@ -3,8 +3,8 @@ package com.uade.pfi.core.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dto.TransportLocationDTO;
 
 public class TransportSessionToTransportLocationDTOConverter implements Converter<TransportSession,TransportLocationDTO>, ListConverter<TransportSession,TransportLocationDTO>{
 
