@@ -11,9 +11,13 @@ public class LocationDTO {
 	private Float latitude;
 	private Float longitude;
 
-	public LocationDTO(Float latitude, Float longitude) {
-		super();
+	public LocationDTO() {
+	}
+	
+	public void setLatitude(Float latitude) {
 		this.latitude = latitude;
+	}
+	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
 	}
 	public Float getLatitude() {

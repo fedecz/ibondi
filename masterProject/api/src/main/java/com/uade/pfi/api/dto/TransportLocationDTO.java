@@ -12,29 +12,20 @@ package com.uade.pfi.api.dto;
  */
 public class TransportLocationDTO {
 	private String transportId;
-	private Float	latitude;
-	private Float	longitude;
+	private LocationDTO location;
 	
 	public TransportLocationDTO(){	}
 	
-	public TransportLocationDTO(String transportId, Integer latitud, Integer longitude){
+	public TransportLocationDTO(String transportId, LocationDTO location){
 		this.transportId = transportId;
-		this.latitude = new Float(latitud);
-		this.longitude = new Float(longitude);
+		this.location = location;
 	}
 	
-	
-	public Float getLatitude() {
-		return latitude;
+	public LocationDTO getLocation() {
+		return location;
 	}
-	public void setLatitude(Float latitude) {
-		this.latitude = latitude;
-	}
-	public Float getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(Float longitude) {
-		this.longitude = longitude;
+	public void setLocation(LocationDTO location) {
+		this.location = location;
 	}
 	public String getTransportId() {
 		return transportId;

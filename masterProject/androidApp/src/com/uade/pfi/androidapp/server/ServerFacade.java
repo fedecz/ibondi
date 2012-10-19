@@ -15,11 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 import android.content.Context;
 
-import com.uade.pfi.core.dto.LocationDTO;
-import com.uade.pfi.core.dto.SessionCheckInDTO;
-import com.uade.pfi.core.dto.TransportLocationListDTO;
-import com.uade.pfi.core.dto.TransportLocationUpdateDto;
-import com.uade.pfi.core.facade.MobileInterface;
+import com.uade.pfi.api.dto.LocationDTO;
+import com.uade.pfi.api.dto.SessionCheckInDTO;
+import com.uade.pfi.api.dto.TransportLocationListDTO;
+import com.uade.pfi.api.dto.TransportLocationUpdateDto;
+import com.uade.pfi.api.facade.MobileInterface;
 import com.uadepfi.android.R;
 
 /**

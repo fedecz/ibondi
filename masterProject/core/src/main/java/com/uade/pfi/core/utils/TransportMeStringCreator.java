@@ -22,8 +22,8 @@ public class TransportMeStringCreator {
 	public static String toString(TransportLocationDTO location) {
 		ToStringCreator c = new ToStringCreator(location);
 		c.append("TransportId",location.getTransportId());
-		c.append("Latitude",location.getLatitude());
-		c.append("Longitude",location.getLongitude());
+		c.append("Latitude",location.getLocation().getLatitude());
+		c.append("Longitude",location.getLocation().getLongitude());
 		return c.toString();
 	}
 	
