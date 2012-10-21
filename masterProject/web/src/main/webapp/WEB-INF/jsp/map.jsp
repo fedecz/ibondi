@@ -25,27 +25,14 @@ body {
 
 <c:set var="i" value="1"/>
 
-var beaches = [
+var transports = [
      <c:forEach var="location" items="${locations}">
-          ['${location.transportId}',${location.latitude},${location.longitude},${i+1}],
+          ['${location.transportId}',${location.location.latitude},${location.location.longitude}],
       </c:forEach>
 ];
 var map;
 
  function initialize() {
-	 var latSum = 0;
-	 var longSum =0;
-	   for (var i = 0; i < beaches.length; i++) {
-	 	latSum=latSum+beaches[i][1];
-	 	longSum=longSum+beaches[i][2];
-	   }
-	   var centerLat = 0;
-	   var centerLong = 0;
-	   if (latSum!=0)
-		   centerLat=latSum / beaches.length;
-	   if (longSum!=0)
-		   centerLong=longSum / beaches.length;
-
 	   		 
   var myOptions = {
     zoom: ${mapZoom},
@@ -53,7 +40,7 @@ var map;
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
  map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-  setMarkers(map, beaches);
+  setMarkers(map, transports);
 
  }
 
@@ -62,13 +49,12 @@ var map;
 
 
   for (var i = 0; i < locations.length; i++) {
-    var beach = locations[i];
-    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+    var transport = locations[i];
+    var myLatLng = new google.maps.LatLng(transport[1], transport[2]);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: beach[0],
-        zIndex: beach[3]
+        title: transport[0]
     });
   }
 }

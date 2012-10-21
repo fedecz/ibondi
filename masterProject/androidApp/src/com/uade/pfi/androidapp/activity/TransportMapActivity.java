@@ -5,6 +5,9 @@ import java.util.List;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -23,8 +26,7 @@ import com.uadepfi.android.R;
 public class TransportMapActivity extends MapActivity {
 
 	private MapView mapView;
-	private Drawable drawable;
-	private List<Overlay> mapOverlays;
+	private Drawable iconBus;
 	private ServerFacade server;
 
 	@Override
@@ -38,11 +40,22 @@ public class TransportMapActivity extends MapActivity {
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);	
 	}
-
+	
 	@Override
-	protected void onStart() {
-		super.onStart();
-		server=ServerFacade.getInstace(this.getBaseContext());
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.show_map_refresh:
+	            getNewTransports();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	
+	private void getNewTransports() {
+		mapView.getOverlays().clear();
 		TransportLocationListDTO list = getLocations();
 		addLocationsToMap(list);
 		MapController mapController = mapView.getController();
@@ -51,20 +64,34 @@ public class TransportMapActivity extends MapActivity {
 		mapController.setZoom(15);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.show_map_menu, menu);
+	    return true;
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		server=ServerFacade.getInstace(this.getBaseContext());
+		getNewTransports();
+	}
+
 
 	private void addLocationsToMap(TransportLocationListDTO locations) {
 		// Displays OverlayItems
-		mapOverlays = mapView.getOverlays();
-		if(drawable==null)
-			drawable = this.getResources().getDrawable(R.drawable.iconbus);
-		TransportItemizedOverlay itemizedOverlay = new TransportItemizedOverlay(drawable,getBaseContext());
+		List<Overlay> overlays = mapView.getOverlays();
+		if(iconBus==null)
+			iconBus = this.getResources().getDrawable(R.drawable.iconbus);
+		TransportItemizedOverlay itemizedOverlay = new TransportItemizedOverlay(iconBus,getBaseContext());
 
 		for (TransportLocationDTO transportLocation : locations.getTransports()) {
 			GeoPoint point = generateGeoPoint(transportLocation.getLocation());
 			OverlayItem overlayitem = generateOverlayItem(transportLocation, point);
 			itemizedOverlay.addOverlay(overlayitem);
 		}
-		mapOverlays.add(itemizedOverlay);
+		overlays.add(itemizedOverlay);
 	}
 
 
@@ -80,7 +107,11 @@ public class TransportMapActivity extends MapActivity {
 	}
 	
 	private TransportLocationListDTO getLocations(){
-		return server.getAllLocations();
+		try {
+			return server.getAllLocations();
+		} catch (Exception e) {
+			return new TransportLocationListDTO();
+		}
 	}
 
 }

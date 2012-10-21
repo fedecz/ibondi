@@ -2,7 +2,6 @@ package com.uade.pfi.androidapp.overlays;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -12,11 +11,11 @@ import com.google.android.maps.OverlayItem;
 public class TransportItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
-	private Context mContext;
+//	private Context mContext;
 
 	public TransportItemizedOverlay(Drawable defaultMarker, Context context) {
 		super(boundCenterBottom(defaultMarker));
-		this.mContext = context;
+//		this.mContext = context;
 	}
 	
 //	@Override

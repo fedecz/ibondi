@@ -8,6 +8,6 @@
 	<classpathentry kind="lib" path="libs/jackson-mapper-asl-1.9.10.jar"/>
 	<classpathentry kind="lib" path="libs/spring-android-core-1.0.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="libs/spring-android-rest-template-1.0.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="libs/api-0.0.1-SNAPSHOT-20121019-1446.jar"/>
+	<classpathentry kind="lib" path="libs/api-0.0.1-SNAPSHOT-20121020-2135.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

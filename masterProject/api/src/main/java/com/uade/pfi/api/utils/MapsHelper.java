@@ -10,6 +10,10 @@ import com.uade.pfi.api.dto.TransportLocationDTO;
 public class MapsHelper {
 
 	public static LocationDTO getCenter(List<TransportLocationDTO> locations){
+		if(locations==null || locations.size()==0){
+			return new LocationDTO(0,0);
+		}
+			
 		//Ordeno la lista de menor a mayor Longitude:
 		Collections.sort(locations, new Comparator<TransportLocationDTO>() {
 			public int compare(TransportLocationDTO p1, TransportLocationDTO p2) {

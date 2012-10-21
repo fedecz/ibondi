@@ -8,7 +8,7 @@ package com.uade.pfi.api.dto;
  *
  */
 public class TransportLocationListDTO {
-	private TransportLocationDTO[] transports;
+	private TransportLocationDTO[] transports = new TransportLocationDTO[0];
 
 	public TransportLocationDTO[] getTransports() {
 		return transports;
