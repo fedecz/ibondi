@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -47,6 +48,9 @@ public class TransportMapActivity extends MapActivity {
 	    switch (item.getItemId()) {
 	        case R.id.show_map_refresh:
 	            getNewTransports();
+	            return true;
+	        case R.id.show_map_filter:
+	            Toast.makeText(this, "No implementado!!", Toast.LENGTH_SHORT).show();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
