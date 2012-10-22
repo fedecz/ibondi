@@ -7,27 +7,27 @@ package com.uade.pfi.api.dto;
  * @author fedec
  *
  */
-public class TransportLocationUpdateDto {
+public class SessionUpdateDto {
 	
 	private String sessionId;
-	private float latitude;
-	private float longitude;
+	private double latitude;
+	private double longitude;
 
-	public TransportLocationUpdateDto() {
+	public SessionUpdateDto() {
 	}
-	public void setLatitude(float latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public void setLongitude(float longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public float getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 	public String getSessionId() {

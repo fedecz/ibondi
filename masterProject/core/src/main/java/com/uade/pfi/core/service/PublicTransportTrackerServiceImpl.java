@@ -43,8 +43,8 @@ public class PublicTransportTrackerServiceImpl implements
 	private void validateLocation(Location location) {
 		if(location==null)
 			throw new IllegalArgumentException("Location cannot be null");
-		if(location.getLatitude()==null || location.getLongitude()==null)
-			throw new IllegalArgumentException("Latitude or longitude cannot be null");
+//		if(location.getLatitude()==null || location.getLongitude()==null)
+//			throw new IllegalArgumentException("Latitude or longitude cannot be null");
 	}
 
 	
@@ -64,6 +64,10 @@ public class PublicTransportTrackerServiceImpl implements
 		TransportSession session = new TransportSession(transportId);
 		TransportSession savedSession = sessionsRepo.save(session);
 		return savedSession.getId();
+	}
+
+	public TransportSession findSession(String sessionId) {
+		return sessionsRepo.findOne(sessionId);
 	}
 
 

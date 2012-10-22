@@ -8,7 +8,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uade.pfi.api.dto.TransportLocationDTO;
@@ -46,6 +48,15 @@ public class WebInterfaceImpl {
 		parameters.put("locationsList", dto);
 		
 		return new ModelAndView("map",parameters);
+	}
+	
+	@RequestMapping("path.htm")
+	public String showPath(@RequestParam String sessionId, Model model){
+		TransportSession session = service.findSession(sessionId);
+		model.addAttribute("session", session);
+		model.addAttribute("center", session.getLastKnownLocation());
+		
+		return "path";
 	}
 
 }

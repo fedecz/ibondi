@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.uade.pfi.androidapp.server.ServerFacade;
 import com.uade.pfi.api.dto.SessionCheckInDTO;
-import com.uade.pfi.api.dto.TransportLocationUpdateDto;
+import com.uade.pfi.api.dto.SessionUpdateDto;
 
 public class TransportMeService extends Service {
 	private ServerFacade server;
@@ -84,10 +84,9 @@ public class TransportMeService extends Service {
 
 
 	private void makeUseOfNewLocation(Location newLocation) {
-		//FIXME ...este cast de double a Float....que onda???
-		Float latitude = (float) (newLocation.getLatitude());
-		Float longitude = (float) (newLocation.getLongitude());
-		TransportLocationUpdateDto dto = new TransportLocationUpdateDto();
+		Double latitude = newLocation.getLatitude();
+		Double longitude = newLocation.getLongitude();
+		SessionUpdateDto dto = new SessionUpdateDto();
 		dto.setSessionId(sessionId);
 		dto.setLatitude(latitude);
 		dto.setLongitude(longitude);

@@ -6,7 +6,8 @@ import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
 
 public interface PublicTransportTrackerService {
-
+	TransportSession findSession(String sessionId);
+	
 	List<TransportSession> retrieveAllSessions();
 
 	List<TransportSession> retrieveSessions(Location myLocation);

@@ -43,8 +43,8 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
 		TransportSession value = new TransportSession(null,new Location(123,456),null, null);
 		TransportLocationDTO locationDTO = converter.convert(value);
-		assertTrue(locationDTO.getLocation().getLatitude().equals(Float.valueOf(123)));
-		assertTrue(locationDTO.getLocation().getLongitude().equals(Float.valueOf(456)));
+		assertTrue(locationDTO.getLocation().getLatitude() == Double.valueOf(123));
+		assertTrue(locationDTO.getLocation().getLongitude() == Double.valueOf(456));
 	}
 	
 	@Test

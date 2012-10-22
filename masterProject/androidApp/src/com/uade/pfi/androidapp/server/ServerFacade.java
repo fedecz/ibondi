@@ -17,8 +17,8 @@ import android.content.Context;
 
 import com.uade.pfi.api.dto.LocationDTO;
 import com.uade.pfi.api.dto.SessionCheckInDTO;
+import com.uade.pfi.api.dto.SessionUpdateDto;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
-import com.uade.pfi.api.dto.TransportLocationUpdateDto;
 import com.uade.pfi.api.facade.MobileInterface;
 import com.uadepfi.android.R;
 
@@ -30,7 +30,6 @@ public class ServerFacade implements MobileInterface {
 
 	private static ServerFacade instance;
 	private RestTemplate restTemplate;
-	private HttpHeaders requestHeaders;
 	private Context context;
 	private String BASE_URL;
 
@@ -44,7 +43,7 @@ public class ServerFacade implements MobileInterface {
 		messageConverters.add(new StringHttpMessageConverter());
 		messageConverters.add(new MappingJacksonHttpMessageConverter());
 		restTemplate.setMessageConverters(messageConverters);
-		requestHeaders = new HttpHeaders();
+		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application","json"));
 	}
 
@@ -86,7 +85,7 @@ public class ServerFacade implements MobileInterface {
 	 * @see com.uade.pfi.core.facade.MobileInterface#postLocation(com.uade.pfi.core.dto.TransportLocationDTO)
 	 */
 	@Override
-	public Boolean postLocation(TransportLocationUpdateDto updateLocation) {
+	public Boolean postLocation(SessionUpdateDto updateLocation) {
 		return restTemplate.postForObject(BASE_URL+context.getString(R.string.postLocationToServerURL), updateLocation, Boolean.class);
 	}
 

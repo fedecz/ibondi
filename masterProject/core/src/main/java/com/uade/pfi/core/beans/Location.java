@@ -12,15 +12,10 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class Location {
 	@Field("lat")
-	private float 	latitude;
+	private double 	latitude;
 	@Field("long")
-	private float 	longitude;
+	private double 	longitude;
 	private Date	trackedOn;
-
-	public Location(Float latitude, Float longitude) {
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
 	
 	public String toString(){
 		return TransportMeStringCreator.toString(this);
@@ -29,7 +24,7 @@ public class Location {
 	public Location() {
 	}
 	
-	public Location(float latitude, float longitude) {
+	public Location(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -43,23 +38,23 @@ public class Location {
 		StringTokenizer st = new StringTokenizer(fromString,",");
 		NumberFormat nf = new DecimalFormat();
 		try {
-			this.latitude = nf.parse(st.nextToken()).floatValue();
-			this.longitude = nf.parse(st.nextToken()).floatValue();
+			this.latitude = nf.parse(st.nextToken()).doubleValue();
+			this.longitude = nf.parse(st.nextToken()).doubleValue();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void setLatitude(Float latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public void setLongitude(Float longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public Float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public Float getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 

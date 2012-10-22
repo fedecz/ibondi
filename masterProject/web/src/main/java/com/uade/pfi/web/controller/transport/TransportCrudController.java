@@ -1,4 +1,4 @@
-package com.uade.pfi.web.controller.crud;
+package com.uade.pfi.web.controller.transport;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uade.pfi.core.beans.Transport;
@@ -44,12 +43,6 @@ public class TransportCrudController {
 		return new ModelAndView("transports/showAll", "transportList", transportList);
 	}
 
-	@RequestMapping(value="getAll.json")
-	public @ResponseBody List<Transport> getAllJson() {
-		return service.getAllTransports();
-	}
-	
-	
 	@RequestMapping(value="show/{id}.html", method=RequestMethod.GET)
 	public ModelAndView showTransport(@PathVariable String id) {
 		Transport t = new Transport();
@@ -65,11 +58,4 @@ public class TransportCrudController {
 		return showTransportList();
 	}
 	
-	@RequestMapping(value="delete/{id}.json", method=RequestMethod.POST)
-	public @ResponseBody String deleteTransportJson(@PathVariable String id) {
-		Transport t = new Transport();
-		t.setId(id);
-		service.remove(t);
-		return id;
-	}
 }

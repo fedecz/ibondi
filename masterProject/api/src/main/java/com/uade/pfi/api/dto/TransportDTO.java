@@ -7,7 +7,7 @@ import com.uade.pfi.api.enums.TransportTypeEnum;
  *
  */
 public class TransportDTO {
-	
+	private String id;
 	private String name;
 	private String branch;
 	private String heading;
@@ -22,6 +22,9 @@ public class TransportDTO {
 		this.transportType = transportType;
 	}
 	
+	public TransportDTO() {
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -37,5 +40,22 @@ public class TransportDTO {
 	public TransportTypeEnum getTransportType() {
 		return transportType;
 	}
-
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+	public void setHeading(String heading) {
+		this.heading = heading;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setTransportType(TransportTypeEnum transportType) {
+		this.transportType = transportType;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 }

@@ -3,7 +3,7 @@ package com.uade.pfi.api.facade;
 import com.uade.pfi.api.dto.LocationDTO;
 import com.uade.pfi.api.dto.SessionCheckInDTO;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
-import com.uade.pfi.api.dto.TransportLocationUpdateDto;
+import com.uade.pfi.api.dto.SessionUpdateDto;
 
 public interface MobileInterface {
 
@@ -13,6 +13,6 @@ public interface MobileInterface {
 	
 	public TransportLocationListDTO getLocations(LocationDTO myLocation);
 	
-	public Boolean postLocation(TransportLocationUpdateDto location);
+	public Boolean postLocation(SessionUpdateDto location);
 
 }

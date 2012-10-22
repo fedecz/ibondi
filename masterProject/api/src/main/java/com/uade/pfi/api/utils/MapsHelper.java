@@ -38,8 +38,8 @@ public class MapsHelper {
 		TransportLocationDTO maxSouthPoint = locations.get(0);
 		TransportLocationDTO maxNorthPoint = locations.get(locations.size() - 1);
 
-		Float centerLat = (float) 0;
-		Float centerLong = (float) 0;
+		Double centerLat = (double) 0;
+		Double centerLong = (double) 0;
 		if(locations.size()>0){
 			centerLat =  (maxSouthPoint.getLocation().getLatitude() + maxNorthPoint.getLocation().getLatitude()) / 2;
 			centerLong = (maxWestPoint.getLocation().getLongitude() + maxEastPoint.getLocation().getLongitude()) / 2;
