@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uade.pfi.api.dto.TransportLocationDTO;
+import com.uade.pfi.api.dto.TransportLocationListDTO;
+import com.uade.pfi.api.utils.MapsHelper;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dto.TransportLocationDTO;
 import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 import com.uade.pfi.core.service.PublicTransportTrackerService;
 
@@ -28,25 +30,20 @@ public class WebInterfaceImpl {
 
 	@RequestMapping("index.htm")
 	public ModelAndView index(){
+		TransportLocationListDTO dto = new TransportLocationListDTO();
 		logger.debug("using service: " + service);
 		List<TransportSession> sessions = service.retrieveAllSessions();
-		List<TransportLocationDTO> locations = converter.convert(sessions);
-		logger.debug("index() accessed. Returned items: " + locations.size());
+		List<TransportLocationDTO> locationsDTOList = converter.convert(sessions);
+		
+		dto.setTransports(locationsDTOList.toArray(new TransportLocationDTO[0]));
+		dto.setCenter(MapsHelper.getCenter(locationsDTOList));
+		
+		if(locationsDTOList.size()>0){
+			dto.setZoom(15);
+		}
+		
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("locations", locations);
-		
-		Integer mapZoom = 2;
-		Float centerLat = (float) 0;
-		Float centerLong = (float) 0;
-//		if(locations.size()>0){
-//			mapZoom = 15;
-//			centerLat =  locations.get(0).getLatitude();
-//			centerLong = locations.get(0).getLongitude();
-//		}
-		
-		parameters.put("mapZoom", mapZoom);
-		parameters.put("centerLat", centerLat);
-		parameters.put("centerLong", centerLong);
+		parameters.put("locationsList", dto);
 		
 		return new ModelAndView("map",parameters);
 	}

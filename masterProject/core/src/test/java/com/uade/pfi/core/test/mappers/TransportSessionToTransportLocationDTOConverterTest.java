@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dto.TransportLocationDTO;
 import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 
 public class TransportSessionToTransportLocationDTOConverterTest {
@@ -43,8 +43,8 @@ public class TransportSessionToTransportLocationDTOConverterTest {
 		TransportSessionToTransportLocationDTOConverter converter = new TransportSessionToTransportLocationDTOConverter();
 		TransportSession value = new TransportSession(null,new Location(123,456),null, null);
 		TransportLocationDTO locationDTO = converter.convert(value);
-		assertTrue(locationDTO.getLatitude().equals(Float.valueOf(123)));
-		assertTrue(locationDTO.getLongitude().equals(Float.valueOf(456)));
+		assertTrue(locationDTO.getLocation().getLatitude().equals(Float.valueOf(123)));
+		assertTrue(locationDTO.getLocation().getLongitude().equals(Float.valueOf(456)));
 	}
 	
 	@Test

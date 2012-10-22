@@ -1,6 +1,6 @@
-package com.uade.pfi.core.dto;
+package com.uade.pfi.api.dto;
 
-import com.uade.pfi.core.enums.TransportTypeEnum;
+import com.uade.pfi.api.enums.TransportTypeEnum;
 
 /**
  * Represents a Transport based on a name, a branch (ramal), heading (sentido) and a type

@@ -10,6 +10,7 @@
   	<module>api</module>
   	<module>web</module>
 	<module>scripts</module>
+	<module>docs</module>
 	<module>emulator</module>
   </modules>
 

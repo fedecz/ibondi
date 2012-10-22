@@ -1,4 +1,4 @@
-package com.uade.pfi.core.enums;
+package com.uade.pfi.api.enums;
 
 import java.util.HashMap;
 import java.util.Map;

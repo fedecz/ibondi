@@ -13,8 +13,8 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.uade.pfi.androidapp.server.ServerFacade;
-import com.uade.pfi.core.dto.SessionCheckInDTO;
-import com.uade.pfi.core.dto.TransportLocationUpdateDto;
+import com.uade.pfi.api.dto.SessionCheckInDTO;
+import com.uade.pfi.api.dto.TransportLocationUpdateDto;
 
 public class TransportMeService extends Service {
 	private ServerFacade server;

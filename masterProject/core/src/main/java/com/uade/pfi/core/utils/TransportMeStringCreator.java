@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.springframework.core.style.ToStringCreator;
 
+import com.uade.pfi.api.dto.TransportLocationDTO;
+import com.uade.pfi.api.dto.TransportLocationUpdateDto;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
-import com.uade.pfi.core.dto.TransportLocationDTO;
-import com.uade.pfi.core.dto.TransportLocationUpdateDto;
 
 /**
  * @author chiwi
@@ -22,8 +22,8 @@ public class TransportMeStringCreator {
 	public static String toString(TransportLocationDTO location) {
 		ToStringCreator c = new ToStringCreator(location);
 		c.append("TransportId",location.getTransportId());
-		c.append("Latitude",location.getLatitude());
-		c.append("Longitude",location.getLongitude());
+		c.append("Latitude",location.getLocation().getLatitude());
+		c.append("Longitude",location.getLocation().getLongitude());
 		return c.toString();
 	}
 	

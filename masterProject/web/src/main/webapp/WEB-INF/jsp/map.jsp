@@ -18,57 +18,41 @@ body {
 	height: 100%
 }
 </style>
-<script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false">
-</script>
+<script type="text/javascript" 	src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 
 <c:set var="i" value="1"/>
-
-var beaches = [
-     <c:forEach var="location" items="${locations}">
-          ['${location.transportId}',${location.latitude},${location.longitude},${i+1}],
-      </c:forEach>
-];
 var map;
 
- function initialize() {
-	 var latSum = 0;
-	 var longSum =0;
-	   for (var i = 0; i < beaches.length; i++) {
-	 	latSum=latSum+beaches[i][1];
-	 	longSum=longSum+beaches[i][2];
-	   }
-	   var centerLat = 0;
-	   var centerLong = 0;
-	   if (latSum!=0)
-		   centerLat=latSum / beaches.length;
-	   if (longSum!=0)
-		   centerLong=longSum / beaches.length;
+var transports = [
+     <c:forEach var="location" items="${locationsList.transports}">
+          ['${location.transportId}',${location.location.latitude},${location.location.longitude}],
+      </c:forEach>
+];
 
-	   		 
-  var myOptions = {
-    zoom: ${mapZoom},
-    center: new google.maps.LatLng(${centerLat},${centerLong}),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
- map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-  setMarkers(map, beaches);
-
+function initialize() {
+   		 
+ var myOptions = {
+   zoom: ${locationsList.zoom},
+   center: new google.maps.LatLng(${locationsList.center.latitude},${locationsList.center.longitude}),
+   mapTypeId: google.maps.MapTypeId.ROADMAP
  }
+map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+ setMarkers(map, transports);
+
+}
 
    
   function setMarkers(map, locations) {
 
 
   for (var i = 0; i < locations.length; i++) {
-    var beach = locations[i];
-    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+    var transport = locations[i];
+    var myLatLng = new google.maps.LatLng(transport[1], transport[2]);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: beach[0],
-        zIndex: beach[3]
+        title: transport[0]
     });
   }
 }

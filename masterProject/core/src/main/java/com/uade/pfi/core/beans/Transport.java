@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.uade.pfi.core.enums.HeadingEnum;
-import com.uade.pfi.core.enums.TransportTypeEnum;
+import com.uade.pfi.api.enums.HeadingEnum;
+import com.uade.pfi.api.enums.TransportTypeEnum;
 
 @Document(collection="transports")
 @CompoundIndexes(
