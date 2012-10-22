@@ -18,31 +18,29 @@ body {
 	height: 100%
 }
 </style>
-<script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false">
-</script>
+<script type="text/javascript" 	src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 
 <c:set var="i" value="1"/>
+var map;
 
 var transports = [
-     <c:forEach var="location" items="${locations}">
+     <c:forEach var="location" items="${locationsList.transports}">
           ['${location.transportId}',${location.location.latitude},${location.location.longitude}],
       </c:forEach>
 ];
-var map;
 
- function initialize() {
-	   		 
-  var myOptions = {
-    zoom: ${mapZoom},
-    center: new google.maps.LatLng(${centerLat},${centerLong}),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
- map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-  setMarkers(map, transports);
-
+function initialize() {
+   		 
+ var myOptions = {
+   zoom: ${locationsList.zoom},
+   center: new google.maps.LatLng(${locationsList.center.latitude},${locationsList.center.longitude}),
+   mapTypeId: google.maps.MapTypeId.ROADMAP
  }
+map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+ setMarkers(map, transports);
+
+}
 
    
   function setMarkers(map, locations) {

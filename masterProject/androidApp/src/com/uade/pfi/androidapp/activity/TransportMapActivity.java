@@ -47,7 +47,7 @@ public class TransportMapActivity extends MapActivity {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.show_map_refresh:
-	            getNewTransports();
+	            getNewTransportsAndSetupMap();
 	            return true;
 	        case R.id.show_map_filter:
 	            Toast.makeText(this, "No implementado!!", Toast.LENGTH_SHORT).show();
@@ -58,14 +58,20 @@ public class TransportMapActivity extends MapActivity {
 	}
 	
 	
-	private void getNewTransports() {
+	private void getNewTransportsAndSetupMap() {
 		mapView.getOverlays().clear();
 		TransportLocationListDTO list = getLocations();
-		addLocationsToMap(list);
 		MapController mapController = mapView.getController();
-		LocationDTO center = MapsHelper.getCenter(Arrays.asList(list.getTransports()));
-		mapController.setCenter(generateGeoPoint(center));
-		mapController.setZoom(15);
+		if(list!=null && list.getTransports().length>0){
+			addLocationsToMap(list);
+			LocationDTO center = MapsHelper.getCenter(Arrays.asList(list.getTransports()));
+			mapController.setCenter(generateGeoPoint(center));
+			mapController.setZoom(15);
+		}else{
+			//TODO se deberia centrar en donde está el tipo parado, no en 0,0
+			mapController.setCenter(generateGeoPoint(new LocationDTO(0,0)));
+			mapController.setZoom(2);
+		}
 	}
 
 	@Override
@@ -79,7 +85,7 @@ public class TransportMapActivity extends MapActivity {
 	protected void onStart() {
 		super.onStart();
 		server=ServerFacade.getInstace(this.getBaseContext());
-		getNewTransports();
+		getNewTransportsAndSetupMap();
 	}
 
 
