@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>uadepfi2012</artifactId>
+    <groupId>edu.uade.pfi</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+	<artifactId>emulator</artifactId>
+	<name>Transport Emulator</name>
+	<build>
+		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
+	</build>
+	<dependencies>
+	    <dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>jgpx</groupId>
+			<artifactId>jgpx</artifactId>
+			<version>1</version>
+		</dependency>
+	</dependencies>
+</project>

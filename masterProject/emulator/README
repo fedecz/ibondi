@@ -1,0 +1,7 @@
+Para poder levantar bien esta app, primero hay uqe instalar manualmente en el repo de maven local, el jar 
+que está en "lib".
+Para lo cual ir a la consola, cd "home del proyecto emulator" (donde se encuentra este README), y ejecutar el comando:
+
+mvn install:install-file -Dfile=lib/jgpx.jar -DgroupId=jgpx -DartifactId=jgpx -Dversion=1 -Dpackaging=jar
+ 
+listo.
