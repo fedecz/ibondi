@@ -1,23 +1,33 @@
 package com.uade.pfi.api.enums;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
-//TODO: AGREGAR EL RESTO DE LOS MAPEOS SI FUERA NECESARIO
+
 public enum TransportTypeEnum {
-	BUS, TRAIN, SUBWAY, SHIP;
+	BUS("BUS"), TRAIN("TRAIN"), SUBWAY("SUBWAY"), SHIP("SHIP");
 		
-	private static final Map<String, TransportTypeEnum> transportTypeMap = new HashMap<String, TransportTypeEnum>();
+	private String codeAsString;
 	
-	static {
-		transportTypeMap.put("BUS", BUS);
-		transportTypeMap.put("COLECTIVO", BUS);
-		transportTypeMap.put("TRAIN", TRAIN);
-		transportTypeMap.put("TREN", TRAIN);
+	TransportTypeEnum(String description) {
+		this.codeAsString = description;
 	}
 	
-	public static TransportTypeEnum createTransportType(String headingAsString) {
-		return transportTypeMap.get(headingAsString);
+	public String code() {
+		return codeAsString;
+	}
+
+	public static List<String> getTranportTypeEnumAsStringList(){
+		return Arrays.asList(BUS.code(), TRAIN.code(), SUBWAY.code(), SHIP.code());
+	}
+
+	public static TransportTypeEnum getTransportTypeBy(String transportTypeName) {
+		if (transportTypeName.contains("Colectivo")) return BUS;
+		if (transportTypeName.contains("Tren")) return TRAIN;
+		if (transportTypeName.contains("Subte")) return SUBWAY;
+		if (transportTypeName.contains("Tren")) return TRAIN;
+		if (transportTypeName.contains("Lancha")) return SHIP;
+		return null;
 	}
 	
 }

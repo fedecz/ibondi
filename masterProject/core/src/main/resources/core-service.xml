@@ -13,4 +13,8 @@
 	
 	<bean id="transportCrudService" class="com.uade.pfi.core.service.TransportCrudService" />
 	
+	<bean id="transportSessionConverter" class="com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter" />
+	
+	<bean id="transportToDTOConverter" class="com.uade.pfi.core.mapper.TransportToTransportDTOConverter"/>
+	
 </beans>

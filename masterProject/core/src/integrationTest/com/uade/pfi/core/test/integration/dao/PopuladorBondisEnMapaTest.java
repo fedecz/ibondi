@@ -43,6 +43,19 @@ public class PopuladorBondisEnMapaTest {
 	}
 	
 	@Test
+	public void popularTransportes() {
+		Transport t1 = new Transport("1","A", "SR", HeadingEnum.IDA, TransportTypeEnum.BUS);
+		Transport t2 = new Transport("2","B", "UCA", HeadingEnum.IDA, TransportTypeEnum.BUS);
+		Transport t3 = new Transport("3","C", "SR", HeadingEnum.IDA, TransportTypeEnum.BUS);
+		Transport t4 = new Transport("4","D", "SR", HeadingEnum.IDA, TransportTypeEnum.TRAIN);
+		Transport t5 = new Transport("5","E", "SR", HeadingEnum.IDA, TransportTypeEnum.TRAIN);
+		Transport t6 = new Transport("6","F", "SR", HeadingEnum.IDA, TransportTypeEnum.TRAIN);
+		
+		
+		transportRepo.save(Arrays.asList(t1, t2, t3, t4, t5, t6));
+	}
+	
+	@Test
 	public void popularTransportesYSessiones(){
 		Transport t1 = new Transport("1","A", "SR", HeadingEnum.IDA, TransportTypeEnum.BUS);
 		Transport t2 = new Transport("2","B", "UCA", HeadingEnum.IDA, TransportTypeEnum.BUS);
