@@ -11,13 +11,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd">
 
-	<beans profile="default">
-		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}"
-			host="127.0.0.1" port="27017" />
-	</beans>
+		<mongo:db-factory
+    		id="mongoDbFactory"
+    		dbname="${mongo.db}"
+    		host="${mongo.host}"
+    		port="${mongo.port}" />
 
-	<beans profile="cloud">
-		<cloud:mongo-db-factory id="mongoDbFactory" />
-	</beans>
 
 </beans>
