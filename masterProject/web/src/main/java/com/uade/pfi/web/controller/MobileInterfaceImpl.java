@@ -15,6 +15,7 @@ import com.uade.pfi.api.dto.LocationDTO;
 import com.uade.pfi.api.dto.SessionCheckInDTO;
 import com.uade.pfi.api.dto.SessionUpdateDto;
 import com.uade.pfi.api.dto.TransportDTO;
+import com.uade.pfi.api.dto.TransportListDTO;
 import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
 import com.uade.pfi.api.facade.MobileInterface;
@@ -79,13 +80,13 @@ public class MobileInterfaceImpl implements MobileInterface {
 	}
 	
 	@RequestMapping(value="/transportListBy.json")
-	public @ResponseBody List<TransportDTO> getTransportListBy(@RequestBody String transportType) {
+	public @ResponseBody TransportListDTO getTransportListBy(@RequestBody String transportType) {
 		logger.debug("[getListOfLinesFrom(" + transportType + ")]" );
 		TimeWatch watch = TimeWatch.start();
 		List<Transport> transports = crudService.getTransportsByType(transportType);
 		List<TransportDTO> transportDTOs = transportToDTOConverter.createTransportDTOListFrom(transports);
 		logger.debug("Transports found: " + transports.size() + " in (" + watch.stop().getTimeElapsed(TimeUnit.MILLISECONDS) + " ms.)");
-		return transportDTOs;
+		return new TransportListDTO(transportDTOs);
 	}
 	
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent" 
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
+
+    <Spinner android:id="@+id/transportType_spinner"
+     	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/transportType_arrays"
+        android:prompt="@string/transportType_prompt" 
+      />
+
+    <Spinner android:id="@+id/line_spinner"
+     	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/line_arrays"
+        android:prompt="@string/line_prompt" 
+      />
+    
+    <Spinner android:id="@+id/branch_spinner"
+     	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/branch_arrays"
+        android:prompt="@string/branch_prompt" 
+      />
+    
+    <Button 
+        android:text="@string/checkInButton" 
+        android:id="@+id/checkInButton" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:onClick="checkIn" />
+    
+</LinearLayout>
