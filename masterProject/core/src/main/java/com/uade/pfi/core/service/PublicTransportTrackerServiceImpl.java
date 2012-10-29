@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uade.pfi.core.aop.TimeWatched;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
 import com.uade.pfi.core.repositories.SessionRepository;
@@ -24,6 +25,7 @@ public class PublicTransportTrackerServiceImpl implements
 	 * (non-Javadoc)
 	 * @see com.uade.pfi.core.service.PublicTransportTrackerService#retrieveLocations()
 	 */
+	@TimeWatched
 	public List<TransportSession> retrieveAllSessions() {
 		logger.debug("retriveAllSessions()");
 		List<TransportSession> sessions = sessionsRepo.findActiveSessions();
@@ -31,6 +33,7 @@ public class PublicTransportTrackerServiceImpl implements
 		return sessions;
 	}
 
+	@TimeWatched
 	public void updatePosition(Location location, String sessionId) {
 		logger.debug("updatePosition(), session id: "+ sessionId);
 		logger.debug("location: "+ TransportMeStringCreator.toString(location).toString());
@@ -53,10 +56,12 @@ public class PublicTransportTrackerServiceImpl implements
 	}
 	
 
+	@TimeWatched
 	public List<TransportSession> retrieveSessions(Location myLocation) {
 		return sessionsRepo.findActiveSessions(myLocation);
 	}
 
+	@TimeWatched
 	public String checkIn(String transportId) {
 		logger.debug("cheking in transportName: " + transportId);
 		if(transportId== null || transportId.trim().equals(""))
