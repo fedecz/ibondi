@@ -5,6 +5,7 @@ import com.uade.pfi.api.dto.SessionCheckInDTO;
 import com.uade.pfi.api.dto.SessionUpdateDto;
 import com.uade.pfi.api.dto.TransportListDTO;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
+import com.uade.pfi.api.dto.TransportTypeListDTO;
 
 public interface MobileInterface {
 
@@ -18,4 +19,5 @@ public interface MobileInterface {
 	
 	public TransportListDTO getTransportListBy(String transportType);
 
+	public TransportTypeListDTO getTransportTypeList(String locale);
 }

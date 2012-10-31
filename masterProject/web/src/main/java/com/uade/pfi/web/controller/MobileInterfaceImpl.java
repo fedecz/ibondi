@@ -1,7 +1,6 @@
 package com.uade.pfi.web.controller;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +17,10 @@ import com.uade.pfi.api.dto.TransportDTO;
 import com.uade.pfi.api.dto.TransportListDTO;
 import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
+import com.uade.pfi.api.dto.TransportTypeListDTO;
+import com.uade.pfi.api.enums.TransportTypeEnum;
 import com.uade.pfi.api.facade.MobileInterface;
+import com.uade.pfi.core.aop.TimeWatched;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.Transport;
 import com.uade.pfi.core.beans.TransportSession;
@@ -26,7 +28,6 @@ import com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter;
 import com.uade.pfi.core.mapper.TransportToTransportDTOConverter;
 import com.uade.pfi.core.service.PublicTransportTrackerService;
 import com.uade.pfi.core.service.TransportCrudService;
-import com.uade.pfi.core.utils.TimeWatch;
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 @Controller
@@ -79,14 +80,18 @@ public class MobileInterfaceImpl implements MobileInterface {
 		return id;
 	}
 	
+	@TimeWatched
 	@RequestMapping(value="/transportListBy.json")
 	public @ResponseBody TransportListDTO getTransportListBy(@RequestBody String transportType) {
-		logger.debug("[getListOfLinesFrom(" + transportType + ")]" );
-		TimeWatch watch = TimeWatch.start();
 		List<Transport> transports = crudService.getTransportsByType(transportType);
 		List<TransportDTO> transportDTOs = transportToDTOConverter.createTransportDTOListFrom(transports);
-		logger.debug("Transports found: " + transports.size() + " in (" + watch.stop().getTimeElapsed(TimeUnit.MILLISECONDS) + " ms.)");
 		return new TransportListDTO(transportDTOs);
+	}
+	
+	@RequestMapping(value="/transportTypeList.json")
+	public @ResponseBody TransportTypeListDTO getTransportTypeList(@RequestBody String locale) {
+		List<String> transportTypes = TransportTypeEnum.getTranportTypeEnumAsStringList();
+		return new TransportTypeListDTO(transportTypes);
 	}
 	
 }

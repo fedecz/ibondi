@@ -50,6 +50,7 @@
     <string name="getAllLocationsFromServerURL">/getAllLocations.json</string>
     <string name="postLocationToServerURL">/postLocation.json</string>
     <string name="getTransportListByFromServerURL">/transportListBy.json</string>
+    <string name="getTransportTypeListByFromServerURL">/transportTypeList.json</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_select_transport">SelectTransportActivity</string>
