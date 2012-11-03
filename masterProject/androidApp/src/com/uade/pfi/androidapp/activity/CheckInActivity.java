@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -72,11 +73,20 @@ public class CheckInActivity extends Activity{
 		    		disableLineSpinner();
 		    		disableBranchSpinner();
 		    		disableHeadingSpinner();
+		    		disableCheckinButton();
 		    	}
 		    }
 		};
 	}
 
+	protected void disableCheckinButton() {
+		((Button) findViewById(R.id.checkInOKButton)).setEnabled(false);
+	}
+
+	protected void enableCheckinButton() {
+		((Button) findViewById(R.id.checkInOKButton)).setEnabled(true);
+	}
+	
 	protected void enableLineSpinnerWithData(String transportType) {
 		SpinnerAdapter arrayAdapter = getAdapterFor(getTransportLineArray());
 		OnItemSelectedListener selectionListener = createLineSelectionListener();
@@ -159,7 +169,29 @@ public class CheckInActivity extends Activity{
 
 	protected void enableHeadingSpinnerWithData(String aSelectedBranch) {
 		SpinnerAdapter arrayAdapter = getAdapterFor(aHeadingArrayFor(aSelectedBranch));
-		enableSpinner(getHeadingSpinner(), arrayAdapter, null);
+		OnItemSelectedListener listener = createHeadingListener();
+		enableSpinner(getHeadingSpinner(), arrayAdapter, listener);
+	}
+
+	private OnItemSelectedListener createHeadingListener() {
+		return new OnItemSelectedListener() {
+
+			@Override
+		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				if(parentView.getSelectedItemPosition()!=0) {
+					enableCheckinButton();
+				} else {
+					onNothingSelected(parentView);
+				}
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		    	if(parentView.getSelectedItemPosition() == 0) {
+		    		disableCheckinButton();
+		    	}
+		    }
+		};
 	}
 
 	private SpinnerAdapter getAdapterFor(String[] transportTypes) {
