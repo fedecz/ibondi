@@ -16,7 +16,7 @@ import android.widget.SpinnerAdapter;
 import com.uade.pfi.androidapp.service.TransportMeService;
 import com.uadepfi.android.R;
 /**
- * @author chiwi
+ * @author luke.skywalker (Chewaca)
  *
  */
 public class CheckInActivity extends Activity{
@@ -35,17 +35,34 @@ public class CheckInActivity extends Activity{
 		configureHeadingSpinner();
 	}
 
+	private void configureLineSpinner() {
+		getLineSpinner().setEnabled(false);
+	}
+
+	private void configureBranchSpinner() {
+		getBranchSpinner().setEnabled(false);
+	}
+
+	private void configureHeadingSpinner() {
+		getHeadingSpinner().setEnabled(false);
+	}
+	
 	private void configureTransportTypeSpinner() {
-		String[] transportTypeList = getTransportTypeArray();
-		Spinner spinner = getTransportTypeSpinner();
-		spinner.setAdapter(createTransportTypeSpinner(transportTypeList));
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		SpinnerAdapter arrayAdapter = getAdapterFor(aTransportTypeArray());
+		OnItemSelectedListener transportTypeListener = createTransportTypeListener();
+		enableSpinner(getTransportTypeSpinner(), arrayAdapter, transportTypeListener);
+	}
+
+	private OnItemSelectedListener createTransportTypeListener() {
+		return new OnItemSelectedListener() {
 		    @Override
 		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 		    	if (position == 0) {
-		    		//Do nothing
+		    		//Do nothing, it's the header
 		    	} else {
-		    		//Fire the other spinner population
+					//Fire the other spinner population
+		    		String transportType = (String)((Spinner)selectedItemView).getSelectedItem();
+		    		enableLineSpinnerWithData(transportType);
 		    	}
 		    }
 
@@ -53,34 +70,95 @@ public class CheckInActivity extends Activity{
 		    public void onNothingSelected(AdapterView<?> parentView) {
 		        // your code here
 		    }
-		});
+		};
 	}
 
-	private String[] getTransportTypeArray() {
-		// TODO Ver como ir a buscar los datos
-		return new String[]{"Colectivo", "Tren"};
+	protected void enableLineSpinnerWithData(String transportType) {
+		SpinnerAdapter arrayAdapter = getAdapterFor(getTransportLineArray());
+		OnItemSelectedListener selectionListener = createLineSelectionListener();
+		enableSpinner(getLineSpinner(), arrayAdapter, selectionListener);
 	}
 
-	private SpinnerAdapter createTransportTypeSpinner(String[] transportTypes) {
+	private void enableSpinner(Spinner spinner, SpinnerAdapter adapter, OnItemSelectedListener listener) {
+		spinner.setEnabled(true);
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(listener);
+	}
+
+	private OnItemSelectedListener createLineSelectionListener() {
+		return new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+		    	if (position == 0) {
+		    		//Do nothing, it's the header
+		    	} else {
+					//Fire the other spinner population
+		    		String selectedLine = (String)((Spinner)selectedItemView).getSelectedItem();
+		    		enableBranchSpinnerWithData(selectedLine);
+		    	}
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		        // your code here
+		    }
+		};
+	}
+
+	protected void enableBranchSpinnerWithData(String aSelectedLine) {
+		SpinnerAdapter arrayAdapter = getAdapterFor(aBranchLineArrayFor(aSelectedLine));
+		OnItemSelectedListener selectionListener = createBranchSelectionListener();
+		enableSpinner(getBranchSpinner(), arrayAdapter, selectionListener);
+	}
+
+	private OnItemSelectedListener createBranchSelectionListener() {
+		return new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+		    	if (position == 0) {
+		    		//Do nothing, it's the header
+		    	} else {
+					//Fire the other spinner population
+		    		String selectedBranch = (String)((Spinner)selectedItemView).getSelectedItem();
+		    		enableHeadingSpinnerWithData(selectedBranch);
+		    	}
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		        // your code here
+		    }
+		};
+	}
+
+	protected void enableHeadingSpinnerWithData(String aSelectedBranch) {
+		SpinnerAdapter arrayAdapter = getAdapterFor(aHeadingArrayFor(aSelectedBranch));
+		enableSpinner(getHeadingSpinner(), arrayAdapter, null);
+	}
+
+	private SpinnerAdapter getAdapterFor(String[] transportTypes) {
 		return new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, transportTypes);
 	}
 
-	
-	
-	private void configureLineSpinner() {
-		// TODO Auto-generated method stub
-		
+	private String[] aHeadingArrayFor(String aSelectedBranch) {
+		// Ver como ir a buscar el servicio que nos trae esto
+		return new String[] {"La Boca","Olivos"};
 	}
 
-	private void configureBranchSpinner() {
-		// TODO Auto-generated method stub
-		
+	private String[] aBranchLineArrayFor(String selectedLine) {
+		// TODO Ver como devolvemos esto
+		return new String[] {"SR","UCA","Boca"};
 	}
 
-	private void configureHeadingSpinner() {
-		// TODO Auto-generated method stub
-		
+	private String[] getTransportLineArray() {
+		// ver como corno ir a buscar los datos al servicio 
+		return new String[]{"152","59"};
+	}
+
+	private String[] aTransportTypeArray() {
+		// TODO Ver como ir a buscar los datos
+		return new String[]{"Colectivo", "Tren"};
 	}
 
 	public void checkIn(View v){
