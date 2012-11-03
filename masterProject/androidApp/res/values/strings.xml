@@ -20,32 +20,26 @@
     <!-- SELECT TRANSPORT Activity -->
     <string name="transportType_prompt">Seleccione Transporte</string>
     <string-array name="transportType_arrays">
-        <item>Colectivo</item>
-        <item>Tren</item>
-        <item>Subte</item>
-        <item>Barco</item>
+        <item>Seleccione tipo de transporte</item>
     </string-array>
     
+    <string name="line_prompt">Seleccione Linea</string>
+    <string-array name="line_arrays">
+        <item>seleccione linea</item>
+    </string-array>
+    
+    <string name="branch_prompt">Seleccione Ramal</string>
+    <string-array name="branch_arrays">
+        <item>seleccione ramal</item>
+    </string-array>
+        
     <string name="headingType_prompt">Seleccione Sentido</string>
     <string-array name="headingType_arrays">
-        <item>IDA</item>
-        <item>VUELTA</item>
-    </string-array>
-    
-    <string name="line_prompt">Seleccione Sentido</string>
-    <string-array name="line_arrays">
-        <item>152</item>
-        <item>59</item>
-    </string-array>
-    
-    <string name="branch_prompt">Seleccione Sentido</string>
-    <string-array name="branch_arrays">
-        <item>SR</item>
-        <item>Comun</item>
+        <item>seleccione destino</item>
     </string-array>
 
     <!-- SERVER Facade -->
-    <string name="baseURL">http://192.168.1.96:8080/web</string>
+    <string name="baseURL">http://localhost:8080/web</string>
     <string name="checkInURL">/checkIn.json</string>
     <string name="getAllLocationsFromServerURL">/getAllLocations.json</string>
     <string name="postLocationToServerURL">/postLocation.json</string>
@@ -53,6 +47,6 @@
     <string name="getTransportTypeListByFromServerURL">/transportTypeList.json</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_select_transport">SelectTransportActivity</string>
+    <string name="title_activity_select_transport">Check In</string>
 
 </resources>
