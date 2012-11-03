@@ -35,6 +35,7 @@ public class CheckInActivity extends Activity{
 		configureLineSpinner();
 		configureBranchSpinner();
 		configureHeadingSpinner();
+		disableCheckinButton();
 	}
 
 	private void configureLineSpinner() {
