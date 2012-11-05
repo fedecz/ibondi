@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public enum TransportTypeEnum {
-	BUS("BUS"), TRAIN("TRAIN"), SUBWAY("SUBWAY"), SHIP("SHIP");
+	BUS("Colectivo"), TRAIN("Tren"), SUBWAY("Subte"), SHIP("Lancha");
 		
 	private String codeAsString;
 	
@@ -25,7 +25,6 @@ public enum TransportTypeEnum {
 		if (transportTypeName.contains("Colectivo")) return BUS;
 		if (transportTypeName.contains("Tren")) return TRAIN;
 		if (transportTypeName.contains("Subte")) return SUBWAY;
-		if (transportTypeName.contains("Tren")) return TRAIN;
 		if (transportTypeName.contains("Lancha")) return SHIP;
 		return null;
 	}

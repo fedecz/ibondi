@@ -3,6 +3,13 @@
  */
 package com.uade.pfi.androidapp.activity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +22,11 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.uade.pfi.androidapp.server.ServerFacade;
 import com.uade.pfi.androidapp.service.TransportMeService;
+import com.uade.pfi.api.dto.TransportDTO;
+import com.uade.pfi.api.dto.TransportListDTO;
+import com.uade.pfi.api.dto.TransportTypeListDTO;
 import com.uadepfi.android.R;
 /**
  * @author chiwi
@@ -23,10 +34,19 @@ import com.uadepfi.android.R;
  */
 public class CheckInActivity extends Activity{
 	
+	private ServerFacade server;
+	private Map<String, List<TransportDTO>> transportMap;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_checkin);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		server=ServerFacade.getInstace(this.getBaseContext());
 		configureView();
 	}
 	
@@ -89,9 +109,22 @@ public class CheckInActivity extends Activity{
 	}
 	
 	protected void enableLineSpinnerWithData(String transportType) {
-		SpinnerAdapter arrayAdapter = getAdapterFor(getTransportLineArray());
+		createTransportMap(transportType);
+		SpinnerAdapter arrayAdapter = getAdapterFor(getLineListFrom());
 		OnItemSelectedListener selectionListener = createLineSelectionListener();
 		enableSpinner(getLineSpinner(), arrayAdapter, selectionListener);
+	}
+
+	private String[] getLineListFrom() {
+		//TODO: VER COMO DEVOLVER LA LISTA ORDENADA, AL SER TEXTO ORDENA PARA EL CULO
+		Set<String> keySet = this.transportMap.keySet();
+		String[] lines = new String[keySet.size() + 1];
+		int i = 0;
+		lines[i++] = "seleccione linea";
+		for (String line : keySet) {
+			lines[i++] = line; 
+		}
+		return lines;
 	}
 
 	private void enableSpinner(Spinner spinner, SpinnerAdapter adapter, OnItemSelectedListener listener) {
@@ -141,11 +174,11 @@ public class CheckInActivity extends Activity{
 	
 	protected void enableBranchSpinnerWithData(String aSelectedLine) {
 		SpinnerAdapter arrayAdapter = getAdapterFor(aBranchLineArrayFor(aSelectedLine));
-		OnItemSelectedListener selectionListener = createBranchSelectionListener();
+		OnItemSelectedListener selectionListener = createBranchSelectionListener(aSelectedLine);
 		enableSpinner(getBranchSpinner(), arrayAdapter, selectionListener);
 	}
 
-	private OnItemSelectedListener createBranchSelectionListener() {
+	private OnItemSelectedListener createBranchSelectionListener(final String aSelectedLine) {
 		return new OnItemSelectedListener() {
 
 			@Override
@@ -153,7 +186,7 @@ public class CheckInActivity extends Activity{
 				if(parentView.getSelectedItemPosition()!=0) {
 					//Fire the other spinner population
 		    		String selectedBranch = (String)((TextView)selectedItemView).getText();
-		    		enableHeadingSpinnerWithData(selectedBranch);
+		    		enableHeadingSpinnerWithData(aSelectedLine, selectedBranch);
 				} else {
 					onNothingSelected(parentView);
 				}
@@ -168,8 +201,8 @@ public class CheckInActivity extends Activity{
 		};
 	}
 
-	protected void enableHeadingSpinnerWithData(String aSelectedBranch) {
-		SpinnerAdapter arrayAdapter = getAdapterFor(aHeadingArrayFor(aSelectedBranch));
+	protected void enableHeadingSpinnerWithData(String aSelectedLine, String aSelectedBranch) {
+		SpinnerAdapter arrayAdapter = getAdapterFor(aHeadingArrayFor(aSelectedLine, aSelectedBranch));
 		OnItemSelectedListener listener = createHeadingListener();
 		enableSpinner(getHeadingSpinner(), arrayAdapter, listener);
 	}
@@ -200,26 +233,56 @@ public class CheckInActivity extends Activity{
 				android.R.layout.simple_spinner_item, transportTypes);
 	}
 
-	private String[] aHeadingArrayFor(String aSelectedBranch) {
-		// Ver como ir a buscar el servicio que nos trae esto
-		return new String[] {"seleccione sentido","La Boca","Olivos"};
+	private String[] aTransportTypeArray() {
+		TransportTypeListDTO transportTypeList = this.server.getTransportTypeList(null);
+		String[] transportTypes = new String[transportTypeList.getTransportTypes().size() + 1];
+		int i = 0;
+		transportTypes[i++] = "seleccione tipo de transporte";
+		for (String type : transportTypeList.getTransportTypes()) {
+			transportTypes[i++] = type;
+		}
+		return transportTypes;
+	}
+	
+	private void createTransportMap(String transportType) {
+		TransportListDTO transportListBy = this.server.getTransportListBy(transportType);
+		this.transportMap = new HashMap<String, List<TransportDTO>>();
+		for (TransportDTO transport : transportListBy.getList()) {
+			String key = transport.getName();
+			if (this.transportMap.containsKey(key)) {
+				this.transportMap.get(key).add(transport);
+			} else {
+				List<TransportDTO> tranportList = new ArrayList<TransportDTO>();
+				tranportList.add(transport);
+				this.transportMap.put(key, tranportList);
+			}
+		}
 	}
 
 	private String[] aBranchLineArrayFor(String selectedLine) {
-		// TODO Ver como devolvemos esto
-		return new String[] {"seleccione ramal", "SR","UCA","Boca"};
+		List<TransportDTO> lineTransportList = this.transportMap.get(selectedLine);
+		String[] branches = new String[lineTransportList.size() + 1];
+		int i=0;
+		branches[i++] = "seleccione ramal";
+		for (TransportDTO transportDTO : lineTransportList) {
+			branches[i++] = transportDTO.getBranch();
+		}
+		return branches;
 	}
-
-	private String[] getTransportLineArray() {
-		// ver como corno ir a buscar los datos al servicio 
-		return new String[]{"seleccione linea", "152","59"};
+	
+	private String[] aHeadingArrayFor(String aSelectedLine, String aSelectedBranch) {
+		List<TransportDTO> lineTransportList = this.transportMap.get(aSelectedLine);
+		String[] heading = new String[3];//IDA O VUELTA
+		int i = 0;
+		heading[i++] = "seleccione destino";
+		for (TransportDTO transportDTO : lineTransportList) {
+			if (transportDTO.getBranch().equals(aSelectedBranch)){
+				heading[i++]= transportDTO.getHeading();
+			}
+		}
+		return heading;
 	}
-
-	private String[] aTransportTypeArray() {
-		// TODO Ver como ir a buscar los datos
-		return new String[]{"seleccione transporte", "Colectivo", "Tren"};
-	}
-
+	
 	public void checkIn(View v){
 		Spinner transportTypeSpinner = getTransportTypeSpinner();
 		Spinner lineSpinner = getLineSpinner();

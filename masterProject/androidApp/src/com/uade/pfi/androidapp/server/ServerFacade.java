@@ -93,11 +93,11 @@ public class ServerFacade implements MobileInterface {
 
 	@Override
 	public TransportListDTO getTransportListBy(String transportType) {
-		return restTemplate.getForObject(BASE_URL + context.getString(R.string.getTransportListByFromServerURL), TransportListDTO.class, transportType);
+		return restTemplate.postForObject(BASE_URL + context.getString(R.string.getTransportListByFromServerURL), transportType, TransportListDTO.class);
 	}
 
 	@Override
 	public TransportTypeListDTO getTransportTypeList(String locale) {
-		return restTemplate.getForObject(BASE_URL + context.getString(R.string.getTransportTypeListByFromServerURL), TransportTypeListDTO.class, locale);
+		return restTemplate.postForObject(BASE_URL + context.getString(R.string.getTransportTypeListByFromServerURL), locale, TransportTypeListDTO.class);
 	}
 }
