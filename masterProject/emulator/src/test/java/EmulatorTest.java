@@ -17,7 +17,11 @@ public class EmulatorTest {
 		emu.startEmulation();
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws InterruptedException{
+		
+		Thread.sleep(5000);
+		
+		
 		Runnable r1 = new Runnable(){
 			public void run() {
 				TransportsEmulator emu = null;
@@ -106,7 +110,7 @@ public class EmulatorTest {
 				emu.startEmulation();		
 			}
 		};
-		ExecutorService executorService = Executors.newFixedThreadPool(7);
+		ExecutorService executorService = Executors.newFixedThreadPool(8);
 		executorService.execute(r1);
 		executorService.execute(r2);
 		executorService.execute(r3);

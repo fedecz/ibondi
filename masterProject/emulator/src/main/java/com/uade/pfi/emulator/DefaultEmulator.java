@@ -17,6 +17,9 @@ import net.divbyzero.gpx.parser.JDOM;
 import net.divbyzero.gpx.parser.Parser;
 import net.divbyzero.gpx.parser.ParsingException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.core.style.ToStringCreator;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -33,12 +36,13 @@ import com.uade.pfi.api.dto.TransportListDTO;
  *
  */
 public class DefaultEmulator implements TransportsEmulator{
+	private Log logger = LogFactory.getLog(DefaultEmulator.class);
 	private GPX gpx;
 	private boolean shouldStop = false;
 	private long speedRatio = 1L; 
 	private String sessionId;
 	private RestTemplate rest;
-	private String baseUrl = "http://127.0.0.1:8080/web";
+	private String baseUrl = "http://ibondi.aws.af.cm";
 	
 	public DefaultEmulator(String gpxFile) throws ParsingException {
 		Parser parser = new JDOM();
@@ -48,17 +52,22 @@ public class DefaultEmulator implements TransportsEmulator{
 
 	private void startTransportSession() {
 		initializeRestTemplate();
+		logger.info("buscando la lista de transportes");
 		TransportListDTO transportListDTO = rest.getForObject(baseUrl + "/transports/getAll.json", TransportListDTO.class);
 		int size = transportListDTO.getList().length;
 		Random r = new Random();
 		int transportIndex = r.nextInt(size-1);
 		String transportId = transportListDTO.getList()[transportIndex].getId();
+		logger.info("Se eligió un transporte al azar: " + transportId);
 		SessionCheckInDTO checkIn = new SessionCheckInDTO();
 		checkIn.setTransportId(transportId);
+		logger.info("Checking in...");
 		sessionId = rest.postForObject(baseUrl+"/checkIn.json", checkIn, String.class);
+		logger.info("done, sessionId:" + sessionId);
 	}
 
 	private void initializeRestTemplate() {
+		logger.info("inicializando restTemplate");
 		rest = new RestTemplate();
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(new StringHttpMessageConverter());
@@ -69,6 +78,7 @@ public class DefaultEmulator implements TransportsEmulator{
 	}
 
 	public void startEmulation() {
+		logger.info("starting emulation.");
 		ArrayList<Track> tracks = gpx.getTracks();
 		for (Track track : tracks) {
 			ArrayList<TrackSegment> segments = track.getSegments();
@@ -85,14 +95,16 @@ public class DefaultEmulator implements TransportsEmulator{
 						long interval = nextWaypoint.getTime().getTime() - currentWaypoint.getTime().getTime();
 						long intervalWithFixedSpeed = interval / speedRatio;
 						try {
+							logger.info("sleeping " + intervalWithFixedSpeed + " ms, (speedRatio: " + speedRatio+")" );
 							Thread.sleep(intervalWithFixedSpeed);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
+							logger.error("error sleeping",e);
 						}
 					}
 				}
 			}
 		}
+		logger.info("finished emulation.");
 	}
 
 	private void postLocation(Waypoint currentWaypoint) {
@@ -100,6 +112,9 @@ public class DefaultEmulator implements TransportsEmulator{
 		update.setSessionId(sessionId);
 		update.setLatitude(currentWaypoint.getCoordinate().getLatitude());
 		update.setLongitude(currentWaypoint.getCoordinate().getLongitude());
+		logger.info("Updating session: " + new ToStringCreator(update).append("sessionId",update.getSessionId())
+				.append("latitude",update.getLatitude())
+				.append("longitude", update.getLongitude()).toString());
 		rest.postForObject(baseUrl+"/postLocation.json", update, Boolean.class);
 	}
 
