@@ -11,11 +11,16 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd">
 
+    <beans profile="default">
 		<mongo:db-factory
     		id="mongoDbFactory"
     		dbname="${mongo.db}"
     		host="${mongo.host}"
     		port="${mongo.port}" />
-
+	</beans>
+	
+	<beans profile="standAloneNewRelic">
+	    <cloud:mongo-db-factory id="mongoDbFactory" />
+	</beans>
 
 </beans>
