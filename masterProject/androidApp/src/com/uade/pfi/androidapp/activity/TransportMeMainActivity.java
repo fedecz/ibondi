@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.uade.pfi.androidapp.location.MyLocationManager;
 import com.uade.pfi.androidapp.service.TransportMeService;
 import com.uadepfi.android.R;
 
@@ -15,6 +16,7 @@ public class TransportMeMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		new MyLocationManager(getApplicationContext());
 	}
 	
 	public void checkIn(View v){

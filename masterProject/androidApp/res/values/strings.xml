@@ -17,9 +17,10 @@
     <string name="show_map_menu_filter">Filter</string>
 	
 	<!-- SERVER Facade -->
-	<string name="baseURL">http://192.168.1.96:8080/web</string>
+	<string name="baseURL">http://10.155.8.10:8080/web</string>
 	<string name="checkInURL">/checkIn.json</string>
 	<string name="getAllLocationsFromServerURL">/getAllLocations.json</string>
+	<string name="getLocationsNearMeFromServerURL">/getLocations.json</string>
     <string name="postLocationToServerURL">/postLocation.json</string>
     
 </resources>
