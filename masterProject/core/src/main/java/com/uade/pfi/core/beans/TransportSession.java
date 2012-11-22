@@ -29,7 +29,7 @@ public class TransportSession {
 	@GeoSpatialIndexed
 	private Location 		lastKnownLocation;
 	private List<Location> 	locations = new ArrayList<Location>();
-	@Indexed(direction=IndexDirection.DESCENDING)
+	@Indexed(direction=IndexDirection.DESCENDING,name="lastUpdated")
 	private Date			lastUpdated;
 
 	

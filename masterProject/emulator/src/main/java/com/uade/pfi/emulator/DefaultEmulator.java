@@ -42,10 +42,11 @@ public class DefaultEmulator implements TransportsEmulator{
 	private long speedRatio = 1L; 
 	private String sessionId;
 	private RestTemplate rest;
-	private String baseUrl = "http://ibondi.aws.af.cm";
+	private String baseUrl="";
 	
-	public DefaultEmulator(String gpxFile) throws ParsingException {
+	public DefaultEmulator(String baseUrl,String gpxFile) throws ParsingException {
 		Parser parser = new JDOM();
+		this.baseUrl = baseUrl;
 		gpx = parser.parse(new File(gpxFile));
 		startTransportSession();
 	}

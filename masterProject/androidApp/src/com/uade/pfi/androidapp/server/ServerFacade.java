@@ -77,7 +77,7 @@ public class ServerFacade implements MobileInterface {
 	 */
 	@Override
 	public TransportLocationListDTO getLocations(LocationDTO myLocation) {
-		TransportLocationListDTO result = restTemplate.getForObject(BASE_URL+context.getString(R.string.getAllLocationsFromServerURL), TransportLocationListDTO.class,myLocation);
+		TransportLocationListDTO result = restTemplate.postForObject(BASE_URL+context.getString(R.string.getLocationsNearMeFromServerURL),myLocation, TransportLocationListDTO.class);
 		return result;
 	}
 

@@ -44,12 +44,14 @@ public class MobileInterfaceImpl implements MobileInterface {
 	}
 	
 	@RequestMapping(value="/getLocations.json")
-	public TransportLocationListDTO getLocations(@RequestBody LocationDTO myLocation) {
+	public @ResponseBody TransportLocationListDTO getLocations(@RequestBody LocationDTO myLocation) {
 		Location l = new Location(myLocation.getLatitude(), myLocation.getLongitude());
 		List<TransportSession> sessions = service.retrieveSessions(l);
 		List<TransportLocationDTO> locations = converter.convert(sessions);
 		TransportLocationListDTO list = new TransportLocationListDTO();
 		list.setTransports(locations.toArray(new TransportLocationDTO[0]));
+		list.setCenter(myLocation);
+		list.setZoom(10);
 		return list;
 	}
 	

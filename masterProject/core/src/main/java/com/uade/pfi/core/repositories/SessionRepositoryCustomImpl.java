@@ -37,6 +37,8 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
  */
 public class SessionRepositoryCustomImpl implements
 		CustomSessionRepository {
+	private double radius = 0.0007; //(1º == 111km)
+
 	private Log logger = LogFactory.getLog(SessionRepositoryCustomImpl.class);
 	
 	@Autowired
@@ -72,8 +74,8 @@ public class SessionRepositoryCustomImpl implements
 	 */
 	public List<TransportSession> findActiveSessions(Location myLocation) {
 		logger.debug("retrieveing all sessions for location: " + TransportMeStringCreator.toString(myLocation));
-		Query query = new Query(getCommonCriteria().andOperator(new Criteria("lastKnownLocation")
-					.withinSphere(new Circle(new Point(myLocation.getLatitude(),myLocation.getLongitude()), 100))));
+		Query query = new Query(getCommonCriteria().and("lastKnownLocation")
+					.withinSphere(new Circle(new Point(myLocation.getLatitude(),myLocation.getLongitude()), radius)));
 		return executeMapReduceAndReturnResults(query);
 	}
 	
@@ -101,5 +103,8 @@ public class SessionRepositoryCustomImpl implements
 				.gt(calendar.getTime());
 	}
 	
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
 
 }
