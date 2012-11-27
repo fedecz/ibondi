@@ -37,7 +37,7 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
  */
 public class SessionRepositoryCustomImpl implements
 		CustomSessionRepository {
-	private double radius = 0.0007; //(1º == 111km)
+	private double radius = 0.000313578; //( x km / 6378 km ) ==> 2km = 2/6378 = 0.000313578
 
 	private Log logger = LogFactory.getLog(SessionRepositoryCustomImpl.class);
 	
@@ -75,7 +75,7 @@ public class SessionRepositoryCustomImpl implements
 	public List<TransportSession> findActiveSessions(Location myLocation) {
 		logger.debug("retrieveing all sessions for location: " + TransportMeStringCreator.toString(myLocation));
 		Query query = new Query(getCommonCriteria().and("lastKnownLocation")
-					.withinSphere(new Circle(new Point(myLocation.getLatitude(),myLocation.getLongitude()), radius)));
+					.withinSphere(new Circle(new Point(myLocation.getLongitude(),myLocation.getLatitude()), radius)));
 		return executeMapReduceAndReturnResults(query);
 	}
 	

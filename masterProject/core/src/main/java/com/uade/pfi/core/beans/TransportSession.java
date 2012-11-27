@@ -10,7 +10,8 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,11 +23,14 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
  *
  */
 @Document(collection="sessions")
+@CompoundIndexes(
+		@CompoundIndex(name="lastKnownLocationAndUpdated_index",def="{'lastKnownLocation': '2d', 'lastUpdated': -1}")
+)
 public class TransportSession {
 	@Id
 	private String 			id;
 	private String 			transportId; //por ahora solo el id. Despues vemos si usamos DBRefs.
-	@GeoSpatialIndexed
+//	@GeoSpatialIndexed
 	private Location 		lastKnownLocation;
 	private List<Location> 	locations = new ArrayList<Location>();
 	@Indexed(direction=IndexDirection.DESCENDING,name="lastUpdated")
@@ -57,6 +61,11 @@ public class TransportSession {
 		this.lastKnownLocation = lastKnownLocation;
 		this.locations = locations;
 		this.lastUpdated = lastUpdated;
+	}
+
+	public TransportSession(String transportId, Location location) {
+		this.transportId = transportId;
+		this.lastKnownLocation = location;
 	}
 
 	public String getTransportId() {

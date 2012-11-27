@@ -11,10 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import com.uade.pfi.core.utils.TransportMeStringCreator;
 
 public class Location {
-	@Field("lat")
-	private double 	latitude;
 	@Field("long")
 	private double 	longitude;
+	@Field("lat")
+	private double 	latitude;
 	private Date	trackedOn;
 	
 	public String toString(){

@@ -24,7 +24,7 @@ public class DefaultMapReduceSessionConverter implements
 		List<TransportSession> result = new ArrayList<TransportSession>(value.value.items.size());
 		String transportId = value.id;
 		for (MapReducePoint point : value.value.items) {
-			TransportSession s = new TransportSession("0",transportId, new Location(point.x, point.y), new ArrayList<Location>(0), null);
+			TransportSession s = new TransportSession(transportId, new Location(point.y, point.x));
 			result.add(s);
 		}
 		return result;
