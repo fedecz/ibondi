@@ -66,4 +66,22 @@ public class TransportCrudServiceTest {
 		Transport retrievedAfterRemoving = crudService.get(retrievedTransport);
 		Assert.assertNull(retrievedAfterRemoving);
 	}
+	
+	@Test
+	public void addTransportForGUITest() {
+		crudService.add(new Transport("152", "SemiRapido", HeadingEnum.IDA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("152", "SemiRapido", HeadingEnum.VUELTA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("152", "Boca", HeadingEnum.IDA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("152", "Boca", HeadingEnum.VUELTA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("152", "UCA", HeadingEnum.IDA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("152", "UCA", HeadingEnum.VUELTA, TransportTypeEnum.BUS));
+		
+		crudService.add(new Transport("59", "SemiRapido", HeadingEnum.IDA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("59", "SemiRapido", HeadingEnum.VUELTA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("59", "1", HeadingEnum.IDA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("59", "1", HeadingEnum.VUELTA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("59", "2", HeadingEnum.IDA, TransportTypeEnum.BUS));
+		crudService.add(new Transport("59", "2", HeadingEnum.VUELTA, TransportTypeEnum.BUS));
+		
+	}
 }

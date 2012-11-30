@@ -18,7 +18,9 @@ import android.content.Context;
 import com.uade.pfi.api.dto.LocationDTO;
 import com.uade.pfi.api.dto.SessionCheckInDTO;
 import com.uade.pfi.api.dto.SessionUpdateDto;
+import com.uade.pfi.api.dto.TransportListDTO;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
+import com.uade.pfi.api.dto.TransportTypeListDTO;
 import com.uade.pfi.api.facade.MobileInterface;
 import com.uadepfi.android.R;
 
@@ -89,5 +91,13 @@ public class ServerFacade implements MobileInterface {
 		return restTemplate.postForObject(BASE_URL+context.getString(R.string.postLocationToServerURL), updateLocation, Boolean.class);
 	}
 
+	@Override
+	public TransportListDTO getTransportListBy(String transportType) {
+		return restTemplate.postForObject(BASE_URL + context.getString(R.string.getTransportListByFromServerURL), transportType, TransportListDTO.class);
+	}
 
+	@Override
+	public TransportTypeListDTO getTransportTypeList(String locale) {
+		return restTemplate.postForObject(BASE_URL + context.getString(R.string.getTransportTypeListByFromServerURL), locale, TransportTypeListDTO.class);
+	}
 }

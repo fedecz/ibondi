@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.springframework.core.style.ToStringCreator;
 
-import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.api.dto.SessionUpdateDto;
+import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.core.beans.Location;
 import com.uade.pfi.core.beans.TransportSession;
 

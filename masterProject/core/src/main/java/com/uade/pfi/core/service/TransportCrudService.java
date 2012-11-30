@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uade.pfi.api.enums.TransportTypeEnum;
 import com.uade.pfi.core.beans.Transport;
 import com.uade.pfi.core.repositories.TransportRepository;
 
@@ -50,5 +51,10 @@ public class TransportCrudService implements CrudService<Transport> {
 
 	public List<Transport> getTransportsByName(String name) {
 		return repo.findByName(name);
+	}
+	
+	public List<Transport> getTransportsByType(String transportTypeName){
+		TransportTypeEnum transportTypeBy = TransportTypeEnum.getTransportTypeBy(transportTypeName);
+		return repo.findByTransportType(transportTypeBy);
 	}
 }

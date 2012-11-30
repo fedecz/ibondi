@@ -4,23 +4,39 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-
-    <TextView
-        android:id="@+id/checkInTransportIdLbl"
-        android:layout_width="wrap_content"
+    <Spinner android:id="@+id/transportType_spinner"
+     	android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/checkInTransportIdLbl"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:entries="@array/transportType_arrays"
+        android:prompt="@string/transportType_prompt" 
+      />
+
+    <Spinner android:id="@+id/line_spinner"
+     	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/line_arrays"
+        android:prompt="@string/line_prompt" 
+      />
     
-    <EditText android:id="@+id/checkInTransportIdTxtBox" 
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        android:inputType="text"/>
-    <Button android:text="@string/checkInOKButton" 
+    <Spinner android:id="@+id/branch_spinner"
+     	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/branch_arrays"
+        android:prompt="@string/branch_prompt" 
+      />
+    
+    <Spinner android:id="@+id/headingType_spinner"
+     	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/headingType_arrays"
+        android:prompt="@string/headingType_prompt" 
+      />
+    
+    <Button 
+        android:text="@string/checkInOKButton" 
         android:id="@+id/checkInOKButton" 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:onClick="checkIn"/>
-    
+        android:onClick="checkIn" />
 
 </LinearLayout>

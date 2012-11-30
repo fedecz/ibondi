@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.uade.pfi.api.enums.HeadingEnum;
@@ -23,6 +24,7 @@ public class Transport {
 	
 	private HeadingEnum heading;
 	
+	@Indexed
 	private TransportTypeEnum transportType;
 	
 	public Transport(String name, String branch, HeadingEnum heading,

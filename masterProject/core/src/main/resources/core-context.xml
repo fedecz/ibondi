@@ -19,6 +19,9 @@
 	<!-- Spring Service -->
 	<import resource="core-service.xml" />
 	
+	<!-- Spring AOP -->
+	<import resource="core-aop.xml" />
+	
 	<context:property-placeholder location="classpath:pfiuade.properties"/>
 	
 </beans>
