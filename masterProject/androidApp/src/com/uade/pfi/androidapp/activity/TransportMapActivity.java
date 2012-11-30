@@ -1,6 +1,5 @@
 package com.uade.pfi.androidapp.activity;
 
-import java.util.Arrays;
 import java.util.List;
 
 import android.graphics.drawable.Drawable;
@@ -19,17 +18,18 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.uade.pfi.androidapp.location.MyLocationManager;
 import com.uade.pfi.androidapp.overlays.TransportItemizedOverlay;
+import com.uade.pfi.androidapp.overlays.WhereIAmOverlay;
 import com.uade.pfi.androidapp.server.ServerFacade;
 import com.uade.pfi.api.dto.LocationDTO;
 import com.uade.pfi.api.dto.TransportLocationDTO;
 import com.uade.pfi.api.dto.TransportLocationListDTO;
-import com.uade.pfi.api.utils.MapsHelper;
 import com.uadepfi.android.R;
 
 public class TransportMapActivity extends MapActivity {
 
 	private MapView mapView;
 	private Drawable iconBus;
+	private Drawable whereIAmIcon;
 	private ServerFacade server;
 
 	@Override
@@ -102,7 +102,7 @@ public class TransportMapActivity extends MapActivity {
 			addLocationsToMap(list);
 		} 
 		mapController.setCenter(generateGeoPoint(myLocation));
-		mapController.setZoom(12);
+		mapController.setZoom(16);
 	}
 
 	private void addLocationsToMap(TransportLocationListDTO locations) {
@@ -110,6 +110,11 @@ public class TransportMapActivity extends MapActivity {
 		List<Overlay> overlays = mapView.getOverlays();
 		if (iconBus == null)
 			iconBus = this.getResources().getDrawable(R.drawable.iconbus);
+		if (whereIAmIcon == null)
+			whereIAmIcon = this.getResources().getDrawable(R.drawable.mira);
+		GeoPoint whereIAmPoint = generateGeoPoint(locations.getCenter());
+		WhereIAmOverlay whereIAm = new WhereIAmOverlay(whereIAmIcon, new OverlayItem(whereIAmPoint, "Here I am", "Here I Am"));
+		overlays.add(whereIAm);
 		TransportItemizedOverlay itemizedOverlay = new TransportItemizedOverlay(
 				iconBus, getBaseContext());
 
