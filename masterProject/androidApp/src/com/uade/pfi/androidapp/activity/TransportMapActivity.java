@@ -29,7 +29,7 @@ public class TransportMapActivity extends MapActivity {
 
 	private MapView mapView;
 	private Drawable iconBus;
-	private Drawable whereIAmIcon;
+	private Drawable myLocationIcon;
 	private ServerFacade server;
 
 	@Override
@@ -101,8 +101,17 @@ public class TransportMapActivity extends MapActivity {
 		if (list != null && list.getTransports().length > 0) {
 			addLocationsToMap(list);
 		} 
-		mapController.setCenter(generateGeoPoint(myLocation));
+		configureCenter(myLocation, mapView);
 		mapController.setZoom(16);
+	}
+
+	private void configureCenter(LocationDTO myLocation, MapView mapView) {
+		mapView.getController().setCenter(generateGeoPoint(myLocation));
+		if (myLocationIcon == null)
+			myLocationIcon = this.getResources().getDrawable(R.drawable.mylocation);
+		GeoPoint whereIAmPoint = generateGeoPoint(myLocation);
+		WhereIAmOverlay whereIAm = new WhereIAmOverlay(myLocationIcon, new OverlayItem(whereIAmPoint, "Here I am", "Here I Am"));
+		mapView.getOverlays().add(whereIAm);
 	}
 
 	private void addLocationsToMap(TransportLocationListDTO locations) {
@@ -110,11 +119,7 @@ public class TransportMapActivity extends MapActivity {
 		List<Overlay> overlays = mapView.getOverlays();
 		if (iconBus == null)
 			iconBus = this.getResources().getDrawable(R.drawable.iconbus);
-		if (whereIAmIcon == null)
-			whereIAmIcon = this.getResources().getDrawable(R.drawable.mira);
-		GeoPoint whereIAmPoint = generateGeoPoint(locations.getCenter());
-		WhereIAmOverlay whereIAm = new WhereIAmOverlay(whereIAmIcon, new OverlayItem(whereIAmPoint, "Here I am", "Here I Am"));
-		overlays.add(whereIAm);
+		
 		TransportItemizedOverlay itemizedOverlay = new TransportItemizedOverlay(
 				iconBus, getBaseContext());
 

@@ -19,7 +19,7 @@
 		<!-- MAIN ACTIVITY -->
 		<activity android:launchMode="standard"
 			android:name="com.uade.pfi.androidapp.activity.TransportMeMainActivity"
-			android:icon="@drawable/iconbus" android:label="@string/app_name">
+			android:icon="@drawable/iconbus_h" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
