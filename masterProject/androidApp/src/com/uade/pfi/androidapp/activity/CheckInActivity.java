@@ -4,7 +4,6 @@
 package com.uade.pfi.androidapp.activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -41,6 +41,21 @@ public class CheckInActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_checkin);
+		setButtonBehavior();
+	}
+
+	private void setButtonBehavior() {
+		Button checkInButton = (Button) findViewById(R.id.checkInOKButton);
+		checkInButton.setOnClickListener(createCheckinButtoneListener());
+	}
+
+	private OnClickListener createCheckinButtoneListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				checkIn(view);
+			}
+		};
 	}
 
 	@Override
@@ -284,25 +299,51 @@ public class CheckInActivity extends Activity{
 	}
 	
 	public void checkIn(View v){
-		Spinner transportTypeSpinner = getTransportTypeSpinner();
-		Spinner lineSpinner = getLineSpinner();
-		Spinner branchSpinner = getBranchSpinner();
-		Spinner headingSpinner = getHeadingSpinner();
-		
-		String transportType = (String) transportTypeSpinner.getSelectedItem();
-		String line = (String) lineSpinner.getSelectedItem();
-		String branch = (String) branchSpinner.getSelectedItem();
-		String heading = (String) headingSpinner.getSelectedItem();
-		
-		Intent intent = new Intent(this,TransportMeService.class);
-		
-		intent.putExtra("transportType", transportType);
-		intent.putExtra("line", line);
-		intent.putExtra("branch", branch);
-		intent.putExtra("heading", heading);
-		
+		String transportType = getTransportTypeId();
+		String line = getLineId();
+		String branch = getBranch();
+		String heading = getHeading();
+		startCheckinService(transportType, line, branch, heading);
+	}
+
+	private void startCheckinService(String transportType, String line, String branch,
+			String heading) {
+		Intent intent = createIntent(transportType, line, branch, heading);
 		CheckInActivity.this.startService(intent);
 		CheckInActivity.this.finish();
+	}
+
+	private Intent createIntent(String transportType, String line, String branch,
+			String heading) {
+		Intent intent = new Intent(this,TransportMeService.class);
+		String transportTypeId = transportType + "|" + line + "|" + branch + "|" + heading; 
+		intent.putExtra("com.uade.pfi.androidapp.intent.transportId", transportTypeId);
+		return intent;
+	}
+
+	private String getHeading() {
+		Spinner headingSpinner = getHeadingSpinner();
+		String heading = (String) headingSpinner.getSelectedItem();
+		return heading;
+	}
+
+	private String getBranch() {
+		Spinner branchSpinner = getBranchSpinner();
+		String branch = (String) branchSpinner.getSelectedItem();
+		return branch;
+	}
+
+	private String getLineId() {
+		Spinner lineSpinner = getLineSpinner();
+		String line = (String) lineSpinner.getSelectedItem();
+		return line;
+	}
+	
+	
+
+	private String getTransportTypeId() {
+		Spinner transportTypeSpinner = getTransportTypeSpinner();
+		return (String) transportTypeSpinner.getSelectedItem();
 	}
 
 	private Spinner getHeadingSpinner() {

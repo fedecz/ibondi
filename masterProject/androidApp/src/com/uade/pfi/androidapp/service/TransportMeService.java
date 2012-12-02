@@ -39,7 +39,7 @@ public class TransportMeService extends Service {
 
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		String transportId = intent.getExtras().getString("transportId");
+		String transportId = intent.getExtras().getString("com.uade.pfi.androidapp.intent.transportId");
 		SessionCheckInDTO dto = new SessionCheckInDTO();
 		dto.setTransportId(transportId);
 		sessionId = server.checkIn(dto);
