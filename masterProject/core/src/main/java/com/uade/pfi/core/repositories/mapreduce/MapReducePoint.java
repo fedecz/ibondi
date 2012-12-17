@@ -1,11 +1,11 @@
 package com.uade.pfi.core.repositories.mapreduce;
 
 public class MapReducePoint{
-	float x,y;
-	public void setX(float x) {
+	double x,y;
+	public void setX(double x) {
 		this.x = x;
 	}
-	public void setY(float y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 }

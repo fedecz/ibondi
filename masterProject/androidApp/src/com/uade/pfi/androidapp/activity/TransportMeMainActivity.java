@@ -17,6 +17,8 @@ public class TransportMeMainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		new MyLocationManager(getApplicationContext());
+		//TODO: en el onStart(), empezar a buscar la posicion actual ya sea
+		//por gps o NETWORK
 	}
 	
 	public void checkIn(View v){

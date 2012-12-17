@@ -1,8 +1,15 @@
 TODO
 - ver tema de BigDecimal en Location
+	- en vez de float, ahora usa double. Veamos como funca ahora.
 - que mapReduce no devuelva List<TransportSession> sino un objeto mas chico que represente el id del transport, el location, y por ahi un timestamp. No hace falta la lista de locations previos
-- ver que implantacion existe de ResourceLoader para no levantar los JS de maprereduce todo el tiempo.
+- ver que implementacion existe de ResourceLoader para no levantar los JS de maprereduce todo el tiempo.
+	- ví que en vez de pasarle la url para que los levante todo el tiempo, uno le puede pasar el script directamente. Asì se levanta del disco una sola vez.
+	- levantar los scripts en memoria cuanod levanta la app.
+	- hacer dinámico el script de Reduce para uqe el valor de eps no esté hardcodeado sino que lo levante de un properties.
 - investigar si hay alguna otra forma con androide de generar la app
+	- esto que era?
+- segurizar la app. 
+	- Investigar OAuth2
 
 
 Corto Plazo - Deadline diciembre
