@@ -3,7 +3,7 @@
 
     <!-- APP -->
     <string name="app_name">UADE-PFI</string>
-
+    
     <!-- MAIN Activity -->
     <string name="checkInButton">Check In</string>
     <string name="checkOutButton">Check Out</string>
@@ -12,7 +12,7 @@
     <!-- CHECKIN Activity -->
     <string name="checkInOKButton">Check In!</string>
     <string name="checkInTransportIdLbl">Transport Id:</string>
-
+    
     <!-- MAP Activity -->
     <string name="show_map_menu_refresh">Refresh</string>
     <string name="show_map_menu_filter">Filter</string>
@@ -39,13 +39,13 @@
     </string-array>
 
     <!-- SERVER Facade -->
-    <string name="baseURL">http://10.0.0.10:8080/web</string>
+    <string name="baseURL">http://192.168.1.96:8080/web</string>
     <string name="checkInURL">/checkIn.json</string>
     <string name="getAllLocationsFromServerURL">/getAllLocations.json</string>
+	<string name="getLocationsNearMeFromServerURL">/getLocations.json</string>
     <string name="postLocationToServerURL">/postLocation.json</string>
     <string name="getTransportListByFromServerURL">/transportListBy.json</string>
     <string name="getTransportTypeListByFromServerURL">/transportTypeList.json</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_select_transport">Check In</string>
 

@@ -10,19 +10,25 @@ import com.uade.pfi.emulator.TransportsEmulator;
 
 
 public class EmulatorTest {
+//	static String baseUrl = "http://ibondi.aws.af.cm";
+	static String baseUrl = "http://localhost:8080/web";
 
 	@Test
-	public void hola() throws ParsingException{
-		TransportsEmulator emu = new DefaultEmulator("circuitos/circuito1.gpx");
+	public void circuitoBasicoNela_Casa() throws ParsingException{
+		TransportsEmulator emu = new DefaultEmulator(baseUrl,"circuitos/circuito1.gpx");
 		emu.startEmulation();
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws InterruptedException{
+		
+		Thread.sleep(5000);
+		
+		
 		Runnable r1 = new Runnable(){
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito1.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito1.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -33,7 +39,7 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito2.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito2.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -44,7 +50,7 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito3.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito3.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -55,7 +61,7 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito4.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito4.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -66,7 +72,7 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito5.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito5.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -77,7 +83,7 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito6.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito6.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -88,7 +94,7 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito7.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito7.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
@@ -99,14 +105,14 @@ public class EmulatorTest {
 			public void run() {
 				TransportsEmulator emu = null;
 				try {
-					emu = new DefaultEmulator("circuitos/circuito8.gpx");
+					emu = new DefaultEmulator(baseUrl,"circuitos/circuito8.gpx");
 				} catch (ParsingException e) {
 					e.printStackTrace();
 				}
 				emu.startEmulation();		
 			}
 		};
-		ExecutorService executorService = Executors.newFixedThreadPool(7);
+		ExecutorService executorService = Executors.newFixedThreadPool(8);
 		executorService.execute(r1);
 		executorService.execute(r2);
 		executorService.execute(r3);

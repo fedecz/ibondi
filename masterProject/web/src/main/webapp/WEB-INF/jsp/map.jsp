@@ -18,7 +18,7 @@ body {
 	height: 100%
 }
 </style>
-<script type="text/javascript" 	src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">
 
 <c:set var="i" value="1"/>
@@ -52,7 +52,8 @@ map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: transport[0]
+        title: transport[0],
+        icon: "static/img/iconbus.png"
     });
   }
 }

@@ -78,9 +78,9 @@ public class ServerFacade implements MobileInterface {
 	 * @see com.uade.pfi.core.facade.MobileInterface#getLocations(com.uade.pfi.core.dto.LocationDTO)
 	 */
 	@Override
-	public TransportLocationListDTO getLocations(LocationDTO arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public TransportLocationListDTO getLocations(LocationDTO myLocation) {
+		TransportLocationListDTO result = restTemplate.postForObject(BASE_URL+context.getString(R.string.getLocationsNearMeFromServerURL),myLocation, TransportLocationListDTO.class);
+		return result;
 	}
 
 	/* (non-Javadoc)

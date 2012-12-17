@@ -3,6 +3,7 @@
  */
 package com.uade.pfi.api.dto;
 
+
 /**
  * @author fedec
  *
@@ -33,5 +34,5 @@ public class SessionUpdateDto {
 	public String getSessionId() {
 		return sessionId;
 	}
-
+	
 }

@@ -20,11 +20,11 @@ public class DefaultMapReduceSessionConverter implements
 	/* (non-Javadoc)
 	 * @see com.uade.pfi.core.mapper.Converter#convert(java.lang.Object)
 	 */
-	public List<TransportSession> convert(MapReduceSessionOutput value) {
-		List<TransportSession> result = new ArrayList<TransportSession>(value.value.items.size());
-		String transportId = value.id;
-		for (MapReducePoint point : value.value.items) {
-			TransportSession s = new TransportSession("0",transportId, new Location(point.x, point.y), new ArrayList<Location>(0), null);
+	public List<TransportSession> convert(MapReduceSessionOutput mapReduceOutput) {
+		List<TransportSession> result = new ArrayList<TransportSession>(mapReduceOutput.value.items.size());
+		String transportId = mapReduceOutput.id;
+		for (MapReducePoint point : mapReduceOutput.value.items) {
+			TransportSession s = new TransportSession(transportId, new Location(point.y, point.x));
 			result.add(s);
 		}
 		return result;

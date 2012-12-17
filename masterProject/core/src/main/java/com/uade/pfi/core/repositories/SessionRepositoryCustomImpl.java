@@ -16,6 +16,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.geo.Circle;
 import org.springframework.data.mongodb.core.geo.Point;
@@ -37,6 +38,10 @@ import com.uade.pfi.core.utils.TransportMeStringCreator;
  */
 public class SessionRepositoryCustomImpl implements
 		CustomSessionRepository {
+	
+	@Value("${sessions.active.radius}")
+	private double radius;
+
 	private Log logger = LogFactory.getLog(SessionRepositoryCustomImpl.class);
 	
 	@Autowired
@@ -72,13 +77,16 @@ public class SessionRepositoryCustomImpl implements
 	 */
 	public List<TransportSession> findActiveSessions(Location myLocation) {
 		logger.debug("retrieveing all sessions for location: " + TransportMeStringCreator.toString(myLocation));
-		Query query = new Query(getCommonCriteria().andOperator(new Criteria("lastKnownLocation")
-					.withinSphere(new Circle(new Point(myLocation.getLatitude(),myLocation.getLongitude()), 100))));
+		Query query = new Query(getCommonCriteria().and("lastKnownLocation")
+					.withinSphere(new Circle(new Point(myLocation.getLongitude(),myLocation.getLatitude()), radius)));
 		return executeMapReduceAndReturnResults(query);
 	}
 	
 	
 	private List<TransportSession> executeMapReduceAndReturnResults(Query query) {
+		//TODO: en vez de pasar classpath:url para map y reduce, se puede pasar 
+		// el script actual en el String. Y asì poder reemplazar variables adentro
+		// como radius.
 		MapReduceResults<MapReduceSessionOutput> mapReduceResults = template.mapReduce(
 				query, 
 				"sessions", 
@@ -91,6 +99,7 @@ public class SessionRepositoryCustomImpl implements
 			MapReduceSessionOutput output = iterator.next();
 			result.addAll(mapReduceConverter.convert(output));
 		}
+		logger.debug(mapReduceResults.getTiming());
 		return result;
 	}
 	
@@ -101,5 +110,8 @@ public class SessionRepositoryCustomImpl implements
 				.gt(calendar.getTime());
 	}
 	
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
 
 }

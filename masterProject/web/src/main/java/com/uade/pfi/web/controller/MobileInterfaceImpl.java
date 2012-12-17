@@ -59,8 +59,15 @@ public class MobileInterfaceImpl implements MobileInterface {
 	}
 	
 	@RequestMapping(value="/getLocations.json")
-	public TransportLocationListDTO getLocations(@RequestBody LocationDTO myLocation) {
-		throw new RuntimeException("To be Implemented");
+	public @ResponseBody TransportLocationListDTO getLocations(@RequestBody LocationDTO myLocation) {
+		Location l = new Location(myLocation.getLatitude(), myLocation.getLongitude());
+		List<TransportSession> sessions = trackerService.retrieveSessions(l);
+		List<TransportLocationDTO> locations = transportSessionConverter.convert(sessions);
+		TransportLocationListDTO list = new TransportLocationListDTO();
+		list.setTransports(locations.toArray(new TransportLocationDTO[0]));
+		list.setCenter(myLocation);
+		list.setZoom(10);
+		return list;
 	}
 	
 	@RequestMapping("/postLocation.json")

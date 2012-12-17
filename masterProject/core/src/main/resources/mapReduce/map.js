@@ -1,3 +1,3 @@
 function(){
-	emit(this.transportId,{items:[{x: this.lastKnownLocation.lat, y: this.lastKnownLocation.long}]});
+	emit(this.transportId,{items:[{x: this.lastKnownLocation.long, y: this.lastKnownLocation.lat}]});
 }
