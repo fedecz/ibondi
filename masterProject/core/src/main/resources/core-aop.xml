@@ -8,6 +8,6 @@
 
     <aop:aspectj-autoproxy/>
     
-    <bean class="com.uade.pfi.core.aop.TimeWatchedAspect"/>
+    <bean class="org.ibondi.core.aop.TimeWatchedAspect"/>
 	
 </beans>

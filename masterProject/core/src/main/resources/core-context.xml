@@ -22,6 +22,6 @@
 	<!-- Spring AOP -->
 	<import resource="core-aop.xml" />
 	
-	<context:property-placeholder location="classpath:pfiuade.properties"/>
+	<context:property-placeholder location="classpath:ibondi.properties"/>
 	
 </beans>

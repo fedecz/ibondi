@@ -5,17 +5,12 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="0zFzbsRmiUC_v_c85GqjBEG4Fi3G3r1yuntmEwg"
+        android:apiKey="xxx"
 />
 
 <!-- 
 Para generar el apiKey, ver aca:
 https://developers.google.com/maps/documentation/android/mapkey
 y usar la de eclipse debug.
-
-chiwi:
-mac debug : 0zFzbsRmiUC9o5xwiOLL9Ibu5kOjsEigu-y1olQ
-ubuntu dridco debug: 0zFzbsRmiUC_-edvDxBRqYdy3SSwqC9cA1lHFIw
-ubuntu casa debug: 0zFzbsRmiUC_v_c85GqjBEG4Fi3G3r1yuntmEwg
 
  -->

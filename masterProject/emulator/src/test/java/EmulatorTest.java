@@ -3,10 +3,9 @@ import java.util.concurrent.Executors;
 
 import net.divbyzero.gpx.parser.ParsingException;
 
+import org.ibondi.emulator.DefaultEmulator;
+import org.ibondi.emulator.TransportsEmulator;
 import org.junit.Test;
-
-import com.uade.pfi.emulator.DefaultEmulator;
-import com.uade.pfi.emulator.TransportsEmulator;
 
 
 public class EmulatorTest {

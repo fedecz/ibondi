@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>uadepfi2012</artifactId>
-		<groupId>edu.uade.pfi</groupId>
+	    <artifactId>ibondi</artifactId>
+	    <groupId>org.ibondi</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -23,7 +23,7 @@
 	<dependencies>
 		<!-- MAIN DEPENDENCIES -->
 		<dependency>
-			<groupId>edu.uade.pfi</groupId>
+			<groupId>org.ibondi</groupId>
 			<artifactId>api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

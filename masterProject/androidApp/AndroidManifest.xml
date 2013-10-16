@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.uadepfi.android"
+    package="org.ibondi.android"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -23,7 +23,7 @@
 
         <!-- MAIN ACTIVITY -->
         <activity
-            android:name="com.uade.pfi.androidapp.activity.TransportMeMainActivity"
+            android:name="org.ibondi.androidapp.activity.TransportMeMainActivity"
             android:icon="@drawable/iconbus_h"
             android:label="@string/app_name"
             android:launchMode="standard" >
@@ -35,19 +35,19 @@
 
         <!-- CHECK-IN ACTIVITY -->
         <activity
-            android:name="com.uade.pfi.androidapp.activity.CheckInActivity"
+            android:name="org.ibondi.androidapp.activity.CheckInActivity"
             android:label="@string/title_activity_select_transport" >
         </activity>
 
         <!-- MAP ACTIVITY -->
         <activity
-            android:name="com.uade.pfi.androidapp.activity.TransportMapActivity"
+            android:name="org.ibondi.androidapp.activity.TransportMapActivity"
             android:label="@string/app_name" >
         </activity>
 
         <!-- GPS SERVICE -->
         <service
-            android:name="com.uade.pfi.androidapp.service.TransportMeService"
+            android:name="org.ibondi.androidapp.service.TransportMeService"
             android:enabled="true"
             android:icon="@drawable/iconbus"
             android:label="@string/app_name" >

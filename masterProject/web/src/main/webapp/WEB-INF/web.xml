@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>pfi Web</display-name>
+	<display-name>ibondi Web</display-name>
 
 	<servlet>
-		<servlet-name>pfi</servlet-name>
+		<servlet-name>ibondi</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -23,7 +23,7 @@
 	</listener>
 
 	<servlet-mapping>
-		<servlet-name>pfi</servlet-name>
+		<servlet-name>ibondi</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	

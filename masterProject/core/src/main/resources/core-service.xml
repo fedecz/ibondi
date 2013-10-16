@@ -9,12 +9,12 @@
 
     <context:annotation-config />
     
-	<bean id="locationService" class="com.uade.pfi.core.service.PublicTransportTrackerServiceImpl"/>
+	<bean id="locationService" class="org.ibondi.core.service.PublicTransportTrackerServiceImpl"/>
 	
-	<bean id="transportCrudService" class="com.uade.pfi.core.service.TransportCrudService" />
+	<bean id="transportCrudService" class="org.ibondi.core.service.TransportCrudService" />
 	
-	<bean id="transportSessionConverter" class="com.uade.pfi.core.mapper.TransportSessionToTransportLocationDTOConverter" />
+	<bean id="transportSessionConverter" class="org.ibondi.core.mapper.TransportSessionToTransportLocationDTOConverter" />
 	
-	<bean id="transportToDTOConverter" class="com.uade.pfi.core.mapper.TransportToTransportDTOConverter"/>
+	<bean id="transportToDTOConverter" class="org.ibondi.core.mapper.TransportToTransportDTOConverter"/>
 	
 </beans>

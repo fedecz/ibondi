@@ -2,7 +2,7 @@
 <resources>
 
     <!-- APP -->
-    <string name="app_name">UADE-PFI</string>
+    <string name="app_name">iBondi</string>
     
     <!-- MAIN Activity -->
     <string name="checkInButton">Check In</string>
