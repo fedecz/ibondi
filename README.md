@@ -31,6 +31,15 @@ The webapp exposes an API in order to interact with the mobile devices. Such API
                 public TransportLocationListDTO getLocations(LocationDTO myLocation);
         }
 
+### Building iBondi
+iBondi is a regular, multi-module Maven project.
+
+        #build deployables
+        $ mvn clean package
+
+        #build all stuff including scripts, emulator and docs
+        $ mvn clean package -Pall
+
 ### How Should I contribute? 
 I don't consider myself an Android Developer, thats why I don't like the code I've written and I encourage anybody to create new frontends, always respecting the API ofcourse.
 

@@ -9,10 +9,17 @@
   	<module>core</module>
   	<module>api</module>
   	<module>web</module>
-	<module>scripts</module>
-	<module>docs</module>
-	<module>emulator</module>
   </modules>
+  <profiles>
+	<profile>
+		<id>all</id>
+		<modules>
+			<module>scripts</module>
+			<module>docs</module>
+			<module>emulator</module>
+		</modules>
+	</profile>
+  </profiles>
 
 </project>
 
